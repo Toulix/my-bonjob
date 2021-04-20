@@ -1,0 +1,57 @@
+<!-- //needs to be moved in the authentication module -->
+
+<header></header>
+<div class="login-container">
+  <div>
+    <div *ngIf="isLoading">
+      <spinner></spinner>
+    </div>
+    <form [formGroup]="loginFormGroup" (ngSubmit)="login()" *ngIf="!isLoading">
+      <p style="text-align: center">Votre Logo ici</p>
+      <p *ngIf="error" class="alert alert-danger">
+        {{ error }}
+      </p>
+
+      <input
+        type="text"
+        placeholder="Identidiant"
+        formControlName="email"
+        [ngClass]="setInputBorderClass()"
+      />
+
+      <!-- validation error for Email -->
+      <div
+        *ngIf="email.invalid && (email.touched || email.dirty)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="email.errors.required">Identifiant requis</div>
+        <div *ngIf="email.errors.email">Adresse email invalide</div>
+      </div>
+
+      <input
+        type="password"
+        placeholder="Mot de passe"
+        formControlName="password"
+        [ngClass]="setInputBorderClass()"
+      />
+
+      <!-- Validation error for password input-->
+      <div
+        *ngIf="password.invalid && (password.touched || password.dirty)"
+        class="alert alert-danger"
+      >
+        <div *ngIf="password.errors.minlength">Minimum 4 caractère</div>
+
+        <div *ngIf="password.errors.required">Mot de passe requis</div>
+      </div>
+
+      <button
+        [ngClass]="setBtnBgClass()"
+        [disabled]="!loginFormGroup.valid"
+        type="submit"
+      >
+        Connexion
+      </button>
+    </form>
+  </div>
+</div>

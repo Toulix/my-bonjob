@@ -1,0 +1,31 @@
+<div class="accesslogin-container">
+  <!-- will be handeled by the authentication module /login -->
+  <button
+    [routerLink]="['/authentication']"
+    type="button"
+    class="btn btn-light btn-sm col-md-2 m-2"
+  >
+    Connection
+  </button>
+
+  <ng-container *ngIf="isAdminLink; else candidateLink">
+    <!-- router link to create account for admin -->
+    <button
+      [routerLink]="['/admin/signup']"
+      type="button"
+      class="btn btn-light btn-sm col-md-2 m-2"
+    >
+      Créer mon compte
+    </button>
+  </ng-container>
+  <ng-template #candidateLink>
+    <!-- router link to create account for candidate -->
+    <button
+      [routerLink]="['/candidate/signup']"
+      type="button"
+      class="btn btn-light btn-sm col-md-2 m-2"
+    >
+      Créer mon compte
+    </button>
+  </ng-template>
+</div>
