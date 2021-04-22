@@ -16,7 +16,7 @@ form {
 input, button {
     width: 100%;
     height: 35px;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 input:focus{
@@ -26,8 +26,10 @@ input:focus{
 input {
     padding-left: 25px;
     padding-top: 5px;
-    padding-bottom: 10px;
+    padding-bottom: 6px;
     margin-bottom: 5px;
+    font-size: 14px;
+    color: rgba($color: #000000, $alpha: 0.6);
 }
 
 .inputBorderAdmin {
@@ -48,9 +50,9 @@ input::-webkit-input-placeholder {
 button {
     outline: none;
     font-size: 14px;
-    padding-bottom: 5px;
     border: none;
-    
+    // font-size: small;
+    font-weight: 300;
     color: white;
 }
 

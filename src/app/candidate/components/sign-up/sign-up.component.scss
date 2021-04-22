@@ -1,3 +1,74 @@
 .signup-container {
-    margin-top: 100px;
+    margin-top: 120px;
 }
+
+.heading_1 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.heading_2 {
+  color: var(--primary-color);
+  font-size: 18px;
+  font-weight: 500;
+}
+
+input, textarea {
+    opacity: 0.7;
+    padding-left: 16px;
+}
+
+
+
+.btn-submit-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3rem;
+//   margin-left: 13rem;
+//   margin-right: 16rem;
+
+  button {
+    border: 0.2em solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 8px;
+  }
+
+  .submit {
+    color: var(--default-color);
+    background-color: var(--primary-color);
+    border: 0.2em solid var(--primary-color); 
+  }
+ }
+
+.selected-btn {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+ .apprentis-status {
+  width: 84px;
+  height: 30px;
+ }
+
+ .student-status, .active-satus, .emploi-status, .not-active-status {
+  width: 78px;
+  height: 30px
+ }
+
+ .btn-container {
+  display: flex;
+  justify-content: space-between
+ }
+
+ .no-year, .year-one, .year-1-2, .year-2-3 {
+  width: 78px;
+  height: 30px;
+ }
+
+ .year-5 {
+  width: 92px;
+  height: 30px;
+ }

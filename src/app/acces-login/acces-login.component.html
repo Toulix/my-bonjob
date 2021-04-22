@@ -1,31 +1,94 @@
-<div class="accesslogin-container">
-  <!-- will be handeled by the authentication module /login -->
-  <button
-    [routerLink]="['/authentication']"
-    type="button"
-    class="btn btn-light btn-sm col-md-2 m-2"
-  >
-    Connection
-  </button>
+<!-- <div class="container h-100" style="border: 1px solid black">
+  <div>
+    <button
+      [routerLink]="['/authentication']"
+      type="button"
+      class="btn btn-light btn-sm m-2"
+    >
+      Connection
+    </button>
 
-  <ng-container *ngIf="isAdminLink; else candidateLink">
-    <!-- router link to create account for admin -->
-    <button
-      [routerLink]="['/admin/signup']"
-      type="button"
-      class="btn btn-light btn-sm col-md-2 m-2"
-    >
-      Créer mon compte
-    </button>
-  </ng-container>
-  <ng-template #candidateLink>
-    <!-- router link to create account for candidate -->
-    <button
-      [routerLink]="['/candidate/signup']"
-      type="button"
-      class="btn btn-light btn-sm col-md-2 m-2"
-    >
-      Créer mon compte
-    </button>
-  </ng-template>
+  1 button with different link 
+    <ng-container *ngIf="isAdminLink; else candidateLink">
+      router link to create account for admin 
+      <button
+        [routerLink]="['/admin/signup']"
+        type="button"
+        class="btn btn-light btn-sm m-2"
+      >
+        Créer mon compte
+      </button>
+    </ng-container>
+    <ng-template #candidateLink>
+     router link to create account for candidate 
+      <button
+        [routerLink]="['/candidate/signup']"
+        type="button"
+        class="btn btn-light btn-sm m-2"
+      >
+        Créer mon compte
+      </button>
+    </ng-template>
+  </div>
+</div> -->
+
+<!-- <div class="container h-100">
+  <div class="row h-100 justify-content-center align-items-center">
+    <div class="col-sm-11 col-md-3 col-xs-6">
+      <div class="row">
+        <button
+          [routerLink]="['/authentication']"
+          type="button"
+          class="btn btn-light btn-sm m-2"
+        >
+          Connection
+        </button>
+      </div>
+      <div class="row">
+        <ng-container *ngIf="isAdminLink; else candidateLink">
+          <button
+            [routerLink]="['/admin/signup']"
+            type="button"
+            class="btn btn-light btn-sm m-2"
+          >
+            Créer mon compte
+          </button>
+        </ng-container>
+        <ng-template #candidateLink>
+        
+          <button
+            [routerLink]="['/candidate/signup']"
+            type="button"
+            class="btn btn-light btn-sm m-2"
+          >
+            Créer mon compte
+          </button>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="login-container">
+  <div>
+    <form>
+      <p style="text-align: center; color: white">Votre Logo ici</p>
+      <button
+        [routerLink]="['/authentication']"
+        type="button"
+        class="btn btn-light m-2"
+      >
+        Connexion
+      </button>
+
+      <button
+        [routerLink]="['/candidate/signup']"
+        type="button"
+        class="btn m-2"
+        style="background-color: var(--default-color)"
+      >
+        Créer mon compte
+      </button>
+    </form>
+  </div>
 </div>

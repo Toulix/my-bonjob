@@ -1,4 +1,3 @@
-import { AuthGuard } from './core/guards/auth.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AccesLoginComponent } from './acces-login/acces-login.component';
@@ -11,13 +10,13 @@ const routes: Routes = [
     path: "admin",
     loadChildren: () => import("./admin/admin.module")
     .then(m => m.AdminModule),
-    canActivate: [AuthGuard]
+  
   },
   {
     path: "candidate",
     loadChildren: () => import("./candidate/candidate.module")
     .then(m => m.CandidateModule),
-    canActivate: [AuthGuard]
+    
   },
   {
     path: "authentication",

@@ -1,14 +1,15 @@
-<div class="signup-container">
+<div class="container signup-container">
   <div class="row">
-    <div class="col-md-7 mx-auto">
-      <p>Inscription</p>
+    <div class="col-md-8 mx-auto">
+      <p class="heading_1">Inscription</p>
+
       <div class="basic-container">
-        <form>
+        <!-- <form>
           <div class="row mb-2">
-            <div class="col-md-5">
+            <div class="col-md-4 offset-md-2">
               <label for="prenom">Prénom</label>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
               <input
                 type="text"
                 class="form-control form-control-sm"
@@ -18,10 +19,10 @@
           </div>
 
           <div class="row mb-2">
-            <div class="col-md-5">
+            <div class="col-md-4 offset-md-2">
               <label for="nom">Nom</label>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
               <input
                 type="text"
                 class="form-control form-control-sm"
@@ -32,10 +33,10 @@
           </div>
 
           <div class="row mb-2">
-            <div class="col-md-5">
+            <div class="col-md-4 offset-md-2">
               <label for="email">email</label>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
               <input
                 type="email"
                 class="form-control form-control-sm"
@@ -46,10 +47,10 @@
           </div>
 
           <div class="row mb-2">
-            <div class="col-md-5">
+            <div class="col-md-4 offset-md-2">
               <label for="password">Mot de passe</label>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
               <input
                 type="password"
                 class="form-control form-control-sm"
@@ -60,10 +61,10 @@
           </div>
 
           <div class="row mb-2">
-            <div class="col-md-5">
+            <div class="col-md-4 offset-md-2">
               <label for="confirmpassword">Confirmation</label>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
               <input
                 type="password"
                 class="form-control form-control-sm"
@@ -74,10 +75,10 @@
           </div>
 
           <div class="row mb-2">
-            <div class="col-md-5">
+            <div class="col-md-4 offset-md-2">
               <label for="profilepicture">Photo de profil</label>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
               <div class="input-group input-group-sm">
                 <input
                   type="text"
@@ -89,15 +90,30 @@
               </div>
             </div>
           </div>
-        </form>
+          <div>
+            <div class="row">
+              <div class="col-md-5 mx-auto col-sm-8">
+                <div class="btn-submit-container">
+                  <button class="btn mb-2">Compléter mes informations</button>
+                  <button class="btn mb-2 submit">Inscription</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form> -->
       </div>
+
+      <p class="heading_1">Complément d'informations</p>
+
       <div class="experience-container">
         <div class="row">
-          <p class="col-md-12">Ajouter une expérience</p>
+          <p class="col-md-12 offset-md-1 heading_2">
+            Ajouter une expérience :
+          </p>
         </div>
         <form>
           <div class="row mb-4">
-            <div class="col-md-5">
+            <div class="col-md-4 offset-md-1">
               <label for="occupiedPost">Poste occupé :</label>
             </div>
             <div class="col-md-7">
@@ -114,56 +130,21 @@
           </div>
 
           <div class="row mb-4">
-            <div class="col-md-5">
+            <div class="col-md-4 offset-md-1">
               <label>Durée du poste occupée :</label>
             </div>
             <div class="col-md-7">
-              <!-- <div class="row">
-                <div class="col-md-3">
-                  <button class="btn btn-outline-secondary btn-sm">Sans</button>
-                </div>
-                <div class="col-md-3">
-                  <button class="btn btn-sm btn-outline-secondary">
-                    &gt; 1 ans
-                  </button>
-                </div>
-                <div class="col-md-3">
-                  <button class="btn btn-sm btn-outline-secondary">
-                    1 - 2 ans
-                  </button>
-                </div>
-                <div class="col-md-3">
-                  <button class="btn btn-sm btn-outline-secondary">
-                    3 - 4 ans
-                  </button>
-                </div>
-                <div class="col-md-3">
-                  <button class="btn btn-sm btn-outline-secondary">
-                    + de 5 ans
-                  </button>
-                </div>
-              </div> -->
-              <div style="display: flex; justify-content: space-between">
-                <button class="btn" style="width: 78px; height: 30px">
-                  Sans
-                </button>
-                <button class="btn" style="width: 78px; height: 30px">
-                  &gt; 1 an
-                </button>
-                <button class="btn" style="width: 78px; height: 30px">
-                  1 - 2 ans
-                </button>
-                <button class="btn" style="width: 78px; height: 30px">
-                  3 - 4 ans
-                </button>
-                <button class="btn" style="width: 92px; height: 30px">
-                  + de 5 ans
-                </button>
+              <div class="btn-container">
+                <button class="btn no-year">Sans</button>
+                <button class="btn selected-btn year-one">&gt; 1 an</button>
+                <button class="btn year-1-2">1 - 2 ans</button>
+                <button class="btn year-3-4">3 - 4 ans</button>
+                <button class="btn year-5">+ de 5 ans</button>
               </div>
             </div>
           </div>
           <div class="row mb-4">
-            <div class="col-md-5">
+            <div class="col-md-4 offset-md-1">
               <label for="entreprise">Nom de l'entreprise</label>
             </div>
             <div class="col-md-7">
@@ -180,11 +161,177 @@
           </div>
 
           <div class="row mb-4">
-            <div class="col-md-5">
+            <div class="col-md-4 offset-md-1">
               <label for="description">Description</label>
             </div>
             <div class="col-md-7">
-              <textarea class="form-control" rows="4" name="" id=""></textarea>
+              <textarea
+                class="form-control"
+                placeholder="Barman"
+                rows="4"
+                name=""
+                id=""
+              ></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="formation-container">
+        <div class="row">
+          <p class="col-md-10 offset-md-1 heading_2">Ajouter une formation :</p>
+          <button class="btn col-md-2">Ajouter+</button>
+        </div>
+        <form>
+          <div class="row mb-4">
+            <div class="col-md-4 offset-md-1">
+              <label for="formationLevel">Niveau de formation: </label>
+            </div>
+            <div class="col-md-7">
+              <div class="input-group input-group-sm">
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  placeholder="Licence"
+                  id="entreprise"
+                />
+                <span class="input-group-text">&nbsp;&nbsp;</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-4 offset-md-1">
+              <label for="description">Spécifiez votre formation</label>
+            </div>
+            <div class="col-md-7">
+              <textarea
+                class="form-control"
+                placeholder="Déscription de la formation"
+                rows="4"
+                name=""
+                id=""
+              ></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <div class="autre-formation-container">
+        <div class="row">
+          <p class="col-md-12 offset-md-1 heading_2">Autres informations :</p>
+        </div>
+        <form>
+          <div class="row mb-4">
+            <div class="col-md-4 offset-md-1">
+              <label for="wantedjob">Emploie recherché </label>
+            </div>
+            <div class="col-md-7">
+              <div class="input-group input-group-sm">
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  placeholder="Barman"
+                  id="wantedjob"
+                />
+                <span class="input-group-text">&nbsp;&nbsp;</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-4 offset-md-1">
+              <label for="description">Spécifiez votre formation</label>
+            </div>
+            <div class="col-md-7">
+              <textarea
+                class="form-control"
+                placeholder="Déscription de la formation"
+                rows="4"
+                name=""
+                id=""
+              ></textarea>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-4 offset-md-1">
+              <label>Statut actuel:</label>
+            </div>
+            <div class="col-md-7">
+              <div class="btn-container">
+                <button class="btn student-status">Etudiants</button>
+
+                <button class="btn selected-btn apprentis-status">
+                  Apprentis
+                </button>
+                <button class="btn active-satus">Actif</button>
+                <button class="btn emploi-status">R.emploi</button>
+                <button class="btn not-active-status">Inactif</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-4 offset-md-1">
+              <label>Mobilité:</label>
+            </div>
+            <div class="col-md-7">
+              <div class="row">
+                <div class="checkbox-inline col-sm-2 col-md-2">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="mobile"
+                    id="oui"
+                  />
+                  <label class="form-check-label" for="oui"> Oui </label>
+                </div>
+
+                <div class="checkbox-inline col-sm-2 col-md-2">
+                  <input
+                    class="form-check-input"
+                    type="radio"
+                    name="mobile"
+                    id="non"
+                    checked
+                  />
+                  <label class="form-check-label" for="non"> Non </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-4 offset-md-1">
+              <label> Secteur </label>
+            </div>
+
+            <div class="col-md-7">
+              <div class="btn-container">
+                <button class="btn selected-btn">Cuisine-Restauration</button>
+
+                <button class="btn selected-btn">Salle-Service</button>
+
+                <button class="btn">Hôtellerie-Hébergement</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mb-2">
+            <div class="col-md-4 offset-md-1">
+              <label for="galerie">Galérie photo</label>
+            </div>
+            <div class="col-md-7">
+              <div class="input-group input-group-sm">
+                <input
+                  type="text"
+                  class="form-control form-control-sm"
+                  placeholder="Ajouter une photo"
+                  id="galerie"
+                />
+                <span class="input-group-text">Télécharger</span>
+              </div>
             </div>
           </div>
         </form>

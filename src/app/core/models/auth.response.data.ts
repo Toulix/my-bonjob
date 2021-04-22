@@ -6,6 +6,6 @@ export interface AuthResponseData {
     roles: string[];
     username?: string;
     name?: string;
-    imageUrl: string;
+    imageUrl?: string;
   }
   

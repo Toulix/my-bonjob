@@ -2,6 +2,7 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { UtilsService } from './core/services/utils.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AuthService } from './core/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -14,9 +15,11 @@ export class AppComponent implements OnInit, OnDestroy{
   linkStatusSub: Subscription;
 
   constructor(public utils: UtilsService,
-              public router: Router) {
-              }
+              public authService: AuthService,
+              public router: Router) {}
+
   ngOnInit() {
+    this.authService.autoLogin();
     this.isAdminLink = this.utils.getIsAdminLinkStatus();
     this.linkStatusSub = this.utils.linkChandedListener()
     .subscribe(

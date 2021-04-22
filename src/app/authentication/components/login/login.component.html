@@ -8,6 +8,7 @@
     </div>
     <form [formGroup]="loginFormGroup" (ngSubmit)="login()" *ngIf="!isLoading">
       <p style="text-align: center">Votre Logo ici</p>
+
       <p *ngIf="error" class="alert alert-danger">
         {{ error }}
       </p>

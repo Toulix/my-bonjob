@@ -19,16 +19,15 @@ export class LoginComponent implements OnInit, OnDestroy {
   
   linkStatusSub: Subscription;
   userSub: Subscription;
-
   user: User;
 
-  constructor(private auth: AuthService,
+  constructor(private authService: AuthService,
               private utils: UtilsService,
               private router: Router, 
               private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.userSub = this.auth.userSubject
+    this.userSub = this.authService.userSubject
                       .subscribe(user => {
                           this.user = user
                         })
@@ -66,25 +65,25 @@ export class LoginComponent implements OnInit, OnDestroy {
   login() {
     this.isLoading = true;
 
-    this.auth.singIn(this.loginFormGroup.value)
-              .subscribe(
-                result => {
-                  if(result && this.user.isAdmin) {
-                    this.isLoading = false;
-                    return this.router.navigate(['/admin'])
-                  
-                  }
-                  
-                  if(result && !this.user.isAdmin) {
-                    this.isLoading = false;
-                    return this.router.navigate(['/candidate'])
-                  }
-                  },
-                (errorMessage) => {
-                  this.isLoading = false;
-                  this.error = errorMessage;
-                }
-              )
+    this.authService.singIn(this.loginFormGroup.value)
+                    .subscribe(
+                      result => {
+                        if(result && this.user.isAdmin) {
+                          this.isLoading = false;
+                          return this.router.navigate(['/admin'])
+                        
+                        }
+                        
+                        if(result && !this.user.isAdmin) {
+                          this.isLoading = false;
+                          return this.router.navigate(['/candidate'])
+                        }
+                        },
+                      (errorMessage) => {
+                        this.isLoading = false;
+                        this.error = errorMessage;
+                      }
+                    )
   }
 
   setInputBorderClass() {

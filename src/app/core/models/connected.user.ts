@@ -1,14 +1,32 @@
+import { JwtHelperService } from '@auth0/angular-jwt';
 export class User {
-    constructor(public id: number, 
-                private _token: string,
-                public email: string,
+    constructor(private _token: string,
                 public roles: string[],
-                public username: string,
-                public name: string,
-                public imageUrl: string
+                public id?: number, 
+                public email?: string,
+                public username?: string,
+                public name?: string,
+                public imageUrl?: string,
                 ){}
 
+  get token() {
+    const helper = new JwtHelperService();
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    if (!userData) {
+      return null;
+    }
+    const isExpired = helper.isTokenExpired(userData.token);
+    if(isExpired) {
+      return null;
+    }
+      return this._token
+  }
 
+  get tokenExpirationDate(): Date {
+    const helper = new JwtHelperService();
+    return helper.getTokenExpirationDate(this._token);
+  }
+  
   get isAdmin() {
     return this.roles.some(role => role === 'ROLE_ADMIN');
   }
