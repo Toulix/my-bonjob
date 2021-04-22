@@ -1,4 +1,4 @@
-import { SERVER_ERROR, INVALID_CREDENTIALS, DEFAULT_ERROR, CLIENT_SIDE_ERROR } from './../utils/constante';
+import { SERVER_ERROR, INVALID_CREDENTIALS, DEFAULT_ERROR, CLIENT_SIDE_ERROR } from '../utils/constante';
 import { Router } from '@angular/router';
 import { AuthResponseData } from './../models/auth.response.data';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
