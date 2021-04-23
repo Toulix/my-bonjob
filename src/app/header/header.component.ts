@@ -40,7 +40,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   setAdminLinkStyles() {
     return {
-      color: this.route.url.includes('authentication')
+      color: this.route.url.includes('authentication') ||
+             this.route.url.includes('signup')
         ? 'var(--primary-color)'
         : 'var(--default-color)'
     }
@@ -48,9 +49,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   setCandidateLinkStyle() {
   return  {
-      color: this.route.url.includes('authentication')
-        ? 'var(--secondary-color)'
-        : 'var(--default-color)'
+      color: this.route.url.includes('authentication') ||
+             this.route.url.includes('signup')
+              ? 'var(--secondary-color)'
+              : 'var(--default-color)'
     }
   }
 

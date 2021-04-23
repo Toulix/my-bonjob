@@ -1,20 +1,72 @@
 
+// @keyframes ldio-yj6m4u7q1v {
+//   0% { transform: translate(-50%,-50%) rotate(0deg); }
+//   100% { transform: translate(-50%,-50%) rotate(360deg); }
+// }
+// .ldio-yj6m4u7q1v div {
+//   position: absolute;
+//   width: 120px;
+//   height: 120px;
+//   border: 20px solid var(--primary-color);
+//   border-top-color: transparent;
+//   border-radius: 50%;
+// }
+// .ldio-yj6m4u7q1v div {
+//   animation: ldio-yj6m4u7q1v 1s linear infinite;
+//   top: 100px;
+//   left: 100px
+// }
+// .loadingio-spinner-rolling-2z2vy30iwtr {
+//   width: 200px;
+//   height: 200px;
+//   display: inline-block;
+//   overflow: hidden;
+//   background: #ffffff;
+// }
+// .ldio-yj6m4u7q1v {
+//   width: 100%;
+//   height: 100%;
+//   position: relative;
+//   transform: translateZ(0) scale(1);
+//   backface-visibility: hidden;
+//   transform-origin: 0 0;
+// }
+// .ldio-yj6m4u7q1v div { box-sizing: content-box; }
+.spinner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    z-index: 200;
+}
+
+
+
 @keyframes ldio-yj6m4u7q1v {
-  0% { transform: translate(-50%,-50%) rotate(0deg); }
-  100% { transform: translate(-50%,-50%) rotate(360deg); }
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
 }
 .ldio-yj6m4u7q1v div {
   position: absolute;
-  width: 120px;
-  height: 120px;
-  border: 20px solid var(--primary-color);
-  border-top-color: transparent;
+  width: 80px;
+  height: 80px;
+  border: 6px solid #0068ff;
+  border-top-color: rgba(0, 0, 0, 0.19);
   border-radius: 50%;
 }
 .ldio-yj6m4u7q1v div {
   animation: ldio-yj6m4u7q1v 1s linear infinite;
   top: 100px;
-  left: 100px
+  left: 100px;
 }
 .loadingio-spinner-rolling-2z2vy30iwtr {
   width: 200px;
@@ -31,4 +83,16 @@
   backface-visibility: hidden;
   transform-origin: 0 0;
 }
-.ldio-yj6m4u7q1v div { box-sizing: content-box; }
+.ldio-yj6m4u7q1v div {
+  box-sizing: content-box;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.5);
+}
