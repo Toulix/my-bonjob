@@ -1,0 +1,10 @@
+<button
+  class="btn btn-low-opacity"
+  *ngFor="let experience of experiencesYear"
+  [value]="experience.value"
+  [class]="experience.styleClass"
+  [ngClass]="{ 'selected-btn': experience.isSelected }"
+  (click)="selectExperience(experience)"
+>
+  {{ experience.label }}
+</button>

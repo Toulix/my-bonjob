@@ -4,8 +4,9 @@ export interface AuthResponseData {
     token: string;
     email?: string;
     roles: string[];
-    username?: string;
-    name?: string;
+    lastname?: string;
+    firstname?: string; 
     imageUrl?: string;
+    expiredIn: number;
   }
   

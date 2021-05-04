@@ -1,0 +1,10 @@
+<button
+  class="btn btn-low-opacity"
+  *ngFor="let status of allCurrentStatus"
+  [value]="status.value"
+  [class]="status.styleClass"
+  [ngClass]="{ 'selected-btn': status.isSelected }"
+  (click)="selectStatus(status)"
+>
+  {{ status.label }}
+</button>

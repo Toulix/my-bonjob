@@ -18,12 +18,9 @@
       />
 
       <!-- validation error for Email -->
-      <div
-        *ngIf="email.invalid && (email.touched || email.dirty)"
-        class="alert alert-danger"
-      >
-        <div *ngIf="email.errors.required">Identifiant requis</div>
-        <div *ngIf="email.errors.email">Adresse email invalide</div>
+      <div *ngIf="email.invalid && (email.touched || email.dirty)">
+        <p class="p-error" *ngIf="email.errors.required">Identifiant requis</p>
+        <p class="p-error" *ngIf="email.errors.email">Adresse email invalide</p>
       </div>
 
       <input
@@ -34,13 +31,13 @@
       />
 
       <!-- Validation error for password input-->
-      <div
-        *ngIf="password.invalid && (password.touched || password.dirty)"
-        class="alert alert-danger"
-      >
-        <div *ngIf="password.errors.minlength">Minimum 4 caractère</div>
-
-        <div *ngIf="password.errors.required">Mot de passe requis</div>
+      <div *ngIf="password.invalid && (password.touched || password.dirty)">
+        <p class="p-error" *ngIf="password.errors.minlength">
+          Minimum 4 caractère
+        </p>
+        <p class="p-error" *ngIf="password.errors.required">
+          Mot de passe requis
+        </p>
       </div>
 
       <button

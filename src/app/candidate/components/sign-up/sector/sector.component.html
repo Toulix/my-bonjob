@@ -1,0 +1,12 @@
+<div class="sector-container">
+  <button
+    class="btn mb-2 btn-low-opacity"
+    *ngFor="let sector of sectors"
+    [value]="sector.value"
+    [class]="sector.styleClass"
+    [ngClass]="{ 'selected-btn': sector.isSelected }"
+    (click)="selectSector(sector)"
+  >
+    {{ sector.label }}
+  </button>
+</div>

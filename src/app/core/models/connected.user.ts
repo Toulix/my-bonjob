@@ -4,9 +4,10 @@ export class User {
                 public roles: string[],
                 public id?: number, 
                 public email?: string,
-                public username?: string,
-                public name?: string,
+                public lastname?: string,
+                public firstname?: string,
                 public imageUrl?: string,
+                public expiredIn?: number
                 ){}
 
   get token() {

@@ -1,341 +1,469 @@
 <div class="container signup-container">
   <div class="row">
+    <p>{{ inscriptionForm.value | json }}</p>
     <div class="col-md-8 mx-auto">
-      <p class="heading_1">Inscription</p>
+      <form [formGroup]="inscriptionForm" (ngSubmit)="onSubmit()">
+        <div formGroupName="user">
+          <div *ngIf="basicInscriptionMode" class="basic-container">
+            <p class="heading_1">Inscription</p>
 
-      <div class="basic-container">
-        <!-- <form>
-          <div class="row mb-2">
-            <div class="col-md-4 offset-md-2">
-              <label for="prenom">Prénom</label>
-            </div>
-            <div class="col-md-6">
-              <input
-                type="text"
-                class="form-control form-control-sm"
-                placeholder="Prénom"
-              />
-            </div>
-          </div>
-
-          <div class="row mb-2">
-            <div class="col-md-4 offset-md-2">
-              <label for="nom">Nom</label>
-            </div>
-            <div class="col-md-6">
-              <input
-                type="text"
-                class="form-control form-control-sm"
-                placeholder="Nom"
-                id="nom"
-              />
-            </div>
-          </div>
-
-          <div class="row mb-2">
-            <div class="col-md-4 offset-md-2">
-              <label for="email">email</label>
-            </div>
-            <div class="col-md-6">
-              <input
-                type="email"
-                class="form-control form-control-sm"
-                placeholder="Adresse email"
-                id="email"
-              />
-            </div>
-          </div>
-
-          <div class="row mb-2">
-            <div class="col-md-4 offset-md-2">
-              <label for="password">Mot de passe</label>
-            </div>
-            <div class="col-md-6">
-              <input
-                type="password"
-                class="form-control form-control-sm"
-                placeholder="Mot de passe"
-                id="password"
-              />
-            </div>
-          </div>
-
-          <div class="row mb-2">
-            <div class="col-md-4 offset-md-2">
-              <label for="confirmpassword">Confirmation</label>
-            </div>
-            <div class="col-md-6">
-              <input
-                type="password"
-                class="form-control form-control-sm"
-                placeholder=" Confirmation du mot de passe"
-                id="confirmpassword"
-              />
-            </div>
-          </div>
-
-          <div class="row mb-2">
-            <div class="col-md-4 offset-md-2">
-              <label for="profilepicture">Photo de profil</label>
-            </div>
-            <div class="col-md-6">
-              <div class="input-group input-group-sm">
+            <!-- Prénom  -->
+            <div class="row mb-2">
+              <div class="col-md-4 offset-md-2">
+                <label for="prenom">Prénom</label>
+              </div>
+              <div class="col-md-6">
                 <input
+                  id="prenom"
                   type="text"
                   class="form-control form-control-sm"
-                  placeholder="Ajouter une photo"
-                  id="profilepicture"
+                  placeholder="Prénom"
+                  formControlName="firstname"
                 />
-                <span class="input-group-text">Télécharger</span>
+                <div
+                  *ngIf="
+                    firstname.invalid && (firstname.touched || firstname.dirty)
+                  "
+                >
+                  <p class="p-error" *ngIf="firstname.errors.required">
+                    Prénom requis !
+                  </p>
+                </div>
               </div>
             </div>
+            <!-- Nom -->
+            <div class="row mb-2">
+              <div class="col-md-4 offset-md-2">
+                <label for="nom">Nom</label>
+              </div>
+              <div class="col-md-6">
+                <input
+                  id="nom"
+                  type="text"
+                  class="form-control form-control-sm"
+                  placeholder="Nom"
+                  formControlName="lastname"
+                />
+                <div
+                  *ngIf="
+                    lastname.invalid && (lastname.touched || lastname.dirty)
+                  "
+                >
+                  <p class="p-error" *ngIf="lastname.errors.required">
+                    Prénom requis !
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- email -->
+            <div class="row mb-2">
+              <div class="col-md-4 offset-md-2">
+                <label for="email">email</label>
+              </div>
+              <div class="col-md-6">
+                <input
+                  id="email"
+                  type="email"
+                  class="form-control form-control-sm"
+                  placeholder="Adresse email"
+                  formControlName="email"
+                />
+                <div *ngIf="email.invalid && (email.touched || email.dirty)">
+                  <p class="p-error" *ngIf="email.errors.required">
+                    Email requis !
+                  </p>
+                  <p class="p-error" *ngIf="email.errors.email">
+                    Email invalide !
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- mot de passe  -->
+            <div class="row mb-2">
+              <div class="col-md-4 offset-md-2">
+                <label for="password">Mot de passe</label>
+              </div>
+              <div class="col-md-6">
+                <input
+                  id="password"
+                  type="password"
+                  class="form-control form-control-sm"
+                  placeholder="Mot de passe"
+                  formControlName="password"
+                />
+                <div
+                  *ngIf="
+                    password.invalid && (password.touched || password.dirty)
+                  "
+                >
+                  <p class="p-error" *ngIf="password.errors.required">
+                    Mot de passe requis !
+                  </p>
+                  <p class="p-error" *ngIf="password.errors.minlength">
+                    Minimum 4 caractère !
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- confirmation -->
+            <div class="row mb-2">
+              <div class="col-md-4 offset-md-2">
+                <label for="confirmpassword">Confirmation</label>
+              </div>
+              <div class="col-md-6">
+                <input
+                  id="confirmpassword"
+                  type="password"
+                  class="form-control form-control-sm"
+                  placeholder="Confirmation du mot de passe"
+                  formControlName="confirmPassword"
+                />
+                <div
+                  *ngIf="
+                    confirmPassword.invalid &&
+                    (confirmPassword.touched || confirmPassword.dirty)
+                  "
+                >
+                  <p class="p-error" *ngIf="confirmPassword.errors.required">
+                    Veuillez confirmer votre mot de passe !
+                  </p>
+                  <p class="p-error" *ngIf="confirmPassword.errors.minlength">
+                    Minimum 4 caractère !
+                  </p>
+                  <p
+                    class="p-error"
+                    *ngIf="confirmPassword.errors.confirmedValidator"
+                  >
+                    Les deux mots de passe ne sont pas indentiques !
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- Profile picture -->
+            <div class="row mb-2">
+              <div class="col-md-4 offset-md-2">
+                <label for="profilepicture">Photo de profil</label>
+              </div>
+              <div class="col-md-6">
+                <div class="input-group input-group-sm">
+                  <input
+                    type="text"
+                    class="form-control form-control-sm input-profile"
+                    placeholder="Ajouter une photo"
+                    id="profilepicture"
+                    #fileName
+                    disabled
+                  />
+                  <span
+                    class="input-group-text btn-upload-profile"
+                    (click)="onClickUploadProfile()"
+                    >Télécharger</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div *ngIf="candidateProfile" class="profile-container">
+              <img
+                [src]="candidateProfile"
+                alt="candidate profile"
+                style="width: 100px; border-radius: 50px"
+              />
+            </div>
+            <input
+              type="file"
+              accept="image/*"
+              #fileUpload
+              (change)="handleFileInput($event.target.files)"
+              class="hidden-file-input"
+            />
           </div>
+          <!--end of  basic form container -->
+
+          <div
+            *ngIf="!basicInscriptionMode"
+            class="other-informations-container"
+          >
+            <p class="heading_1">Complément d'informations</p>
+            <!-- Experience forms begins here -->
+            <!-- Experience Title -->
+            <div class="row">
+              <p class="col-md-12 offset-md-1 heading_2">
+                Ajouter une expérience :
+              </p>
+            </div>
+
+            <div formArrayName="experiences" class="mb-2">
+              <div
+                *ngFor="
+                  let experience of experiencesArray.controls;
+                  let i = index
+                "
+                [formGroupName]="i"
+              >
+                <!-- occupied post -->
+                <div class="row mb-4">
+                  <div class="col-md-4 offset-md-1">
+                    <label for="occupiedPost">Poste occupé :</label>
+                  </div>
+                  <div class="col-md-7">
+                    <div class="input-group input-group-sm">
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        placeholder="Aucune entreprise ajoutée"
+                        id="occupiedPost"
+                        formControlName="positionHeld"
+                      />
+                      <span class="input-group-text">&nbsp;&nbsp;</span>
+                    </div>
+                    <!-- bellow the input-group, show the error message -->
+                    <div
+                      *ngIf="
+                        positionHeld(i).invalid &&
+                        (positionHeld(i).touched || positionHeld(i).dirty)
+                      "
+                    >
+                      <p
+                        class="p-error"
+                        *ngIf="positionHeld(i).errors.required"
+                      >
+                        Ce champ est requis !
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!--post duration -->
+                <div class="row mb-4">
+                  <div class="col-md-4 offset-md-1">
+                    <label>Durée du poste occupée :</label>
+                  </div>
+                  <div class="col-md-7">
+                    <div>
+                      <experience-year [form]="experience"></experience-year>
+                    </div>
+                  </div>
+                </div>
+                <!-- company name -->
+                <div class="row mb-4">
+                  <div class="col-md-4 offset-md-1">
+                    <label for="entreprise">Nom de l'entreprise</label>
+                  </div>
+                  <div class="col-md-7">
+                    <div class="input-group input-group-sm">
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        placeholder="Le mea culpa"
+                        id="entreprise"
+                        formControlName="business"
+                      />
+                      <span class="input-group-text">&nbsp;&nbsp;</span>
+                    </div>
+                    <!-- bellow the input group show the error message -->
+                    <div
+                      *ngIf="
+                        business(i).invalid &&
+                        (business(i).touched || business(i).dirty)
+                      "
+                    >
+                      <p class="p-error" *ngIf="business(i).errors.required">
+                        Nom de l'entreprise requis !
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- description -->
+                <div class="row mb-3">
+                  <div class="col-md-4 offset-md-1">
+                    <label for="description">Description</label>
+                  </div>
+                  <div class="col-md-7">
+                    <textarea
+                      class="form-control"
+                      placeholder="Barman"
+                      rows="4"
+                      formControlName="description"
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="row">
+                  <button
+                    *ngIf="i != 0"
+                    class="btn col-md-2 offset-md-8 btn-delete-experience"
+                    (click)="deleteExperienceArray(i)"
+                  >
+                    Supprimer
+                  </button>
+                </div>
+              </div>
+              <!-- end of for loop-->
+
+              <!-- btn add experience -->
+              <div class="row">
+                <button
+                  [disabled]="!experiencesArray.valid"
+                  class="btn col-md-1 offset-md-10 btn-add-experience"
+                  (click)="addExperience()"
+                  data-toggle="tooltip"
+                  title="Cliquer pour ajouter une autre expérience"
+                >
+                  Ajouter+
+                </button>
+              </div>
+            </div>
+
+            <!-- Experience forms ends here -->
+
+            <!-- Formation forms begins here -->
+            <!-- formation title -->
+            <div class="row">
+              <p class="col-md-10 offset-md-1 heading_2">
+                Ajouter une formation :
+              </p>
+            </div>
+
+            <div formArrayName="formations">
+              <div
+                *ngFor="let formation of formationArray.controls; let i = index"
+                [formGroupName]="i"
+              >
+                <!-- formation level -->
+                <div class="row mb-4">
+                  <div class="col-md-4 offset-md-1">
+                    <label for="formationLevel">Niveau de formation: </label>
+                  </div>
+                  <div class="col-md-7">
+                    <div class="input-group input-group-sm">
+                      <input
+                        type="text"
+                        class="form-control form-control-sm"
+                        placeholder="Licence"
+                        id="entreprise"
+                        formControlName="level"
+                      />
+                      <span class="input-group-text">&nbsp;&nbsp;</span>
+                    </div>
+                    <div
+                      *ngIf="
+                        level(i).invalid && (level(i).touched || level(i).dirty)
+                      "
+                    >
+                      <p class="p-error" *ngIf="level(i).errors.required">
+                        Niveau de formation requis !
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <!-- formation specification -->
+                <div class="row mb-3">
+                  <div class="col-md-4 offset-md-1">
+                    <label for="description">Spécifiez votre formation</label>
+                  </div>
+                  <div class="col-md-7">
+                    <textarea
+                      class="form-control"
+                      placeholder="Déscription de la formation"
+                      rows="4"
+                      formControlName="description"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <button
+                  [disabled]="!formationArray.valid"
+                  class="btn col-md-1 offset-md-10 btn-add-formation"
+                  (click)="addFormation()"
+                >
+                  Ajouter+
+                </button>
+              </div>
+            </div>
+
+            <!-- Formation forms ends here -->
+
+            <!-- other formation begins here -->
+            <div class="row">
+              <p class="col-md-12 offset-md-1 heading_2">
+                Autres informations :
+              </p>
+            </div>
+            <!-- wanted job -->
+            <div class="row mb-4">
+              <div class="col-md-4 offset-md-1">
+                <label for="wantedjob">Emploie recherché </label>
+              </div>
+              <div class="col-md-7">
+                <div class="input-group input-group-sm">
+                  <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    placeholder="Barman"
+                    id="wantedjob"
+                  />
+                  <span class="input-group-text">&nbsp;&nbsp;</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- current status -->
+            <div class="row mb-4">
+              <div class="col-md-4 offset-md-1">
+                <label>Statut actuel:</label>
+              </div>
+              <div class="col-md-7">
+                <actual-status [form]="others"></actual-status>
+              </div>
+            </div>
+
+            <!-- mobility -->
+            <div class="row mb-4">
+              <div class="col-md-4 offset-md-1">
+                <label>Mobilité:</label>
+              </div>
+              <div class="col-md-7">
+                <mobility [form]="others"></mobility>
+              </div>
+            </div>
+
+            <!-- sector  -->
+            <div class="row mb-4">
+              <div class="col-md-4 offset-md-1">
+                <label> Secteur </label>
+              </div>
+
+              <div class="col-md-7">
+                <sector [form]="others"></sector>
+              </div>
+            </div>
+            <!-- other formation ends here -->
+          </div>
+
+          <!-- 2 buttons for signin-up and for completing information -->
           <div>
             <div class="row">
               <div class="col-md-5 mx-auto col-sm-8">
                 <div class="btn-submit-container">
-                  <button class="btn mb-2">Compléter mes informations</button>
-                  <button class="btn mb-2 submit">Inscription</button>
+                  <!-- By default this button is shown but
+                    when the user clicks on it, it disappears to complete 
+                    other information
+                    -->
+                  <button
+                    class="btn mb-2"
+                    *ngIf="basicInscriptionMode"
+                    (click)="onSwitchInscriptionMode()"
+                  >
+                    Compléter mes informations
+                  </button>
+                  <button class="btn mb-2 submit" type="submit">
+                    Inscription
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-        </form> -->
-      </div>
-
-      <p class="heading_1">Complément d'informations</p>
-
-      <div class="experience-container">
-        <div class="row">
-          <p class="col-md-12 offset-md-1 heading_2">
-            Ajouter une expérience :
-          </p>
         </div>
-        <form>
-          <div class="row mb-4">
-            <div class="col-md-4 offset-md-1">
-              <label for="occupiedPost">Poste occupé :</label>
-            </div>
-            <div class="col-md-7">
-              <div class="input-group input-group-sm">
-                <input
-                  type="text"
-                  class="form-control form-control-sm"
-                  placeholder="Aucune entreprise ajoutée"
-                  id="occupiedPost"
-                />
-                <span class="input-group-text">&nbsp;&nbsp;</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mb-4">
-            <div class="col-md-4 offset-md-1">
-              <label>Durée du poste occupée :</label>
-            </div>
-            <div class="col-md-7">
-              <div class="btn-container">
-                <button class="btn no-year">Sans</button>
-                <button class="btn selected-btn year-one">&gt; 1 an</button>
-                <button class="btn year-1-2">1 - 2 ans</button>
-                <button class="btn year-3-4">3 - 4 ans</button>
-                <button class="btn year-5">+ de 5 ans</button>
-              </div>
-            </div>
-          </div>
-          <div class="row mb-4">
-            <div class="col-md-4 offset-md-1">
-              <label for="entreprise">Nom de l'entreprise</label>
-            </div>
-            <div class="col-md-7">
-              <div class="input-group input-group-sm">
-                <input
-                  type="text"
-                  class="form-control form-control-sm"
-                  placeholder="Le mea culpa"
-                  id="entreprise"
-                />
-                <span class="input-group-text">&nbsp;&nbsp;</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mb-4">
-            <div class="col-md-4 offset-md-1">
-              <label for="description">Description</label>
-            </div>
-            <div class="col-md-7">
-              <textarea
-                class="form-control"
-                placeholder="Barman"
-                rows="4"
-                name=""
-                id=""
-              ></textarea>
-            </div>
-          </div>
-        </form>
-      </div>
-
-      <div class="formation-container">
-        <div class="row">
-          <p class="col-md-10 offset-md-1 heading_2">Ajouter une formation :</p>
-          <button class="btn col-md-2">Ajouter+</button>
-        </div>
-        <form>
-          <div class="row mb-4">
-            <div class="col-md-4 offset-md-1">
-              <label for="formationLevel">Niveau de formation: </label>
-            </div>
-            <div class="col-md-7">
-              <div class="input-group input-group-sm">
-                <input
-                  type="text"
-                  class="form-control form-control-sm"
-                  placeholder="Licence"
-                  id="entreprise"
-                />
-                <span class="input-group-text">&nbsp;&nbsp;</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mb-4">
-            <div class="col-md-4 offset-md-1">
-              <label for="description">Spécifiez votre formation</label>
-            </div>
-            <div class="col-md-7">
-              <textarea
-                class="form-control"
-                placeholder="Déscription de la formation"
-                rows="4"
-                name=""
-                id=""
-              ></textarea>
-            </div>
-          </div>
-        </form>
-      </div>
-
-      <div class="autre-formation-container">
-        <div class="row">
-          <p class="col-md-12 offset-md-1 heading_2">Autres informations :</p>
-        </div>
-        <form>
-          <div class="row mb-4">
-            <div class="col-md-4 offset-md-1">
-              <label for="wantedjob">Emploie recherché </label>
-            </div>
-            <div class="col-md-7">
-              <div class="input-group input-group-sm">
-                <input
-                  type="text"
-                  class="form-control form-control-sm"
-                  placeholder="Barman"
-                  id="wantedjob"
-                />
-                <span class="input-group-text">&nbsp;&nbsp;</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mb-4">
-            <div class="col-md-4 offset-md-1">
-              <label for="description">Spécifiez votre formation</label>
-            </div>
-            <div class="col-md-7">
-              <textarea
-                class="form-control"
-                placeholder="Déscription de la formation"
-                rows="4"
-                name=""
-                id=""
-              ></textarea>
-            </div>
-          </div>
-
-          <div class="row mb-4">
-            <div class="col-md-4 offset-md-1">
-              <label>Statut actuel:</label>
-            </div>
-            <div class="col-md-7">
-              <div class="btn-container">
-                <button class="btn student-status">Etudiants</button>
-
-                <button class="btn selected-btn apprentis-status">
-                  Apprentis
-                </button>
-                <button class="btn active-satus">Actif</button>
-                <button class="btn emploi-status">R.emploi</button>
-                <button class="btn not-active-status">Inactif</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mb-4">
-            <div class="col-md-4 offset-md-1">
-              <label>Mobilité:</label>
-            </div>
-            <div class="col-md-7">
-              <div class="row">
-                <div class="checkbox-inline col-sm-2 col-md-2">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="mobile"
-                    id="oui"
-                  />
-                  <label class="form-check-label" for="oui"> Oui </label>
-                </div>
-
-                <div class="checkbox-inline col-sm-2 col-md-2">
-                  <input
-                    class="form-check-input"
-                    type="radio"
-                    name="mobile"
-                    id="non"
-                    checked
-                  />
-                  <label class="form-check-label" for="non"> Non </label>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mb-4">
-            <div class="col-md-4 offset-md-1">
-              <label> Secteur </label>
-            </div>
-
-            <div class="col-md-7">
-              <div class="btn-container">
-                <button class="btn selected-btn">Cuisine-Restauration</button>
-
-                <button class="btn selected-btn">Salle-Service</button>
-
-                <button class="btn">Hôtellerie-Hébergement</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="row mb-2">
-            <div class="col-md-4 offset-md-1">
-              <label for="galerie">Galérie photo</label>
-            </div>
-            <div class="col-md-7">
-              <div class="input-group input-group-sm">
-                <input
-                  type="text"
-                  class="form-control form-control-sm"
-                  placeholder="Ajouter une photo"
-                  id="galerie"
-                />
-                <span class="input-group-text">Télécharger</span>
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
+      </form>
     </div>
   </div>
 </div>

@@ -39,13 +39,14 @@ export class AuthService {
             token,
             email,
             roles,
-            username,
-            name,
-            imageUrl 
+            lastname,
+            firstname,
+            imageUrl,
+            expiredIn 
               } = responseData;
               console.log(responseData);
               
-      const user = new User(token, roles, id, email, username, name, imageUrl);
+      const user = new User(token, roles, id, email, lastname, firstname, imageUrl, expiredIn);
       console.log(user);
       
       this.userSubject.next(user);
@@ -85,15 +86,16 @@ export class AuthService {
                                 userData.roles,
                                 userData.id,
                                 userData.email,
-                                userData.username,
-                                userData.name,
-                                userData.imageUrl);
+                                userData.lastname,
+                                userData.firstname,
+                                userData.imageUrl,
+                                userData.expiredIn);
       //check if that user has a token and that token is valid and not expired
           if(loadedUser.token) {
             this.userSubject.next(loadedUser)
-            console.log(' Expiration date: ', loadedUser.tokenExpirationDate);
+            console.log(' Expiration date: ', loadedUser.expiredIn);
             
-            this.autoLogout(loadedUser.tokenExpirationDate.getTime() - new Date().getTime())
+            this.autoLogout((loadedUser.expiredIn * 1000) - new Date().getTime())
           }
     }
 

@@ -1,0 +1,12 @@
+<div [formGroup]="form">
+  <div *ngFor="let mobility of mobilities" class="radio-item">
+    <input
+      type="radio"
+      [id]="mobility.label"
+      name="mobility"
+      [value]="mobility.value"
+      formControlName="mobility"
+    />
+    <label [attr.for]="mobility.label"> {{ mobility.label }}</label>
+  </div>
+</div>

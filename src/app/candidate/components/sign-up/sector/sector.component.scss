@@ -1,0 +1,36 @@
+
+.sector-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.btn-first {
+    min-width: 165px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.btn-second {
+    min-width: 160px; 
+    font-size: 14px
+}
+
+.btn-third {
+    min-width: 150px;
+}
+
+.btn-fourth {
+    min-width: 160px;
+    font-size: 14px;
+}
+
+.btn-fifth {
+    min-width: 165px
+}
+
+.btn-sixth {
+    min-width: 150px;
+    padding-left: 0px;
+    padding-right: 0px
+}

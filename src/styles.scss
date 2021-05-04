@@ -22,6 +22,7 @@ body {
 
 .btn {
     border-radius: 2px;
+
     font-family: sans-serif;
     letter-spacing: 0.2px;
     opacity: 0.93;
@@ -48,10 +49,27 @@ cursor: pointer;
 -ms-user-select: none;
 user-select: none;
 background-image: none;
-border: 1px solid transparent;
-border-top-color: transparent;
-border-right-color: transparent;
-border-bottom-color: transparent;
-border-left-color: transparent;
+// border: 1px solid transparent;
+// border-top-color: transparent;
+// border-right-color: transparent;
+// border-bottom-color: transparent;
+// border-left-color: transparent;
+border: 1px solid #6663;
 border-radius: 4px;
+}
+
+
+input.ng-touched.ng-invalid {
+    border: 2px solid red;
+}
+
+.selected-btn {
+    background-color: var(--primary-color);
+    color: white !important;
+  }
+
+// Radio button style
+
+.btn-low-opacity {
+    color: rgba(0,0,0,0.6);
 }

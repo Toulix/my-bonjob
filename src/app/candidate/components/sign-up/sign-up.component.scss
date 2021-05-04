@@ -2,6 +2,19 @@
     margin-top: 120px;
 }
 
+.hidden-file-input{
+  display: none;
+}
+
+.input-profile {
+  background: rgba(255,255,255, 1.0);
+  cursor: pointer;
+}
+
+.btn-upload-profile {
+  cursor: pointer;
+}
+
 .heading_1 {
     font-size: 1.5rem;
     color: var(--primary-color);
@@ -21,14 +34,24 @@ input, textarea {
     padding-left: 16px;
 }
 
+.p-error {
+  margin-bottom: 0;
+  margin-left: 17px;
+  font-size: 0.8rem;
+  color: rgba(255,0,0,0.8)
+}
+
+.profile-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
 
 .btn-submit-container {
   display: flex;
   flex-direction: column;
   margin-top: 3rem;
-//   margin-left: 13rem;
-//   margin-right: 16rem;
 
   button {
     border: 0.2em solid var(--primary-color);
@@ -43,32 +66,26 @@ input, textarea {
   }
  }
 
-.selected-btn {
-  background-color: var(--primary-color);
-  color: white;
-}
-
- .apprentis-status {
-  width: 84px;
-  height: 30px;
- }
-
- .student-status, .active-satus, .emploi-status, .not-active-status {
-  width: 78px;
-  height: 30px
- }
-
  .btn-container {
   display: flex;
   justify-content: space-between
  }
 
- .no-year, .year-one, .year-1-2, .year-2-3 {
-  width: 78px;
-  height: 30px;
+ .btn-add-experience, .btn-add-formation {
+  color: white;
+  background: var(--secondary-color);
+  height: 29px;
+  min-width: 8.5rem;
+  font-size: 13px;
  }
 
- .year-5 {
-  width: 92px;
-  height: 30px;
+
+ .btn-delete-experience {
+  height: 29px;
+  font-size: 13px;
+  margin-bottom: -30px;
  }
+
+ .btn:disabled {
+  opacity: 0.65;
+}
