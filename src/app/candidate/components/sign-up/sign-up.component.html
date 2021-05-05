@@ -1,8 +1,18 @@
 <div class="container signup-container">
   <div class="row">
     <p>{{ inscriptionForm.value | json }}</p>
+    <div *ngIf="isLoading">
+      <spinner></spinner>
+    </div>
+
     <div class="col-md-8 mx-auto">
-      <form [formGroup]="inscriptionForm" (ngSubmit)="onSubmit()">
+      <div>
+        <p *ngIf="error" style="text-align: center; color: var(--error-color)">
+          {{ error }}
+        </p>
+      </div>
+
+      <form [formGroup]="inscriptionForm" (ngSubmit)="onSignUp()">
         <div formGroupName="user">
           <div *ngIf="basicInscriptionMode" class="basic-container">
             <p class="heading_1">Inscription</p>
@@ -369,6 +379,7 @@
                   </div>
                 </div>
               </div>
+              <!-- btn add formation  -->
               <div class="row">
                 <button
                   [disabled]="!formationArray.valid"
@@ -389,7 +400,7 @@
               </p>
             </div>
             <!-- wanted job -->
-            <div class="row mb-4">
+            <div class="row mb-4" formGroupName="others">
               <div class="col-md-4 offset-md-1">
                 <label for="wantedjob">Emploie recherché </label>
               </div>
@@ -400,6 +411,7 @@
                     class="form-control form-control-sm"
                     placeholder="Barman"
                     id="wantedjob"
+                    formControlName="job_search"
                   />
                   <span class="input-group-text">&nbsp;&nbsp;</span>
                 </div>
@@ -412,6 +424,7 @@
                 <label>Statut actuel:</label>
               </div>
               <div class="col-md-7">
+                <!-- others  here is not the formGroupName, it's a simple getter  -->
                 <actual-status [form]="others"></actual-status>
               </div>
             </div>
@@ -452,10 +465,27 @@
                     class="btn mb-2"
                     *ngIf="basicInscriptionMode"
                     (click)="onSwitchInscriptionMode()"
+                    [disabled]="
+                      !firstname.valid ||
+                      !lastname.valid ||
+                      !email.valid ||
+                      !password.valid ||
+                      !confirmPassword.valid
+                    "
                   >
                     Compléter mes informations
                   </button>
-                  <button class="btn mb-2 submit" type="submit">
+                  <button
+                    [disabled]="
+                      !firstname.valid ||
+                      !lastname.valid ||
+                      !email.valid ||
+                      !password.valid ||
+                      !confirmPassword.valid
+                    "
+                    class="btn mb-2 submit"
+                    type="submit"
+                  >
                     Inscription
                   </button>
                 </div>

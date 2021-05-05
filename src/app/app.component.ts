@@ -27,6 +27,8 @@ export class AppComponent implements OnInit, OnDestroy{
       this.isAdminLink = linkStatus;
       }
   )
+      
+
   }
 
   ngOnDestroy() {

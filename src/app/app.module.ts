@@ -1,3 +1,4 @@
+import { CoreModule } from './core/core.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -15,6 +16,7 @@ import { HeaderComponent } from './header/header.component';
     HeaderComponent
   ],
   imports: [
+    CoreModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

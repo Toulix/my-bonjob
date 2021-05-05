@@ -50,7 +50,7 @@ export class AuthService {
       console.log(user);
       
       this.userSubject.next(user);
-     // this.autoLogout(user.tokenExpirationDate.getTime());
+    
       localStorage.setItem('userData', JSON.stringify(responseData));
   }
 
@@ -62,6 +62,9 @@ export class AuthService {
       return throwError(errorMessage);
     } else { //error from the server, bad request etc...
       //Needs to handle 404, 500 error here, (not found)
+      console.log('Status: ', error.status);
+      console.log('Error property: ', error.error);
+      
       switch(error.status) {
         case 401:
           errorMessage = INVALID_CREDENTIALS;
@@ -69,7 +72,7 @@ export class AuthService {
         case 500:
           errorMessage = SERVER_ERROR;
           break;
-        default:
+        default: //status 0 => Unexpeted error
           errorMessage = DEFAULT_ERROR;
       }
     }
@@ -94,7 +97,6 @@ export class AuthService {
           if(loadedUser.token) {
             this.userSubject.next(loadedUser)
             console.log(' Expiration date: ', loadedUser.expiredIn);
-            
             this.autoLogout((loadedUser.expiredIn * 1000) - new Date().getTime())
           }
     }

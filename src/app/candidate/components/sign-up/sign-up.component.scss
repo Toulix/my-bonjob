@@ -1,5 +1,6 @@
 .signup-container {
     margin-top: 120px;
+    height: 100vh;
 }
 
 .hidden-file-input{
@@ -87,5 +88,5 @@ input, textarea {
  }
 
  .btn:disabled {
-  opacity: 0.65;
+  opacity: 0.5;
 }

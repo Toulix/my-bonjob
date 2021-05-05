@@ -11,6 +11,7 @@ export class User {
                 ){}
 
   get token() {
+    
     const helper = new JwtHelperService();
     const userData = JSON.parse(localStorage.getItem('userData'));
     if (!userData) {

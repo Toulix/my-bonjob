@@ -1,7 +1,11 @@
+import { AuthService } from './../../../core/services/auth.service';
+import { exhaustMap } from 'rxjs/operators';
+import { SignUpService } from './../../services/sign-up.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ConfirmedValidator } from '../../validators/confirmed.validators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -9,6 +13,10 @@ import { ConfirmedValidator } from '../../validators/confirmed.validators';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
+
+  isLoading= false;
+  error: string = null;
+
   //By default the user sees the basic input for registration 
   //(firstname, lastname, email, password, confirmpassword, image)
   basicInscriptionMode: boolean = true;
@@ -19,16 +27,46 @@ export class SignUpComponent implements OnInit {
   profileImageToUpload: File = null;
   candidateProfile: string = null;
 
-  inscriptionForm: FormGroup
+  inscriptionForm: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private auth: AuthService,
+              private signUpService: SignUpService) { }
 
   ngOnInit(): void {
     this.initInscriptionForm();
   }
 
-  onSubmit() {
-    console.log(this.others);
+  onSignUp() {
+    this.isLoading = true;
+    //strip out the confirm password 
+    const { confirmPassword, ...signUpForm} = this.inscriptionForm.value.user;
+    const { email, password } = signUpForm;
+    const signUpData = Object.assign({}, {user: {...signUpForm}});
+ 
+    const credentials = { email, password};
+  
+    this.signUpService
+        .create<any>(signUpData)
+        .pipe(
+          exhaustMap(() =>{
+            return this.auth.singIn(credentials)
+          })
+        )
+        .subscribe(
+          (response)=> {
+            this.isLoading = false;
+            console.log(response);
+            return this.router.navigate(['/'])
+            
+          },
+          (errorMessage)=> {
+            this.isLoading = false;
+            this.error = errorMessage;
+            return this.router.navigate(['/candidate/signup'])
+          }
+        )
   }
 
   onSwitchInscriptionMode() {
