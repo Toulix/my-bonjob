@@ -1,6 +1,6 @@
 import { AuthService } from './../../../core/services/auth.service';
 import { exhaustMap } from 'rxjs/operators';
-import { SignUpService } from './../../services/sign-up.service';
+import { SignUpService } from '../../../core/services/sign-up.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent implements OnInit {
 
-  isLoading= false;
+  isLoading = false;
   error: string = null;
 
   //By default the user sees the basic input for registration 
@@ -67,6 +67,10 @@ export class SignUpComponent implements OnInit {
             return this.router.navigate(['/candidate/signup'])
           }
         )
+
+    // this.signUpService
+    //       .create<any>(signUpData)
+    //       .subscribe();
   }
 
   onSwitchInscriptionMode() {

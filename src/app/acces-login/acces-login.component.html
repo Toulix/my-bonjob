@@ -81,14 +81,35 @@
         Connexion
       </button>
 
-      <button
+      <!-- <button
         [routerLink]="['/candidate/signup']"
         type="button"
         class="btn m-2"
         style="background-color: var(--default-color)"
       >
         Créer mon compte
-      </button>
+      </button> -->
+
+      <ng-container *ngIf="isAdminLink; else candidateLink">
+        <button
+          [routerLink]="['/admin/signup']"
+          type="button"
+          class="btn m-2"
+          style="background-color: var(--default-color)"
+        >
+          Créer mon compte
+        </button>
+      </ng-container>
+      <ng-template #candidateLink>
+        <button
+          [routerLink]="['/candidate/signup']"
+          type="button"
+          class="btn m-2"
+          style="background-color: var(--default-color)"
+        >
+          Créer mon compte
+        </button>
+      </ng-template>
     </form>
   </div>
 </div>

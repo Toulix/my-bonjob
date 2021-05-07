@@ -1,4 +1,5 @@
-import { SignUpService } from './services/sign-up.service';
+import { SignUpService } from '../core/services/sign-up.service';
+
 import {  ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';

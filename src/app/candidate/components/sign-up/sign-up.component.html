@@ -1,11 +1,11 @@
 <div class="container signup-container">
   <div class="row">
-    <p>{{ inscriptionForm.value | json }}</p>
     <div *ngIf="isLoading">
       <spinner></spinner>
     </div>
 
-    <div class="col-md-8 mx-auto">
+    <div class="col-md-8 mx-auto" *ngIf="!isLoading">
+      <p>{{ inscriptionForm.value | json }}</p>
       <div>
         <p *ngIf="error" style="text-align: center; color: var(--error-color)">
           {{ error }}

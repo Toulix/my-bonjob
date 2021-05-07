@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { LoginComponent } from './components/login/login.component';
+import { SignUpService } from '../core/services/sign-up.service';
 
 
 
@@ -17,6 +18,7 @@ import { LoginComponent } from './components/login/login.component';
     CommonModule,
     AuthenticationRoutingModule,
     SharedModule
-  ]
+  ],
+  providers: [SignUpService]
 })
 export class AuthenticationModule { }

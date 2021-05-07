@@ -1,1 +1,187 @@
-<p>signup-form works!</p>
+<div class="container signup-container">
+  <div *ngIf="isLoading">
+    <spinner></spinner>
+  </div>
+  <div class="row" *ngIf="!isLoading">
+    <div class="col-md-6 mx-auto">
+      <p>{{ inscriptionForm.value | json }}</p>
+      <div>
+        <p *ngIf="error" style="text-align: center; color: var(--error-color)">
+          {{ error }}
+        </p>
+      </div>
+
+      <form [formGroup]="inscriptionForm" (ngSubmit)="onSignUp()">
+        <div formGroupName="user">
+          <div>
+            <p class="heading_1">Inscription</p>
+
+            <!-- Prénom  -->
+            <div class="row mb-2">
+              <div class="col-md-3 offset-md-2">
+                <label for="prenom">Prénom</label>
+              </div>
+              <div class="col-md-6">
+                <input
+                  id="prenom"
+                  type="text"
+                  class="form-control form-control-sm"
+                  placeholder="Prénom"
+                  formControlName="firstname"
+                />
+                <div
+                  *ngIf="
+                    firstname.invalid && (firstname.touched || firstname.dirty)
+                  "
+                >
+                  <p class="p-error" *ngIf="firstname.errors.required">
+                    Prénom requis !
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- Nom -->
+            <div class="row mb-2">
+              <div class="col-md-3 offset-md-2">
+                <label for="nom">Nom</label>
+              </div>
+              <div class="col-md-6">
+                <input
+                  id="nom"
+                  type="text"
+                  class="form-control form-control-sm"
+                  placeholder="Nom"
+                  formControlName="lastname"
+                />
+                <div
+                  *ngIf="
+                    lastname.invalid && (lastname.touched || lastname.dirty)
+                  "
+                >
+                  <p class="p-error" *ngIf="lastname.errors.required">
+                    Prénom requis !
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Société -->
+            <div class="row mb-2">
+              <div class="col-md-3 offset-md-2">
+                <label for="nom">Société</label>
+              </div>
+              <div class="col-md-6">
+                <input
+                  id="nom"
+                  type="text"
+                  class="form-control form-control-sm"
+                  placeholder="Nom de votre société"
+                  formControlName="company"
+                />
+                <div
+                  *ngIf="company.invalid && (company.touched || company.dirty)"
+                >
+                  <p class="p-error" *ngIf="company.errors.required">
+                    Nom de la société requis !
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- email -->
+            <div class="row mb-2">
+              <div class="col-md-3 offset-md-2">
+                <label for="email">email</label>
+              </div>
+              <div class="col-md-6">
+                <input
+                  id="email"
+                  type="email"
+                  class="form-control form-control-sm"
+                  placeholder="Adresse email"
+                  formControlName="email"
+                />
+                <div *ngIf="email.invalid && (email.touched || email.dirty)">
+                  <p class="p-error" *ngIf="email.errors.required">
+                    Email requis !
+                  </p>
+                  <p class="p-error" *ngIf="email.errors.email">
+                    Email invalide !
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- mot de passe  -->
+            <div class="row mb-2">
+              <div class="col-md-3 offset-md-2">
+                <label for="password">Mot de passe</label>
+              </div>
+              <div class="col-md-6">
+                <input
+                  id="password"
+                  type="password"
+                  class="form-control form-control-sm"
+                  placeholder="Mot de passe"
+                  formControlName="password"
+                />
+                <div
+                  *ngIf="
+                    password.invalid && (password.touched || password.dirty)
+                  "
+                >
+                  <p class="p-error" *ngIf="password.errors.required">
+                    Mot de passe requis !
+                  </p>
+                  <p class="p-error" *ngIf="password.errors.minlength">
+                    Minimum 4 caractère !
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- confirmation -->
+            <div class="row mb-2">
+              <div class="col-md-3 offset-md-2">
+                <label for="confirmpassword">Confirmation</label>
+              </div>
+              <div class="col-md-6">
+                <input
+                  id="confirmpassword"
+                  type="password"
+                  class="form-control form-control-sm"
+                  placeholder="Confirmation du mot de passe"
+                  formControlName="confirmPassword"
+                />
+                <div
+                  *ngIf="
+                    confirmPassword.invalid &&
+                    (confirmPassword.touched || confirmPassword.dirty)
+                  "
+                >
+                  <p class="p-error" *ngIf="confirmPassword.errors.required">
+                    Veuillez confirmer votre mot de passe !
+                  </p>
+                  <p class="p-error" *ngIf="confirmPassword.errors.minlength">
+                    Minimum 4 caractère !
+                  </p>
+                  <p
+                    class="p-error"
+                    *ngIf="confirmPassword.errors.confirmedValidator"
+                  >
+                    Les deux mots de passe ne sont pas indentiques !
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-4">
+              <div class="col-md-9 offset-md-2">
+                <button [disabled]="!user.valid" type="submit">
+                  Inscription
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
