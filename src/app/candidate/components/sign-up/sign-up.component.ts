@@ -1,5 +1,5 @@
 import { AuthService } from './../../../core/services/auth.service';
-import { exhaustMap } from 'rxjs/operators';
+import { exhaustMap, take } from 'rxjs/operators';
 import { SignUpService } from '../../../core/services/sign-up.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -37,42 +37,13 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
     this.initInscriptionForm();
   }
-
-  onSignUp() {
-    this.isLoading = true;
-    //strip out the confirm password 
-    const { confirmPassword, ...signUpForm} = this.inscriptionForm.value.user;
-    const { email, password } = signUpForm;
-    const signUpData = Object.assign({}, {user: {...signUpForm}});
- 
-    const credentials = { email, password};
-  
-    this.signUpService
-        .create<any>(signUpData)
-        .pipe(
-          exhaustMap(() =>{
-            return this.auth.singIn(credentials)
-          })
-        )
-        .subscribe(
-          (response)=> {
-            this.isLoading = false;
-            console.log(response);
-            return this.router.navigate(['/'])
-            
-          },
-          (errorMessage)=> {
-            this.isLoading = false;
-            this.error = errorMessage;
-            return this.router.navigate(['/candidate/signup'])
-          }
-        )
-
-    // this.signUpService
-    //       .create<any>(signUpData)
-    //       .subscribe();
+  onSave($event: Event) {
+    $event.stopPropagation();
+    console.log("Button save was clicked ", $event);
+    
   }
 
+ 
   onSwitchInscriptionMode() {
     this.basicInscriptionMode = !this.basicInscriptionMode;
   }
@@ -111,6 +82,45 @@ export class SignUpComponent implements OnInit {
       })
     })
   }
+
+  onSignUp() {
+    console.log('signup executed !');
+    
+    this.isLoading = true;
+    //strip out the confirm password 
+    const { confirmPassword, ...signUpForm} = this.inscriptionForm.value.user;
+    const { email, password } = signUpForm;
+    const signUpData = Object.assign({}, {user: {...signUpForm}});
+ 
+    const credentials = { email, password};
+  
+    this.signUpService
+        .create<any>(signUpData)
+        .pipe(
+          take(1),
+          exhaustMap(() =>{
+            return this.auth.singIn(credentials)
+          })
+        )
+        .subscribe(
+          (response)=> {
+            this.isLoading = false;
+            console.log(response);
+            return this.router.navigate(['/candidate'])
+            
+          },
+          (errorMessage)=> {
+            this.isLoading = false;
+            this.error = errorMessage;
+            return this.router.navigate(['/candidate/signup'])
+          }
+        )
+
+    // this.signUpService
+    //       .create<any>(signUpData)
+    //       .subscribe();
+  }
+
 
   get others() {
     return this.inscriptionForm.get('user.others')

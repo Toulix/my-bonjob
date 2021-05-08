@@ -36,7 +36,6 @@ export class ExperienceYearComponent implements OnInit {
       if(value == experience.value) {
         return this.form.get('durationPositionHeld').setValue('');
       }
-
         return this.form.get('durationPositionHeld').setValue(duration);
   }
 }

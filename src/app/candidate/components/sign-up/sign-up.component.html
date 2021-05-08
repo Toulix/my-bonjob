@@ -4,8 +4,7 @@
       <spinner></spinner>
     </div>
 
-    <div class="col-md-8 mx-auto" *ngIf="!isLoading">
-      <p>{{ inscriptionForm.value | json }}</p>
+    <div class="col-md-9 mx-auto" *ngIf="!isLoading">
       <div>
         <p *ngIf="error" style="text-align: center; color: var(--error-color)">
           {{ error }}
@@ -312,7 +311,7 @@
               <div class="row">
                 <button
                   [disabled]="!experiencesArray.valid"
-                  class="btn col-md-1 offset-md-10 btn-add-experience"
+                  class="btn col-md-1 btn-add-experience"
                   (click)="addExperience()"
                   data-toggle="tooltip"
                   title="Cliquer pour ajouter une autre expérience"
