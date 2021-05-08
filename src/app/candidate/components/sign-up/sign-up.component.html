@@ -295,7 +295,7 @@
                     ></textarea>
                   </div>
                 </div>
-                <div class="row">
+                <div class="row delete-container">
                   <button
                     *ngIf="i != 0"
                     class="btn col-md-2 offset-md-8 btn-delete-experience"
@@ -308,7 +308,7 @@
               <!-- end of for loop-->
 
               <!-- btn add experience -->
-              <div class="row">
+              <div class="row add-experience-container">
                 <button
                   [disabled]="!experiencesArray.valid"
                   class="btn col-md-1 btn-add-experience"
@@ -377,9 +377,19 @@
                     ></textarea>
                   </div>
                 </div>
+
+                <div class="row delete-container">
+                  <button
+                    *ngIf="i != 0"
+                    class="btn col-md-2 offset-md-8 btn-delete-experience"
+                    (click)="deleteFormationArray(i)"
+                  >
+                    Supprimer
+                  </button>
+                </div>
               </div>
               <!-- btn add formation  -->
-              <div class="row">
+              <div class="row add-formation-container">
                 <button
                   [disabled]="!formationArray.valid"
                   class="btn col-md-1 offset-md-10 btn-add-formation"

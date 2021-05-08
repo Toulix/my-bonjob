@@ -204,6 +204,10 @@ export class SignUpComponent implements OnInit {
   deleteExperienceArray(index: number) {
     return this.experiencesArray.removeAt(index);
   }
+  
+  deleteFormationArray(index: number) {
+    return this.formationArray.removeAt(index);
+  }
 
   setProfileName(profileName: string) {
    return this.inscriptionForm

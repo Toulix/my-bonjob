@@ -4,7 +4,6 @@
   </div>
   <div class="row" *ngIf="!isLoading">
     <div class="col-md-6 mx-auto">
-      <p>{{ inscriptionForm.value | json }}</p>
       <div>
         <p *ngIf="error" style="text-align: center; color: var(--error-color)">
           {{ error }}
