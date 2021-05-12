@@ -1,3 +1,4 @@
+import { ADMIN_ROLE, USER_ROLE } from './../utils/constante';
 import { JwtHelperService } from '@auth0/angular-jwt';
 export class User {
     constructor(private _token: string,
@@ -30,11 +31,11 @@ export class User {
   }
   
   get isAdmin() {
-    return this.roles.some(role => role === 'ROLE_ADMIN');
+    return this.roles.some(role => role === ADMIN_ROLE);
   }
 
   get isCandidate() {
-    return this.roles.some(role => role === 'ROLE_USER')
+    return this.roles.some(role => role === USER_ROLE)
   }
 
 //   getToken() {
