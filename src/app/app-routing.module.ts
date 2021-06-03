@@ -4,13 +4,12 @@ import { AccesLoginComponent } from './acces-login/acces-login.component';
 
 const routes: Routes = [
   {
-    path: '', component: AccesLoginComponent
+    path: '', component: AccesLoginComponent, pathMatch: 'full'
   },
   {
     path: "admin",
     loadChildren: () => import("./admin/admin.module")
     .then(m => m.AdminModule),
-  
   },
   {
     path: "candidate",

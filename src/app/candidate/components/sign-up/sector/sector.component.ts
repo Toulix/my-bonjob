@@ -1,7 +1,7 @@
-import { FormArray, FormControl, FormGroup, FormGroupName, FormBuilder } from '@angular/forms';
 import { Component, Input, OnInit } from '@angular/core';
-import { SectorAttribute } from 'src/app/candidate/models/sector-attribute';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Sector } from 'src/app/candidate/enums/sector';
+import { SectorAttribute } from 'src/app/candidate/models/sector-attribute';
 
 @Component({
   selector: 'sector',

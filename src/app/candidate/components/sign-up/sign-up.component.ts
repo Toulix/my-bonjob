@@ -25,7 +25,7 @@ export class SignUpComponent implements OnInit {
   @ViewChild("fileName", {static: false}) fileName: ElementRef;
   
   profileImageToUpload: File = null;
-  candidateProfile: string = null;
+  candidateProfile: string = null; // <= base 64
 
   inscriptionForm: FormGroup;
 
@@ -37,13 +37,7 @@ export class SignUpComponent implements OnInit {
   ngOnInit(): void {
     this.initInscriptionForm();
   }
-  onSave($event: Event) {
-    $event.stopPropagation();
-    console.log("Button save was clicked ", $event);
-    
-  }
-
- 
+  
   onSwitchInscriptionMode() {
     this.basicInscriptionMode = !this.basicInscriptionMode;
   }
@@ -240,6 +234,8 @@ export class SignUpComponent implements OnInit {
       this.setProfileName(fileName);
       //store base 64 in the from object
       this.setProfileData(event.target.result);
+      //we need this for displaying the name of the image
+      //inside the input which is disabled
       this.fileName.nativeElement.value = this.profileImageToUpload.name;
 
     }

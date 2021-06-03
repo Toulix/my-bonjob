@@ -1,0 +1,36 @@
+{
+    "user": {
+        "firstname": "Patrick André",
+        "lastname": "TOLOJANAHARY",
+        "email": "",
+        "profil": null,
+        "description": "",
+        "video": null,
+        "pjs": [],
+        "languages": [
+            { "name" : "Français", "level":"Avancé"}
+        ],
+        "experiences": [
+            {
+                "positionHeld": "Développeur web",
+                "durationPositionHeld": "2",
+                "business": "hightao-mg",
+                "description": "Test"
+            }
+        ],
+        "formations": [
+            {
+                "level": "Licence",
+                "description": "Licence en informatique"
+            }
+        ], 
+        "others": {
+            "job_search": "Barman",
+            "statut": "Apprentis",
+            "mobility": true,
+            "sector": []
+        }
+    }
+}
+
+

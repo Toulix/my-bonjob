@@ -1,37 +1,57 @@
-import { SERVER_ERROR, INVALID_CREDENTIALS, DEFAULT_ERROR, CLIENT_SIDE_ERROR } from '../utils/constante';
-import { Router } from '@angular/router';
-import { AuthResponseData } from './../models/auth.response.data';
+import { DataService } from './data.service';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { catchError, tap } from 'rxjs/operators';
-import { throwError } from 'rxjs'
+import { Router } from '@angular/router';
+import { BehaviorSubject, of, throwError } from 'rxjs';
+import { catchError, exhaustMap, take, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+
 import { User } from '../models/connected.user';
-import { BehaviorSubject } from 'rxjs';
+import { AuthResponseData } from './../models/auth.response.data';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
-  url = `${environment.apiUrl}/login_check`;
+export class AuthService extends DataService {
+
   userSubject = new BehaviorSubject<User>(null);
+  user: User;
+
   private expirationTimer: any;
 
-  constructor(private http: HttpClient,
-              private route: Router) { }
+  constructor(http: HttpClient,
+              private route: Router) { 
+              super(`${environment.apiUrl}/login_check`, http);
+         }
 
   singIn(credentials) {
-    return this.http
-                .post<AuthResponseData>(this.url, credentials)
+    return this.create<AuthResponseData>(credentials)
                 .pipe(
                   tap((responseData) => {
+                    console.log("responseDAta ", responseData);
+                    
                     this.handleResponseData(responseData);
-                  }),
-                  catchError(this.handleAuthError)
-                )
-             }
+                  }))
+                }
+ 
+  emitUser(user: User) {
+    return this.userSubject.next(user);
+  }
+//
+  user$ = this.userSubject.asObservable();
+
+  getCurrentUser$() {
+   // console.log("get Current user called");
+    
+    return this.userSubject.pipe(
+                take(1),
+                exhaustMap((user: User) =>{
+                //  console.log("User from exhaustd map", user);
+                  return of(user);
+                })
+              )
+    }
             
 
   handleResponseData(responseData: AuthResponseData) {
@@ -41,63 +61,69 @@ export class AuthService {
             roles,
             lastname,
             firstname,
-            imageUrl,
             expiredIn 
               } = responseData;
-              console.log(responseData);
-              
-      const user = new User(token, roles, id, email, lastname, firstname, imageUrl, expiredIn);
-      console.log(user);
       
-      this.userSubject.next(user);
-    
-      localStorage.setItem('userData', JSON.stringify(responseData));
-  }
+   const expirationDate = new Date(new Date().getTime() + expiredIn * 1000);
 
-  handleAuthError(error: HttpErrorResponse) {
-    let errorMessage = '';
-    //client side error, network error
-    if(error.error instanceof ErrorEvent) {
-      errorMessage = `${CLIENT_SIDE_ERROR}${error.error.message}`;
-      return throwError(errorMessage);
-    } else { //error from the server, bad request etc...
-      //Needs to handle 404, 500 error here, (not found)
-      console.log('Status: ', error.status);
-      console.log('Error property: ', error.error);
-      
-      switch(error.status) {
-        case 401:
-          errorMessage = INVALID_CREDENTIALS;
-          break;
-        case 500:
-          errorMessage = SERVER_ERROR;
-          break;
-        default: //status 0 => Unexpeted error
-          errorMessage = DEFAULT_ERROR;
-      }
-    }
-    return throwError(errorMessage);
-  }
+   if(!responseData.imageUrl) {
+        this.user = new User(token, 
+                              roles,
+                              id,
+                              email,
+                              lastname,
+                              firstname,
+                              null, // the property is called imageUrl in the user Object
+                              null, // the property is called imageName in the user Object
+                              expirationDate);
 
+        }  else {
+              const {
+                imageUrl: {
+                    name,
+                    url
+                  }
+                } = responseData;
+
+              this.user = new User(token, 
+                  roles,
+                  id,
+                  email,
+                  lastname,
+                  firstname,
+                  url, // the property is called imageUrl in the user Object
+                  name, // the property is called imageName in the user Object
+                  expirationDate);
+            }
+     
+      this.userSubject.next(this.user);
+      localStorage.setItem('userData', JSON.stringify(this.user));
+  }
 
   autoLogin() {
-    const userData: AuthResponseData = JSON.parse(localStorage.getItem('userData'));
+    //Local storage does not reflect the database state
+    //when refreshing the page, it needs to be fixed
+    console.log("AutoLogin Called");
+    
+    const userData = JSON.parse(localStorage.getItem('userData'));
     if(!userData) {
       return;
     }
-    const loadedUser = new User(userData.token,
+    const loadedUser = new User(userData._token,
                                 userData.roles,
                                 userData.id,
                                 userData.email,
                                 userData.lastname,
                                 userData.firstname,
                                 userData.imageUrl,
-                                userData.expiredIn);
+                                userData.imageName,
+                                new Date(userData.expirationDate));
       //check if that user has a token and that token is valid and not expired
+      console.log("Loaded user ", loadedUser);
+      
           if(loadedUser.token) {
             this.userSubject.next(loadedUser)
-            console.log(' Expiration date: ', loadedUser.expiredIn);
-            this.autoLogout((loadedUser.expiredIn * 1000) - new Date().getTime())
+            this.autoLogout((loadedUser.expirationDate).getTime() - new Date().getTime())
           }
     }
 
@@ -121,14 +147,23 @@ export class AuthService {
 
  
   isLoggedIn() {
-    const helper = new JwtHelperService();
-    const userData = JSON.parse(localStorage.getItem('userData'));
-    if (!userData) {
+    //if we don't have a token, that means the user is not logged in
+    if (!this.getToken()) {
       return false;
     }
-  
-    const isExpired = helper.isTokenExpired(userData.token);
+    //If the token is expired, the user is not logged in
+    const isExpired = this.isTokenExpired();
     return !isExpired;
+  }
+
+  isTokenExpired() {
+    const userData = this.getToken();
+    return (new Date() > userData.expirationDate) ? true : false;
+  }
+
+//Get user information from local storage
+  getToken() {
+    return JSON.parse(localStorage.getItem('userData'));
   }
 }
 

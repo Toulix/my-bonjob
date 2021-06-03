@@ -1,9 +1,9 @@
-import { catchError } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CLIENT_SIDE_ERROR, DEFAULT_ERROR, INVALID_CREDENTIALS, SERVER_ERROR } from '../utils/constante';
 import { throwError } from 'rxjs';
-import { AuthResponseData } from '../models/auth.response.data';
+import { catchError } from 'rxjs/operators';
+
+import { CLIENT_SIDE_ERROR, DEFAULT_ERROR, INVALID_CREDENTIALS, SERVER_ERROR } from '../utils/constante';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +13,38 @@ export class DataService {
 
   getAll(){}
 
-  getOne() {}
+  getMockCandidate<T>(id) {
+    const url = 'assets/mock.candidate.json';
+    return this.http.get<T>(url)
+                    .pipe(
+                      catchError(this.handleError)
+                    )
+  }
 
-  create<T>(ressource) {
+  getOne<T>(id){
+    return this.http.get<T>(`${this.endPoint}/${id}`)
+                    .pipe(
+                      catchError(this.handleError)
+                    )
+  }
+
+ create<T>(ressource) {
     return this.http.post<T>(this.endPoint, ressource)
                     .pipe(
                       catchError(this.handleError)
                     )}
 
-  update(ressource) {}
+  update<T>(id, ressource) {
+    return this.http.patch<T>(`${this.endPoint}/${id}`, ressource).pipe(
+                              catchError(this.handleError)
+                                  )}
+
+  // update(id, ressource) {
+  //   return this.http.patch(`${this.endPoint}/${id}`, ressource)
+  //                   .pipe(
+  //                     catchError(this.handleError)
+  //                   )
+  // }
 
   delete(id: string | number) {}
 

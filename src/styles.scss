@@ -1,5 +1,54 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap');
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
+@font-face {
+    font-family: 'kelvetica_nobisregular';
+    src: url('/src/assets/fonts/Kelvetica_Nobis/kelvetica-nobis.regular-webfont.woff2') format('woff2'),
+         url('/src/assets/fonts/Kelvetica_Nobis/kelvetica-nobis.regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'HelveticaNeueLT Com 57 Cn';
+    src: url('/src/assets/fonts/Kelvetica_Nobis/HelveticaNeueLTCom-Cn.woff2') format('woff2'),
+        url('/src/assets/fonts/Kelvetica_Nobis/HelveticaNeueLTCom-Cn.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueLT Com 37 ThCn';
+    src: url('/src/assets/fonts/Kelvetica_Nobis/HelveticaNeueLTCom-ThCn.woff2') format('woff2'),
+        url('/src/assets/fonts/Kelvetica_Nobis/HelveticaNeueLTCom-ThCn.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueLT Com 67 MdCn';
+    src: url('/src/assets/fonts/Kelvetica_Nobis/HelveticaNeueLTCom-MdCn.woff2') format('woff2'),
+        url('/src/assets/fonts/Kelvetica_Nobis/HelveticaNeueLTCom-MdCn.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueLT Com 65 Md';
+    src: url('/src/assets/fonts/Kelvetica_Nobis/HelveticaNeueLTCom-Hv.woff2') format('woff2'),
+        url('/src/assets/fonts/Kelvetica_Nobis/HelveticaNeueLTCom-Hv.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
+
+
 
 :root {
     --primary-color: #003c7e;
@@ -9,11 +58,11 @@
 }
 
 html, body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'kelvetica_nobisregular', Arial, sans-serif;
     height: 100%;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    
 }
 
 body {
@@ -73,3 +122,33 @@ input.ng-touched.ng-invalid {
 .btn-low-opacity {
     color: rgba(0,0,0,0.6);
 }
+
+.candidateBackground {
+    background-color: var(--primary-color);
+}
+
+.adminBackground{
+    background-color: var(--secondary-color);
+}
+
+.defaultBackground {
+    background-color: var(--default-color);
+}
+
+.hidden-file-input{
+    display: none;
+  }
+
+.btn-custom {
+    color: #fff;
+    border: 0;
+    padding: 0.5rem 0.7rem;
+    border-radius: 5px;
+    outline:0;
+}
+
+.heading_2 {
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+    font-weight: 500;
+  }

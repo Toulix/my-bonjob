@@ -1,5 +1,4 @@
 import { ADMIN_ROLE, USER_ROLE } from './../utils/constante';
-import { JwtHelperService } from '@auth0/angular-jwt';
 export class User {
     constructor(private _token: string,
                 public roles: string[],
@@ -7,29 +6,18 @@ export class User {
                 public email?: string,
                 public lastname?: string,
                 public firstname?: string,
-                public imageUrl?: string,
-                public expiredIn?: number
+                public imageUrl?: string | null,
+                public imageName?: string | null,
+                public expirationDate?: Date
                 ){}
 
   get token() {
-    
-    const helper = new JwtHelperService();
-    const userData = JSON.parse(localStorage.getItem('userData'));
-    if (!userData) {
-      return null;
-    }
-    const isExpired = helper.isTokenExpired(userData.token);
-    if(isExpired) {
+    if (!this.expirationDate || new Date() > this.expirationDate) {
       return null;
     }
       return this._token
   }
 
-  get tokenExpirationDate(): Date {
-    const helper = new JwtHelperService();
-    return helper.getTokenExpirationDate(this._token);
-  }
-  
   get isAdmin() {
     return this.roles.some(role => role === ADMIN_ROLE);
   }
@@ -37,12 +25,4 @@ export class User {
   get isCandidate() {
     return this.roles.some(role => role === USER_ROLE)
   }
-
-//   getToken() {
-//     // const retreivedObjectToken = localStorage.getItem('token');
-//     // return JSON.parse(retreivedObjectToken);
-//     if(!this._token)
-//   }
 }
-// const user = new User(1,'qsdf', 'qsdf', ['a','b'], 'toto','momo', 'qsdf');
-// user.isAdmin

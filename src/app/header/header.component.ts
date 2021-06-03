@@ -56,4 +56,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+  setClasses() {
+    return {   
+        candidateBackground: !this.isAdminLink,
+        adminBackground: this.isAdminLink,
+        defaultBackground: this.route.url.includes('authentication') || 
+                            this.route.url.includes('signup') ||
+                            this.route.url.includes('profile')
+    } 
+  }
+
 }

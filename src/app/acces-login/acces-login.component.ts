@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UtilsService } from '../core/services/utils.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -11,7 +12,8 @@ export class AccesLoginComponent implements OnInit, OnDestroy {
   isAdminLink: boolean
   linkStatusSub: Subscription
 
-  constructor(private utils: UtilsService) { }
+  constructor(private utils: UtilsService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.isAdminLink = this.utils.getIsAdminLinkStatus();
@@ -23,9 +25,16 @@ export class AccesLoginComponent implements OnInit, OnDestroy {
     )
 
   }
-
+//
   ngOnDestroy() {
     this.linkStatusSub.unsubscribe();
   }
-
+  setClasses() {
+    return {   
+        candidateBackground: !this.isAdminLink,
+        adminBackground: this.isAdminLink,
+        defaultBackground: this.router.url.includes('authentication') || 
+                            this.router.url.includes('signup')
+    }
+  }
 }

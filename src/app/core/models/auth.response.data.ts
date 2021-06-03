@@ -6,7 +6,10 @@ export interface AuthResponseData {
     roles: string[];
     lastname?: string;
     firstname?: string; 
-    imageUrl?: string;
+    imageUrl?: {
+      name?: string,
+      url?: string
+    } | null;
     expiredIn: number;
   }
   
