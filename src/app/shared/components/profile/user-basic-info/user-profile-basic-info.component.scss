@@ -1,0 +1,42 @@
+label {
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+span {
+  font-size: 13px;
+  padding-left: 8px;
+
+}
+.input-profile, .input-video {
+  background: rgba(255,255,255, 1.0);
+  cursor: pointer;
+}
+.btn-upload-profile, .btn-upload-video {
+  cursor: pointer;
+}
+input, textarea{
+opacity: 0.7
+}
+
+
+  .small-line-height {
+    line-height: 1;
+  }
+    
+.isloading {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  
+.btn-save {
+    background-color: var(--primary-color);
+    color: #fff;
+    min-width: 9rem;
+    border-radius: 8px;
+  }
+
+  textarea {
+    font-size: .875rem ;
+  }

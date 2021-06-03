@@ -1,0 +1,63 @@
+<div class="d-flex">
+  <div class="d-flex flex-column">
+    <div class="media">
+      <div class="icon-plus-container">
+        <i
+          class="bi bi-plus"
+          data-bs-toggle="tooltip"
+          data-bs-placement="bottom"
+          title="Ajouter une pièce jointe"
+          (click)="onUploadPj()"
+        ></i>
+      </div>
+      <input
+        type="file"
+        accept="image/png, image/gif, image/jpeg, image/jpg, application/msword, text/plain, application/pdf"
+        #filePjUpload
+        (change)="handlePjInput($event.target.files[0])"
+        class="hidden-file-input"
+      />
+    </div>
+
+    <div class="mx-auto">
+      <span>Ajouter une </span>
+    </div>
+    <div class="mx-auto">
+      <span> pièce jointe</span>
+    </div>
+  </div>
+
+  <div class="pj-container">
+    <!-- ng for attachement -->
+    <div *ngIf="pjs" class="pj-item-container">
+      <div
+        *ngFor="let pj of pjs"
+        class="d-flex justify-content-between pj-item mb-1"
+      >
+        <span class="pj-name">{{ pj.name }}</span>
+        <i
+          class="bi bi-x delete-icon"
+          (click)="onDeleteOnePj(pj)"
+          data-bs-toggle="tooltip"
+          data-bs-placement="bottom"
+          title="supprimer le pièce jointe"
+        ></i>
+      </div>
+      <div
+        class="progress"
+        style="height: 10px; width: 100px"
+        *ngIf="progress > 0"
+      >
+        <div
+          class="progress-bar"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          [style.width.%]="progress"
+        >
+          {{ progress }}%
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

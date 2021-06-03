@@ -1,0 +1,56 @@
+<!-- Profil picture -->
+<div class="d-flex flex-column small-line-height profil-container">
+  <i
+    *ngIf="isDeleteProfilIconShown"
+    class="bi bi-x delete-icon"
+    (click)="onDeleteProfile()"
+    data-bs-toggle="tooltip"
+    data-bs-placement="bottom"
+    title="supprimer le photo de profil"
+  ></i>
+
+  <input
+    type="file"
+    accept="image/*"
+    #fileUpload
+    (change)="handleUserProfilInput($event.target.files[0])"
+    class="hidden-file-input"
+  />
+
+  <!-- the image itself goes here -->
+
+  <div class="media" (click)="onClickUploadProfile()">
+    <ng-container
+      *ngIf="user?.imageUrl; then thenTemplate; else elseTemplate"
+    ></ng-container>
+    <ng-template #thenTemplate>
+      <img
+        [src]="user.imageUrl"
+        alt="user profil"
+        class="userProfil"
+        #userProfile
+      />
+    </ng-template>
+
+    <ng-template #elseTemplate>
+      <!-- change this into something more generic -->
+      <ng-container *ngIf="userProfile; else elseTemplate">
+        <img [src]="userProfile" alt="just uploaded image" />
+      </ng-container>
+
+      <ng-template #elseTemplate>
+        <img [src]="defaultUserProfil" alt="default user profile" />
+      </ng-template>
+    </ng-template>
+    <div class="icon-container">
+      <i class="bi bi-pencil"></i>
+    </div>
+  </div>
+  <!-- image label -->
+  <div class="mx-auto">
+    <span>Photo de</span>
+  </div>
+  <div class="mx-auto">
+    <span>profil</span>
+  </div>
+</div>

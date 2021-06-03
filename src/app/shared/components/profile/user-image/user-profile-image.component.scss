@@ -1,0 +1,76 @@
+.media {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    border: 1px dashed rgb(197, 197, 197);
+    border-radius: 40px;
+  }
+span {
+  font-size: 13px;
+  padding-left: 8px;
+}
+.userProfil {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+}
+
+i {
+    cursor: pointer;
+  }
+  
+i.bi-pencil {
+    color: white;
+  }
+
+.profil-container {
+    position: relative;
+}
+
+.profil-container > i {
+    right: -4px;
+  }
+
+.bi-x:hover {
+    transform: scale(1.5);
+  }
+
+//needs refactoring
+  img  {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    cursor: pointer;
+  }
+
+//needs refactoring
+  .icon-container {
+    position: absolute;
+    top: 30px;
+    left: 32px; 
+  }
+
+  img {
+    -webkit-filter: brightness(100%);
+  }
+  
+  .media:hover :not(.bi-pencil) {
+    -webkit-filter: brightness(70%);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 0.2s ease-out;
+  }
+//needs refactoring
+  .small-line-height {
+    line-height: 1;
+  }
+  
+  .delete-icon{
+    position: absolute;
+    color: black;
+    align-self: flex-end;
+    top: -4px;
+  }
+  

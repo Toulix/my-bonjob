@@ -1,0 +1,140 @@
+<form [formGroup]="basicInfoForm" (ngSubmit)="onSaveUser()">
+  <div class="row mb-3">
+    <div class="col-md-2 heading_2">PROFIL</div>
+
+    <div class="col-md-6 offset-md-2">
+      <div class="d-flex justify-content-end">
+        <button
+          class="btn btn-save"
+          type="submit"
+          [ngClass]="{ isloading: isLoading }"
+        >
+          Enregistre{{ isLoading ? "ment..." : "r" }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div formGroupName="user">
+    <!-- ----------------- Prénoms: --------------------- -->
+    <div class="row mb-2">
+      <div class="col-md-2">
+        <label for="">Prénoms :</label>
+      </div>
+
+      <div class="col-md-6 offset-md-2">
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          formControlName="firstname"
+        />
+      </div>
+    </div>
+    <!-- ------------------ Nom :------------------------- -->
+    <div class="row mb-2">
+      <div class="col-md-2">
+        <label for="">Nom :</label>
+      </div>
+
+      <div class="col-md-6 offset-md-2">
+        <input
+          type="text"
+          class="form-control form-control-sm"
+          formControlName="lastname"
+        />
+      </div>
+    </div>
+    <!-- ----------------- Formulaire Photo de profil ------------------------ -->
+    <div class="row mb-2">
+      <div class="col-md-2">
+        <label for="profilepicture">Photo de profil</label>
+      </div>
+      <div class="col-md-6 offset-md-2">
+        <div class="input-group input-group-sm">
+          <input
+            type="text"
+            class="form-control form-control-sm input-profile"
+            placeholder="Ajouter une photo"
+            id="profilepicture"
+            disabled
+          />
+          <span
+            class="input-group-text btn-upload-profile"
+            (click)="onClickUploadProfile()"
+            >Télécharger</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- ------------------------Formulaire Video-------------- -->
+    <div class="row mb-2" *ngIf="!(authService.user$ | async)?.isAdmin">
+      <div class="col-md-2">
+        <label for="video-presentation">Présentation vidéo</label>
+      </div>
+      <div class="col-md-6 offset-md-2">
+        <div class="input-group input-group-sm">
+          <input
+            type="text"
+            class="form-control form-control-sm input-video"
+            placeholder="Ajoutez une présentation vidéo"
+            id="video-presentation"
+            disabled
+          />
+          <span
+            class="input-group-text btn-upload-video"
+            (click)="onClickUploadVideo()"
+            >Télécharger</span
+          >
+        </div>
+      </div>
+    </div>
+    <!-- 3 circle  -->
+    <!-- -------------------- Pièce jointe-------------------- -->
+    <div class="row mb-2 mt-4">
+      <div class="col-md-2"></div>
+      <div class="col-md-6 offset-md-2">
+        <div class="d-flex">
+          <!-- Profil picture -->
+
+          <!-- <p>{{ !(authService.user$ | async)?.isAdmin }}</p> -->
+          <user-profile-image [user]="user"> </user-profile-image>
+
+          <!-- Video -->
+          <!-- Only show the video if the user a candidate -->
+          <user-video
+            *ngIf="!(authService.user$ | async)?.isAdmin"
+            [candidate]="candidate"
+            [user]="user"
+          >
+          </user-video>
+
+          <!-- Pièces jointes -->
+          <div class="ms-4">
+            <!-- Only show the pjs if the user a candidate -->
+            <app-pjs
+              *ngIf="!(authService.user$ | async)?.isAdmin"
+              [candidatefromparent]="candidate"
+              [user]="user"
+            >
+            </app-pjs>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- description -->
+    <div class="row mb-2 mt-4">
+      <div class="col-md-2">
+        <label for="description">A propos</label>
+      </div>
+      <div class="col-md-6 offset-md-2">
+        <textarea
+          class="form-control"
+          placeholder="A propos de vous"
+          rows="4"
+          formControlName="description"
+        ></textarea>
+      </div>
+    </div>
+  </div>
+</form>

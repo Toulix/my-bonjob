@@ -1,0 +1,65 @@
+span {
+    font-size: 13px;
+    padding-left: 8px;
+}
+
+.video-container {
+    position: relative;
+  }
+//needs refactoring
+
+.video-container > i {
+    right: -10px;
+  }
+
+ i {
+    cursor: pointer;
+  }
+
+  i.bi-pencil {
+    color: white;
+  }
+  
+  i.bi-plus {
+    width: 1rem;
+    height: 1rem;
+    color: var(--secondary-color);
+  }
+  .bi-x:hover {
+    transform: scale(1.5);
+  }
+  
+
+.delete-icon {
+    position: absolute;
+    color: black;
+    align-self: flex-end;
+    top: -4px;
+}
+
+.icon-plus-container {
+    position: absolute;
+    font-size: 40px;
+    top: 21px;
+    left: 20px;
+}
+
+.media {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    border: 1px dashed rgb(197, 197, 197);
+    border-radius: 40px;
+  }
+
+  video {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    cursor: pointer;
+  }
+
+  .small-line-height {
+    line-height: 1;
+  }
+    

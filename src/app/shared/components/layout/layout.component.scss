@@ -1,0 +1,76 @@
+:host {
+    font-weight: 300;
+    font-size: 1.1em;
+}
+span {
+  margin-right: 0.7rem;
+}
+
+img {
+  width: 26px;
+  height: 26px;
+  border-radius: 13px;
+  cursor: pointer;
+}
+
+.show-candidate {
+  color: #0068db;
+  text-decoration: underline;
+  margin-left: 1rem;
+  font-size: 0.9rem;
+}
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+.wrapper {
+  display: flex;
+  width: 100%;
+}
+
+/* ---------------------------------------------------
+    CONTENT STYLE
+----------------------------------------------------- */
+
+#content {
+  width: calc(100% - 250px);
+  padding: 10px 70px;
+  min-height: 100vh;
+  transition: all 0.3s;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+#content.active {
+  width: 100%;
+}
+
+/* ---------------------------------------------------
+    Router container STYLE
+----------------------------------------------------- */
+.router-container {
+  margin-top: 75px;
+}
+
+/* ---------------------------------------------------
+    MEDIAQUERIES
+----------------------------------------------------- */
+
+@media (max-width: 768px) {
+  #sidebar {
+    margin-left: -250px;
+  }
+  #sidebar.active {
+    margin-left: 0;
+  }
+  #content {
+    width: 100%;
+  }
+  #content.active {
+    width: calc(100% - 250px);
+  }
+  #sidebarCollapse span {
+    display: none;
+  }
+}

@@ -1,0 +1,47 @@
+<div class="d-flex flex-column ms-4 small-line-height video-container">
+  <i
+    *ngIf="isDeleteVideoIconShown"
+    class="bi bi-x delete-icon"
+    (click)="onDeleteVideo()"
+    data-bs-toggle="tooltip"
+    data-bs-placement="bottom"
+    title="supprimer le vidéo de profil"
+  >
+  </i>
+
+  <input
+    type="file"
+    accept="video/*"
+    #fileVideoUpload
+    (change)="handleVideoInput($event.target.files[0])"
+    class="hidden-file-input"
+  />
+
+  <!-- video -->
+  <div class="media">
+    <video
+      class="video-url-from-server"
+      *ngIf="candidate?.user.video"
+      [src]="candidate?.user.video"
+      #candidateVideo
+    ></video>
+
+    <video *ngIf="!candidate?.user.video" [src]="candidateVideo"></video>
+
+    <div class="icon-plus-container">
+      <i
+        class="bi bi-plus"
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        title="Ajouter une vidéo"
+        (click)="onClickUploadVideo()"
+      ></i>
+    </div>
+  </div>
+  <div class="mx-auto">
+    <span>Présentation</span>
+  </div>
+  <div class="mx-auto">
+    <span>vidéo</span>
+  </div>
+</div>

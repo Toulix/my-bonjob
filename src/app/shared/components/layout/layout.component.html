@@ -1,1 +1,23 @@
-<p>layout works!</p>
+<div class="wrapper">
+  <side-nav-bar></side-nav-bar>
+
+  <div id="content">
+    <nav class="navbar">
+      <div class="container-fluid" style="justify-content: flex-end">
+        <span>{{ (authService.user$ | async)?.lastname | uppercase }}</span>
+        <img
+          src="{{ (authService.user$ | async)?.imageUrl }}"
+          alt="user image"
+        />
+        <span
+          *ngIf="(authService.user$ | async)?.isAdmin"
+          class="show-candidate"
+          >Afficher Candidats</span
+        >
+      </div>
+    </nav>
+    <div class="router-container">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
