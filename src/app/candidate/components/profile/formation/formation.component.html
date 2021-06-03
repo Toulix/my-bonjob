@@ -1,0 +1,73 @@
+<div class="row">
+  <p class="col-md-12 heading_2">Ajouter une formation :</p>
+</div>
+<div [formGroup]="basicInfoForm">
+  <div formGroupName="user">
+    <div formArrayName="formations">
+      <div
+        *ngFor="let formation of formationArray.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <!-- formation level -->
+        <div class="row mb-4">
+          <div class="col-md-2">
+            <label for="formationLevel">Niveau de formation: </label>
+          </div>
+          <div class="col-md-6 offset-md-2">
+            <div class="input-group input-group-sm">
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                placeholder="Licence"
+                id="entreprise"
+                formControlName="level"
+              />
+              <span class="input-group-text">&nbsp;&nbsp;</span>
+            </div>
+            <div
+              *ngIf="level(i).invalid && (level(i).touched || level(i).dirty)"
+            >
+              <p class="p-error" *ngIf="level(i).errors.required">
+                Niveau de formation requis !
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- formation specification -->
+        <div class="row mb-3">
+          <div class="col-md-2">
+            <label for="description">Spécifiez votre formation</label>
+          </div>
+          <div class="col-md-6 offset-md-2">
+            <textarea
+              class="form-control"
+              placeholder="Déscription de la formation"
+              rows="4"
+              formControlName="description"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="row delete-container">
+          <button
+            *ngIf="i != 0"
+            class="btn col-md-2 offset-md-8 btn-delete-formation"
+            (click)="deleteFormationArray(i)"
+          >
+            Supprimer
+          </button>
+        </div>
+      </div>
+      <!-- btn add formation  -->
+      <div class="row col-md-10 add-formation-container">
+        <button
+          [disabled]="!formationArray.valid"
+          class="btn col-md-1 offset-md-10 btn-add-formation"
+          (click)="addFormation()"
+        >
+          Ajouter+
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

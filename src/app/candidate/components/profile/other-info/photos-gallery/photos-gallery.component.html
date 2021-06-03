@@ -1,0 +1,41 @@
+<div class="row mb-4">
+  <div class="col-md-2">
+    <label>Gallerie photo</label>
+  </div>
+
+  <div class="col-md-6 offset-md-2">
+    <div class="input-group input-group-sm">
+      <input
+        type="text"
+        class="form-control form-control-sm input-gallery"
+        placeholder="Ajoutez une photo"
+        disabled
+      />
+      <span
+        class="input-group-text btn-upload-gallery"
+        (click)="onClickUploadGallery()"
+        >Télécharger</span
+      >
+    </div>
+    <input
+      type="file"
+      accept="images/*"
+      #galleryUpload
+      (change)="handleGalleryInput($event.target.files[0])"
+      class="hidden-file-input"
+    />
+  </div>
+</div>
+
+<div class="d-flex flex-wrap">
+  <div *ngFor="let gallery of galleries" class="mb-1 picture-container">
+    <img [src]="gallery.url" alt="" />
+    <i
+      class="bi bi-x delete-icon"
+      (click)="onDeleteOnePicture(gallery)"
+      data-bs-toggle="tooltip"
+      data-bs-placement="bottom"
+      title="supprimer le photo"
+    ></i>
+  </div>
+</div>

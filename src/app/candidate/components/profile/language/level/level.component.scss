@@ -1,0 +1,11 @@
+:host {
+    display: flex;
+    justify-content: space-between
+}
+.beginner, .advanced, .fluent {
+    width: 104px;
+    height: 30px;
+}
+.intermediate {
+    height: 30px;
+} 

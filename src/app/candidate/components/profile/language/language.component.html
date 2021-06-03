@@ -1,0 +1,70 @@
+<div class="row">
+  <p class="col-md-12 heading_2">Ajouter une langue :</p>
+</div>
+<!-- { "name" : "Français", "level":"Débutant"} -->
+<div [formGroup]="basicInfoForm">
+  <div formGroupName="user">
+    <div formArrayName="languages">
+      <div
+        *ngFor="let language of languagesArray.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <!-- formation level -->
+        <div class="row mb-4">
+          <div class="col-md-2">
+            <label for="formationLevel">Langue:</label>
+          </div>
+          <div class="col-md-6 offset-md-2">
+            <div class="input-group input-group-sm">
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                placeholder="Anglais"
+                id="entreprise"
+                formControlName="name"
+              />
+              <span class="input-group-text">&nbsp;&nbsp;</span>
+            </div>
+            <div *ngIf="name(i).invalid && (name(i).touched || name(i).dirty)">
+              <p class="p-error" *ngIf="name(i).errors.required">
+                Niveau de langue requis !
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- Language level -->
+        <div class="row mb-3">
+          <div class="col-md-2">
+            <label for="description">Niveau de langue</label>
+          </div>
+          <div class="col-md-6 offset-md-2">
+            <language-level
+              formControlName="level"
+              [form]="language"
+            ></language-level>
+          </div>
+        </div>
+
+        <div class="row delete-container">
+          <button
+            *ngIf="i != 0"
+            class="btn col-md-2 offset-md-8 btn-delete-language"
+            (click)="deleteLanguageArray(i)"
+          >
+            Supprimer
+          </button>
+        </div>
+      </div>
+      <!-- btn add formation  -->
+      <div class="row col-md-10 add-language-container">
+        <button
+          [disabled]="!languagesArray.valid"
+          class="btn col-md-1 offset-md-10 btn-add-language"
+          (click)="addLanguage()"
+        >
+          Ajouter+
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,69 @@
+<!-- other formation begins here -->
+<div [formGroup]="basicInfoForm">
+  <div formGroupName="user">
+    <div class="row">
+      <p class="col-md-12 heading_2">Autres informations :</p>
+    </div>
+    <!-- wanted job -->
+
+    <!-- <div class="row mb-4">
+        <div class="col-md-2">
+          <label for="formationLevel">Langue:</label>
+        </div>
+        <div class="col-md-6 offset-md-2"> -->
+    <div formGroupName="others">
+      <div class="row mb-4">
+        <div class="col-md-2">
+          <label for="wantedjob">Emploie recherché </label>
+        </div>
+        <div class="col-md-6 offset-md-2">
+          <div class="input-group input-group-sm">
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              placeholder="Barman"
+              id="wantedjob"
+              formControlName="job_search"
+            />
+            <span class="input-group-text">&nbsp;&nbsp;</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- current status -->
+      <div class="row mb-4">
+        <div class="col-md-2">
+          <label>Statut actuel:</label>
+        </div>
+        <div class="col-md-6 offset-md-2">
+          <!-- others  here is not the formGroupName, it's a simple getter  -->
+          <actual-status
+            formControlName="statut"
+            [form]="others"
+          ></actual-status>
+        </div>
+      </div>
+
+      <!-- mobility -->
+      <div class="row mb-4">
+        <div class="col-md-2">
+          <label>Mobilité:</label>
+        </div>
+        <div class="col-md-6 offset-md-2">
+          <mobility [form]="others"></mobility>
+        </div>
+      </div>
+    </div>
+    <!-- sector  -->
+    <!-- <div class="row mb-4">
+      <div class="col-md-2">
+        <label> Secteur </label>
+      </div>
+
+      <div class="col-md-6 offset-md-2">
+      <sector [form]="others"></sector>
+      </div>
+    </div> -->
+    <!-- other formation ends here -->
+  </div>
+</div>

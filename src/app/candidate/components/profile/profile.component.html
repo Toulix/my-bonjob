@@ -1,1 +1,67 @@
-<p>profile works!</p>
+<div class="profil-container">
+  <div class="basic-info">
+    <!-- ---------------------- ---------------
+    <p>Profil: {{ profilForm.value | json }}</p>
+    <p>Video: {{ videoForm.value | json }}</p> -->
+
+    <content-loader
+      *ngIf="isLoading"
+      viewBox="0 0 800 360"
+      speed="2"
+      backgroundColor="#f3f3f3"
+      foregroundColor="#ecebeb"
+    >
+      <svg:circle cx="307" cy="217" r="39" />
+      <svg:rect x="275" y="43" rx="3" ry="3" width="385" height="28" />
+      <svg:rect x="4" y="7" rx="3" ry="3" width="119" height="8" />
+      <svg:rect x="275" y="87" rx="3" ry="3" width="385" height="28" />
+      <svg:rect x="275" y="130" rx="3" ry="3" width="385" height="28" />
+      <svg:rect x="275" y="0" rx="3" ry="3" width="385" height="28" />
+      <svg:circle cx="406" cy="218" r="39" />
+      <svg:circle cx="508" cy="219" r="39" />
+      <svg:rect x="275" y="275" rx="3" ry="3" width="385" height="106" />
+      <svg:rect x="3" y="281" rx="3" ry="3" width="119" height="8" />
+      <svg:rect x="5" y="53" rx="3" ry="3" width="119" height="8" />
+      <svg:rect x="5" y="138" rx="3" ry="3" width="119" height="8" />
+      <svg:rect x="5" y="95" rx="3" ry="3" width="119" height="8" />
+    </content-loader>
+
+    <user-profile-basic-info
+      *ngIf="candidate"
+      [basicInfoForm]="basicInfoForm"
+      [user]="user"
+      [candidate]="candidate"
+    >
+    </user-profile-basic-info>
+
+    <div>
+      <candidate-experience
+        *ngIf="candidate"
+        [basicInfoForm]="basicInfoForm"
+      ></candidate-experience>
+    </div>
+
+    <div>
+      <candidate-formation
+        [basicInfoForm]="basicInfoForm"
+      ></candidate-formation>
+    </div>
+
+    <div>
+      <candidate-language *ngIf="candidate" [basicInfoForm]="basicInfoForm">
+      </candidate-language>
+    </div>
+
+    <div>
+      <other-info *ngIf="candidate" [basicInfoForm]="basicInfoForm">
+      </other-info>
+    </div>
+
+    <div class="galleries-container">
+      <candidate-photos-gallery
+        [candidatefromparent]="candidate"
+        [user]="user"
+      ></candidate-photos-gallery>
+    </div>
+  </div>
+</div>

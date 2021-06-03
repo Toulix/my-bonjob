@@ -1,0 +1,11 @@
+<button
+  type="button"
+  class="btn btn-low-opacity"
+  *ngFor="let level of languageLevel"
+  [value]="level.value"
+  [class]="level.styleClass"
+  [ngClass]="{ 'selected-btn': level.isSelected }"
+  (click)="selectLevel(level)"
+>
+  {{ level.label }}
+</button>

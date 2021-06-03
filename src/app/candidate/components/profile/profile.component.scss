@@ -1,0 +1,41 @@
+:host {
+    background-color: #fafafa;
+}
+
+.basic-info {
+  position: relative;
+}
+
+content-loader svg {
+  position: absolute;
+}
+
+label, p {
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.6);
+}
+span {
+  font-size: 13px;
+}
+
+.small-line-height {
+  line-height: 1;
+}
+
+.galleries-container::after {
+  content: '';
+  display: block;
+  height: 10rem;
+}
+
+.btn-save {
+  background-color: var(--primary-color);
+  color: #fff;
+  min-width: 9rem;
+  border-radius: 8px;
+}
+
+.isloading {
+  pointer-events: none;
+  opacity: 0.5;
+}

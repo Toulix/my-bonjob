@@ -1,0 +1,130 @@
+<div class="row">
+  <p class="col-md-12 heading_2">Ajouter une expérience :</p>
+</div>
+
+<div [formGroup]="basicInfoForm">
+  <div formGroupName="user">
+    <div formArrayName="experiences" class="mb-2">
+      <div
+        *ngFor="let experience of experiencesArray.controls; let i = index"
+        [formGroupName]="i"
+      >
+        <!-- occupied post -->
+        <div class="row mb-4">
+          <div class="col-md-2">
+            <label for="occupiedPost">Poste occupé :</label>
+          </div>
+          <div class="col-md-6 offset-md-2">
+            <div class="input-group input-group-sm">
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                placeholder="Aucune entreprise ajoutée"
+                id="occupiedPost"
+                formControlName="positionHeld"
+              />
+              <span class="input-group-text">&nbsp;&nbsp;</span>
+            </div>
+            <!-- bellow the input-group, show the error message -->
+            <div
+              *ngIf="
+                positionHeld(i).invalid &&
+                (positionHeld(i).touched || positionHeld(i).dirty)
+              "
+            >
+              <p class="p-error" *ngIf="positionHeld(i).errors.required">
+                Ce champ est requis !
+              </p>
+            </div>
+          </div>
+        </div>
+        <!--post duration -->
+        <div class="row mb-4">
+          <div class="col-md-3">
+            <label>Durée du poste occupée :</label>
+          </div>
+
+          <div class="col-md-6 offset-md-1">
+            <div>
+              <duration [form]="experience"></duration>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-4">
+          <div class="col-md-2">
+            <label for="entreprise">Nom de l'entreprise</label>
+          </div>
+          <div class="col-md-6 offset-md-2">
+            <div class="input-group input-group-sm">
+              <input
+                type="text"
+                class="form-control form-control-sm"
+                placeholder="Le mea culpa"
+                id="entreprise"
+                formControlName="business"
+              />
+              <span class="input-group-text">&nbsp;&nbsp;</span>
+            </div>
+            <!-- bellow the input group show the error message -->
+            <div
+              *ngIf="
+                business(i).invalid &&
+                (business(i).touched || business(i).dirty)
+              "
+            >
+              <p class="p-error" *ngIf="business(i).errors.required">
+                Nom de l'entreprise requis !
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- company name -->
+        <!-- 
+              <div class="col-md-2">
+                  <label for="occupiedPost">Poste occupé :</label>
+                </div>
+                <div class="col-md-6 offset-md-2"> -->
+
+        <!-- description -->
+        <div class="row mb-3">
+          <div class="col-md-2">
+            <label for="description">Description</label>
+          </div>
+          <div class="col-md-6 offset-md-2">
+            <textarea
+              class="form-control"
+              placeholder="Barman"
+              rows="4"
+              formControlName="description"
+            ></textarea>
+          </div>
+        </div>
+        <div class="row delete-container">
+          <button
+            *ngIf="i != 0"
+            class="btn col-md-2 offset-md-8 btn-delete-experience"
+            (click)="deleteExperienceArray(i)"
+          >
+            Supprimer
+          </button>
+        </div>
+      </div>
+      <!-- end of for loop-->
+
+      <!-- btn add experience -->
+      <div class="row col-md-10 add-experience-container">
+        <button
+          [disabled]="!experiencesArray.valid"
+          class="btn col-md-1 btn-add-experience"
+          (click)="addExperience()"
+          data-toggle="tooltip"
+          title="Cliquer pour ajouter une autre expérience"
+        >
+          Ajouter+
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
