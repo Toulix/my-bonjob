@@ -1,1 +1,7 @@
-<p>profile works!</p>
+<user-profile-basic-info
+  *ngIf="admin"
+  [basicInfoForm]="basicInfoForm"
+  [user]="user"
+  [candidate]="candidate"
+>
+</user-profile-basic-info>
