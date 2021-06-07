@@ -1,13 +1,13 @@
-import { Language } from './../../../core/models/language';
-import { Formation } from './../../../core/models/fomations';
-import { Experience } from './../../../core/models/experience';
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { startWith, switchMap, tap } from 'rxjs/operators';
 import { CandidateResponseData } from 'src/app/core/models/candidate-response-data';
 
 import { User } from './../../../core/models/connected.user';
+import { Experience } from './../../../core/models/experience';
+import { Formation } from './../../../core/models/fomations';
+import { Language } from './../../../core/models/language';
 import { AuthService } from './../../../core/services/auth.service';
 import { CandidateService } from './../../services/candidate.service';
 import { ProfilFormService } from './../../services/profil-form.service';
@@ -19,12 +19,6 @@ import { ProfilFormService } from './../../services/profil-form.service';
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
-  styles: [`
-  content-loader svg {
-    position: absolute;
-  }
-  `],
-
 })
 export class ProfileComponent implements OnInit, OnDestroy {
   isLoading = false;
@@ -36,7 +30,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   userSub : Subscription;
 
   basicInfoForm: FormGroup;
- //
+
 
   constructor(private profilFormService : ProfilFormService,
               private fb: FormBuilder,
@@ -48,8 +42,6 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     this.initBasicInfoForm();
     console.log("Ng on init profil component called");
-    
-    // const userData = this.authService.getUserInfoFromLocalStorage();
     
     this.userSub = this.authService
                           .user$

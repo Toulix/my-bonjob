@@ -36,7 +36,7 @@ export class AuthService extends DataService {
     return this.create<AuthResponseData>(credentials)
                 .pipe(
                   tap((responseData) => {
-                    console.log("responseDAta ", responseData);
+                    // console.log("responseDAta ", responseData);
                     
                     this.handleResponseData(responseData);
                   }))
@@ -102,7 +102,7 @@ export class AuthService extends DataService {
                   name, // the property is called imageName in the user Object
                   expirationDate);
             }
-      console.log("User in handleResponseData", this.user);
+      // console.log("User in handleResponseData", this.user);
       
      
       this.userSubject.next(this.user);
@@ -117,8 +117,8 @@ export class AuthService extends DataService {
     if(!userData) {
       return;
     }
-    console.log("User data  from local storage in autologin just before the call to the server", userData);
-    console.log("User data in the user subject ");
+    // console.log("User data  from local storage in autologin just before the call to the server", userData);
+    // console.log("User data in the user subject ");
     
     console.log("AutoLogin Called");
     this.userService.getOne<BaseUserData>(userData.id)
@@ -162,7 +162,7 @@ export class AuthService extends DataService {
                            // localStorage.setItem('userData', JSON.stringify(this.user));
                             this.autoLogout((loadedUser.expirationDate).getTime() - new Date().getTime())
                           }
-                    console.log("Loaded user ", loadedUser);
+                 //   console.log("Loaded user ", loadedUser);
                       }
                     )   
     }
