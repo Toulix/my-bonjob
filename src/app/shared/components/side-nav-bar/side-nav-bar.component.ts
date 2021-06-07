@@ -19,6 +19,8 @@ export class SideNavBarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.userSubscription = this.authService.user$.subscribe(
                           user => {
+                            console.log("user in sideNav", user);
+                            
                             this.user = user;
                           }
       )
@@ -30,15 +32,15 @@ export class SideNavBarComponent implements OnInit, OnDestroy {
 
   setNavBarBackground() {
     return {
-      adminBackground: !this.user.isAdmin,
-      candidateBackground: this.user.isAdmin
+      adminBackground: !this.user?.isAdmin,
+      candidateBackground: this.user?.isAdmin
         }
   }
 
   setAreaExpandedClass() {
     return {
-      adminBackground: !this.user.isAdmin && (this.isExpanded == true),
-      candidateBackground: this.user.isAdmin && (this.isExpanded == true)
+      adminBackground: !this.user?.isAdmin && (this.isExpanded == true),
+      candidateBackground: this.user?.isAdmin && (this.isExpanded == true)
     }
   }
 }

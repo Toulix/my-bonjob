@@ -4,16 +4,28 @@
   <div id="content">
     <nav class="navbar">
       <div class="container-fluid" style="justify-content: flex-end">
-        <span>{{ (authService.user$ | async)?.lastname | uppercase }}</span>
-        <img
+        <span>{{ authService.user?.lastname | uppercase }}</span>
+        <!-- <img
           src="{{ (authService.user$ | async)?.imageUrl }}"
           alt="user image"
-        />
-        <span
-          *ngIf="(authService.user$ | async)?.isAdmin"
-          class="show-candidate"
-          >Afficher Candidats</span
+        /> -->
+        <ng-container
+          *ngIf="
+            authService.user?.imageUrl;
+            then thenTemplate;
+            else elseTemplate
+          "
         >
+        </ng-container>
+        <ng-template #thenTemplate>
+          <img src="{{ authService.user?.imageUrl }}" alt="user image" />
+        </ng-template>
+        <ng-template #elseTemplate>
+          <img [src]="defaultUserImage" alt="default user image" />
+        </ng-template>
+        <span *ngIf="authService.user?.isAdmin" class="show-candidate">
+          <a [routerLink]="['/candidatelist']">Afficher Candidats</a>
+        </span>
       </div>
     </nav>
     <div class="router-container">

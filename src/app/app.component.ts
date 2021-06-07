@@ -14,8 +14,6 @@ export class AppComponent implements OnInit, OnDestroy{
   isAdminLink: boolean
   linkStatusSub: Subscription;
 
-  isLoggedIn = true;
-
   constructor(public utils: UtilsService,
               public authService: AuthService,
               public router: Router) {}

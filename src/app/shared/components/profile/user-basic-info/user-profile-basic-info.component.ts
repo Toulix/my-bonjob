@@ -41,7 +41,7 @@ export class UserProfileBasicInfoComponent implements OnInit {
               ) {}
 
   ngOnInit(): void {
-    console.log("");
+    
     
   }
 

@@ -4,13 +4,14 @@ import { Experience } from './../../../core/models/experience';
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { startWith, switchMap, tap } from 'rxjs/operators';
 import { CandidateResponseData } from 'src/app/core/models/candidate-response-data';
 
 import { User } from './../../../core/models/connected.user';
 import { AuthService } from './../../../core/services/auth.service';
 import { CandidateService } from './../../services/candidate.service';
 import { ProfilFormService } from './../../services/profil-form.service';
+
 
 
 
@@ -46,18 +47,23 @@ export class ProfileComponent implements OnInit, OnDestroy {
     this.isLoading = true;
 
     this.initBasicInfoForm();
- 
-    this.userSub = this.authService.getCurrentUser$()
-                            .pipe(
-                              // tap((user)=> {
-                              //   console.log('User from tap Operator', user);
-                              // }),
+    console.log("Ng on init profil component called");
+    
+    // const userData = this.authService.getUserInfoFromLocalStorage();
+    
+    this.userSub = this.authService
+                          .user$
+                            .pipe( //when refreshing the page (the user behaviorSubject becomes null)
+                              startWith(this.authService.user),
+                              tap((user)=> {
+                                console.log('User from tap Operator', user);
+                              }),
                               switchMap(user => {
-                              //  console.log("User from switchMap", user);
+                              console.log("User from switchMap", user);
                                 
                                 this.user = user;
                                 return this.candidateService
-                                           .getOne<CandidateResponseData>(user.id);
+                                           .getOne<CandidateResponseData>(user?.id);
                               })
                             ).subscribe(
                               //we should patch all the form here

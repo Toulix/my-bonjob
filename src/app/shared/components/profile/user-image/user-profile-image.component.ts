@@ -23,7 +23,7 @@ export class UserProfileImageComponent implements OnInit {
   //upload new profile
   userProfile: string | ArrayBuffer = null;
   defaultUserProfil: string = "/assets/images/default_candidate_profil.png";
-
+//
   userProfileToUpload: File;
 
   isDeleteProfilIconShown: boolean = false;

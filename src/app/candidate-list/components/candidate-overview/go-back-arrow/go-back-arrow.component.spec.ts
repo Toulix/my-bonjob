@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CandidatesListComponent } from './candidates-list.component';
+import { GoBackArrowComponent } from './go-back-arrow.component';
 
-describe('CandidatesListComponent', () => {
-  let component: CandidatesListComponent;
-  let fixture: ComponentFixture<CandidatesListComponent>;
+describe('GoBackArrowComponent', () => {
+  let component: GoBackArrowComponent;
+  let fixture: ComponentFixture<GoBackArrowComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CandidatesListComponent ]
+      declarations: [ GoBackArrowComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CandidatesListComponent);
+    fixture = TestBed.createComponent(GoBackArrowComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

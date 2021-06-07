@@ -68,7 +68,7 @@
     </div>
 
     <!-- ------------------------Formulaire Video-------------- -->
-    <div class="row mb-2" *ngIf="!(authService.user$ | async)?.isAdmin">
+    <div class="row mb-2" *ngIf="!authService.user?.isAdmin">
       <div class="col-md-2">
         <label for="video-presentation">Présentation vidéo</label>
       </div>
@@ -103,7 +103,7 @@
           <!-- Video -->
           <!-- Only show the video if the user a candidate -->
           <user-video
-            *ngIf="!(authService.user$ | async)?.isAdmin"
+            *ngIf="!authService.user?.isAdmin"
             [candidate]="candidate"
             [user]="user"
           >
@@ -113,7 +113,7 @@
           <div class="ms-4">
             <!-- Only show the pjs if the user a candidate -->
             <app-pjs
-              *ngIf="!(authService.user$ | async)?.isAdmin"
+              *ngIf="!authService.user?.isAdmin"
               [candidatefromparent]="candidate"
               [user]="user"
             >

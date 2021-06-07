@@ -29,7 +29,6 @@ import { SideNavBarComponent } from './components/side-nav-bar/side-nav-bar.comp
     RouterModule,
     CommonModule,
     ReactiveFormsModule,
- 
   ],
   exports: [
     LayoutComponent,

@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { AdminResponseData } from 'src/app/core/models/admin-response-data';
 import { User } from 'src/app/core/models/connected.user';
-import { switchMap } from 'rxjs/operators';
+import { startWith, switchMap } from 'rxjs/operators';
 import { AdminService } from '../../services/admin.service';
 
 @Component({
@@ -29,8 +29,9 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.initBasicInfoForm();
 
-    this.userSub = this.authService.getCurrentUser$()
+    this.userSub = this.authService.user$
                                     .pipe(
+                                      startWith(this.authService.user),
                                       // tap((user)=> {
                                       //   console.log('User from tap Operator', user);
                                       // }),
@@ -39,7 +40,7 @@ export class ProfileComponent implements OnInit {
                                         
                                         this.user = user;
                                         return this.adminService
-                                                  .getOne<AdminResponseData>(user.id);
+                                                    .getOne<AdminResponseData>(user?.id);
                                       })
                                     ).subscribe(
                                       //we should patch all the form here
