@@ -16,23 +16,27 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-   return this.authService.userSubject
-                .pipe(
-                    take(1),
-                    exhaustMap(user => {
-                      if(user && user.token) {
+    const userInfo = this.authService.getUserInfoFromLocalStorage();
+
+    // return this.authService.user$
+    //             .pipe(
+    //                 take(1),
+    //                 exhaustMap(user => {
+    //                   console.log("User in the authInterceptor", user);
+                      //if we have a token and the token is not expired
+                      if(userInfo && !this.authService.isTokenExpired()) {
                         const modifiedRequest = request.clone({ 
-                          headers: new HttpHeaders().set('Authorization', `Bearer ${user.token}`)
+                          headers: new HttpHeaders().set('Authorization', `Bearer ${userInfo._token}`)
                         })
-                        // console.log("Auth interceptor called, with token", modifiedRequest);
+                       console.log("Auth interceptor called, with token", modifiedRequest);
                         return next.handle(modifiedRequest);
                       }
                         else {
-                          // console.log("Auth interceptor called, without token", request);
+                          console.log("Auth interceptor called, without token", request);
                           return next.handle(request);
                         }
-                      })
-                  )
+                  //     })
+                  // )
    
   }
 }
