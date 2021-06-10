@@ -1,0 +1,24 @@
+.btn-add-offer {
+    background-color: var(--primary-color);
+    border-radius: 8px;
+    color: white;
+    height: 2.5rem;
+    width: 9rem;
+}
+
+label {
+    font-size: 1rem;
+}
+
+.heading_2 {
+    color: var(--primary-color);
+}
+
+.btn-upload-offer-image  {
+    cursor: pointer;
+}
+
+.isloading {
+    pointer-events: none;
+    opacity: 0.5;
+  }

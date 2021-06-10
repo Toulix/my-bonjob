@@ -1,3 +1,4 @@
+import { PublishOfferComponent } from './components/publish-offer/publish-offer.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -15,6 +16,7 @@ const route: Routes = [
         children: [
           { path: '', redirectTo: 'profile'}, 
           { path: 'profile', component: ProfileComponent },
+          { path: 'publishOffer', component: PublishOfferComponent}
         ]
       },
     { path: 'signup', component: SignupFormComponent}

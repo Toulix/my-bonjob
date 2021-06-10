@@ -1,4 +1,4 @@
-<nav id="sidebar" [ngClass]="setNavBarBackground()">
+<nav *ngIf="user" id="sidebar" [ngClass]="setNavBarBackground()">
   <div>
     <div class="sidebar-header" [ngClass]="setNavBarBackground()">
       <span class="logo larger">@</span>
@@ -7,21 +7,21 @@
     </div>
 
     <ul class="list-unstyled components">
-      <li *ngIf="!(authService.user$ | async)?.isAdmin">
+      <li *ngIf="!authService.user?.isAdmin">
         <a href="#">
           <i class="bi bi-search"></i>
           <span>Rechercher une offre d'emploi </span>
         </a>
       </li>
 
-      <li *ngIf="(authService.user$ | async)?.isAdmin">
+      <li *ngIf="authService.user?.isAdmin">
         <a href="#">
           <i class="bi bi-search"></i>
           <span>Rechercher des candidats</span>
         </a>
       </li>
       <!-- for candidate  -->
-      <li *ngIf="!(authService.user$ | async)?.isAdmin" class="active">
+      <li *ngIf="!authService.user?.isAdmin" class="active">
         <a
           href="#jobOfferSubmenu"
           data-bs-toggle="collapse"
@@ -46,7 +46,7 @@
         </ul>
       </li>
       <!-- liste des candidats (admin) -->
-      <li *ngIf="(authService.user$ | async)?.isAdmin" class="active">
+      <li *ngIf="authService.user?.isAdmin" class="active">
         <a
           href="#candidates"
           data-bs-toggle="collapse"
@@ -71,15 +71,15 @@
       </li>
 
       <!-- Publier offre candidats (admin) -->
-      <li *ngIf="(authService.user$ | async)?.isAdmin">
-        <a href="#">
+      <li *ngIf="authService.user?.isAdmin">
+        <a [routerLink]="['/admin/publishOffer']">
           <i class="bi bi-plus-circle"></i>
-          <span>Publier une offre</span>
+          <span>Publier une offre </span>
         </a>
       </li>
 
       <!-- Mes offres (admin) -->
-      <li *ngIf="(authService.user$ | async)?.isAdmin" class="active">
+      <li *ngIf="authService.user?.isAdmin" class="active">
         <a
           href="#myOffers"
           data-bs-toggle="collapse"
@@ -105,7 +105,7 @@
 
       <!-- admin -->
 
-      <li *ngIf="(authService.user$ | async)?.isAdmin">
+      <li *ngIf="authService.user?.isAdmin">
         <a href="#">
           <i class="bi bi-plus-circle"></i>
           <span>Améliorez leurs chances</span>
@@ -113,7 +113,7 @@
       </li>
 
       <!-- (candidat) -->
-      <li *ngIf="!(authService.user$ | async)?.isAdmin">
+      <li *ngIf="!authService.user?.isAdmin">
         <a href="#">
           <i class="bi bi-lightning-charge"></i>
           <span>Améliorer vos chances</span>
@@ -121,7 +121,7 @@
       </li>
 
       <!-- (candidat) -->
-      <li *ngIf="!(authService.user$ | async)?.isAdmin">
+      <li *ngIf="!authService.user?.isAdmin">
         <a href="#">
           <img
             src="/assets/images/search_candidate_20px.png"

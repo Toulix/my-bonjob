@@ -1,0 +1,200 @@
+<div class="container">
+  <div>
+    <p *ngIf="error" class="alert alert-danger">
+      {{ error }}
+    </p>
+
+    <p class="heading_2">PUBLIER UNE OFFRE</p>
+    <form [formGroup]="publishOfferform" (ngSubmit)="createOffer()">
+      <div class="row">
+        <div class="col-md-4 col-sm-12">
+          <label for="job-title" class="form-label">
+            Indiquez un titre de travail :
+          </label>
+          <div class="input-group input-group-sm">
+            <input
+              type="text"
+              id="job-title"
+              class="form-control form-control-sm"
+              formControlName="title"
+              aria-describedby="job-title"
+            />
+            <span class="input-group-text" id="job-title"
+              ><i class="bi bi-search"></i
+            ></span>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <label for="job-place" class="form-label">
+            Emplacement de l'emploi :
+          </label>
+          <div class="input-group input-group-sm mb-3">
+            <input
+              type="text"
+              formControlName="location"
+              id="job-place"
+              class="form-control form-control-sm"
+              aria-describedby="job-place"
+            />
+            <span class="input-group-text" id="job-place"
+              ><i class="bi bi-geo-alt"></i
+            ></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-4 col-sm-12">
+          <label for="filename" class="form-label"> Ajoutez une photo : </label>
+          <div class="input-group input-group-sm">
+            <input
+              type="text"
+              id="filename"
+              placeholder="Nom du fichier..."
+              class="form-control form-control-sm"
+              disabled
+              #offerImageName
+              aria-describedby="filename"
+            />
+            <input
+              type="file"
+              accept="image/*"
+              #offerImageInput
+              (change)="handleOfferPhotoInput($event.target.files[0])"
+              class="hidden-file-input"
+            />
+
+            <span
+              class="input-group-text btn-upload-offer-image"
+              id="filename"
+              (click)="onClickUploadOfferImage()"
+              ><i class="bi bi-folder-fill"></i>
+              Télécharger
+            </span>
+          </div>
+        </div>
+
+        <div class="col-md-4 col-sm-12">
+          <label for="contract-type" class="form-label">
+            Type de contract
+          </label>
+          <select
+            formControlName="contrat"
+            class="form-select form-select-sm"
+            aria-label=".form-select-sm example"
+          >
+            <option
+              *ngFor="let contractType of contractTypes"
+              [value]="contractType"
+            >
+              {{ contractType }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-4 col-sm-12">
+          <label for="formation-level" class="form-label">
+            Niveau de formation
+          </label>
+          <select formControlName="level" class="form-select form-select-sm">
+            <option *ngFor="let formation of formations" [value]="formation">
+              {{ formation }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-4 col-sm-12">
+          <label for="Number of hour" class="form-label"
+            >Nombre d'heures:
+          </label>
+          <select formControlName="hour" class="form-select form-select-sm">
+            <option *ngFor="let hour of hours" [value]="hour">
+              {{ hour }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-4 col-sm-12">
+          <label for="minimum- experience" class="form-label">
+            Expérience minimum :
+          </label>
+          <select
+            formControlName="experience"
+            class="form-select form-select-sm"
+          >
+            <option
+              *ngFor="let minimumExperience of minimumExperiences"
+              [value]="minimumExperience.value"
+            >
+              {{ minimumExperience.label }}
+            </option>
+          </select>
+        </div>
+        <div class="col-md-4 col-sm-12">
+          <label for="salary" class="form-label"> Salaire proposé : </label>
+          <input
+            type="number"
+            class="form-control form-control-sm"
+            formControlName="salary"
+            min="0"
+          />
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-4 col-sm-12">
+          <label for="required-language" class="form-label">
+            Langue demandée:
+          </label>
+          <select formControlName="language" class="form-select form-select-sm">
+            <option *ngFor="let language of languages" [value]="language">
+              {{ language }}
+            </option>
+          </select>
+        </div>
+
+        <div class="col-md-4 col-sm-12">
+          <label for="beginning" class="form-label"> Date de début : </label>
+          <input
+            formControlName="startDate"
+            type="date"
+            id="beginning"
+            class="form-control form-control-sm"
+            aria-describedby="beginning"
+          />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <label for="job-description" class="form-label">
+            Description supplémentaire :
+          </label>
+
+          <textarea
+            formControlName="description"
+            class="form-control"
+            name=""
+            id="job-description"
+            cols="30"
+            rows="5"
+          >
+          </textarea>
+        </div>
+      </div>
+      <div class="mt-5">
+        <button
+          type="submit"
+          [ngClass]="{ isloading: isLoading }"
+          class="btn btn-add-offer"
+        >
+          Ajouter l'offre{{ isLoading ? "..." : "" }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

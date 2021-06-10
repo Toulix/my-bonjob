@@ -122,6 +122,7 @@ export class AuthService extends DataService {
     
     console.log("AutoLogin Called");
     this.userService.getOne<BaseUserData>(userData.id)
+    //an option would be to use the startwith operator with the behaviorSubject
                     .subscribe(
                       (result: BaseUserData) => {
                        console.log("Result in autologin", result);

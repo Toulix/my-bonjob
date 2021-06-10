@@ -1,4 +1,3 @@
 <!-- dont show app-header if we have a connected user -->
 <app-header *ngIf="!(authService.user$ | async)"></app-header>
-
 <router-outlet></router-outlet>

@@ -1,3 +1,4 @@
+import { startWith } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -17,12 +18,16 @@ export class SideNavBarComponent implements OnInit, OnDestroy {
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
-    this.userSubscription = this.authService.user$.subscribe(
-                          user => {
-                            console.log("user in sideNav", user);
-                            
-                            this.user = user;
-                          }
+    this.userSubscription = this.authService.user$
+                                  .pipe(
+                                    startWith(this.authService.user)
+                                  )
+                                  .subscribe(
+                                  user => {
+                                    console.log("user in sideNav", user);
+                                    
+                                    this.user = user;
+                                  }
       )
   }
 
@@ -32,15 +37,19 @@ export class SideNavBarComponent implements OnInit, OnDestroy {
 
   setNavBarBackground() {
     return {
-      adminBackground: !this.user?.isAdmin,
-      candidateBackground: this.user?.isAdmin
+      adminBackground: !this.authService.user?.isAdmin,
+      candidateBackground: this.authService.user?.isAdmin
         }
   }
 
   setAreaExpandedClass() {
-    return {
-      adminBackground: !this.user?.isAdmin && (this.isExpanded == true),
-      candidateBackground: this.user?.isAdmin && (this.isExpanded == true)
+    // return {
+    //   adminBackground: !this.user?.isAdmin && (this.isExpanded == true),
+    //   candidateBackground: this.user?.isAdmin && (this.isExpanded == true)
+    // }
+      return {
+      adminBackground: !this.authService.user?.isAdmin && (this.isExpanded == true),
+      candidateBackground: this.authService.user?.isAdmin && (this.isExpanded == true)
     }
   }
 }

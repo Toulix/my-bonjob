@@ -8,6 +8,7 @@ import { CandidateListComponent } from './components/candidate-overview/candidat
 import { CandidateSearchComponent } from './components/candidate-overview/candidate-search/candidate-search.component';
 import { SingleCandidateComponent } from './components/candidate-overview/candidate-list/single-candidate/single-candidate.component';
 import { GoBackArrowComponent } from './components/candidate-overview/go-back-arrow/go-back-arrow.component';
+import { CandidateDetailsComponent } from './components/candidate-overview/candidate-list/single-candidate/candidate-details/candidate-details.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { GoBackArrowComponent } from './components/candidate-overview/go-back-ar
     CandidateListComponent,
     CandidateOverviewComponent,
     CandidateListComponent,
-    GoBackArrowComponent
+    GoBackArrowComponent,
+    CandidateDetailsComponent
   ],
   imports: [
     CommonModule,

@@ -21,6 +21,7 @@
 
     <div>
       <candidate-formation
+        *ngIf="candidate"
         [basicInfoForm]="basicInfoForm"
       ></candidate-formation>
     </div>
@@ -37,6 +38,7 @@
 
     <div class="galleries-container">
       <candidate-photos-gallery
+        *ngIf="candidate"
         [candidatefromparent]="candidate"
         [user]="user"
       ></candidate-photos-gallery>
