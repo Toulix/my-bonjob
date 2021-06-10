@@ -8,6 +8,6 @@ import { Injectable } from '@angular/core';
 })
 export class OfferService extends DataService {
     constructor(http: HttpClient) {
-        super(`${environment.apiUrl}/offers`,http);
+        super(`${environment.apiUrl}/offerssdfsdfsdf`,http);
     }
 }

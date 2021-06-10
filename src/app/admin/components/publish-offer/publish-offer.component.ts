@@ -19,7 +19,7 @@ export class PublishOfferComponent implements OnInit {
   publishOfferform: FormGroup;
   error = null;
 
-  isloading = false;
+  isLoading = false;
 
   @ViewChild("offerImageInput", {static: false}) offerImageInputRef: ElementRef;
   @ViewChild("offerImageName", {static: false}) offerImageNameRef: ElementRef;
@@ -75,17 +75,18 @@ export class PublishOfferComponent implements OnInit {
     const offer = { ...this.publishOfferform.value, 
                     hour: +this.publishOfferform.value.hour 
                   }
-    this.isloading = true;
+    this.isLoading = true;
     
     this.offerService.create(offer)
                       .subscribe(
                         (result) => {
-                          this.isloading = false;
+                          this.isLoading = false;
+                          this.publishOfferform.reset();
                           console.log(result);
 
                         },
                           (error) => {
-                            this.isloading = false;
+                            this.isLoading = false;
                             this.error = error;
                           }                         
                       )

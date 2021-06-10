@@ -150,10 +150,10 @@
         >
       </li>
       <li>
-        <a href="#">
+        <a [routerLink]="['/authentication']" (click)="logOut()">
           <i class="bi bi-box-arrow-in-right"></i>
-          <span>Déconnexion</span></a
-        >
+          <span>Déconnexion</span>
+        </a>
       </li>
     </ul>
   </div>

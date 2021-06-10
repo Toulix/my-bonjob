@@ -1,8 +1,10 @@
 <div class="container">
   <div>
-    <p *ngIf="error" class="alert alert-danger">
-      {{ error }}
-    </p>
+    <div class="row">
+      <p *ngIf="error" class="col-md-8 alert alert-danger">
+        {{ error }}
+      </p>
+    </div>
 
     <p class="heading_2">PUBLIER UNE OFFRE</p>
     <form [formGroup]="publishOfferform" (ngSubmit)="createOffer()">
@@ -189,7 +191,7 @@
       <div class="mt-5">
         <button
           type="submit"
-          [ngClass]="{ isloading: isLoading }"
+          [ngClass]="{ isLoading: isLoading }"
           class="btn btn-add-offer"
         >
           Ajouter l'offre{{ isLoading ? "..." : "" }}

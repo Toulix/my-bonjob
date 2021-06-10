@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { startWith } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/core/services/auth.service';
@@ -15,7 +16,8 @@ export class SideNavBarComponent implements OnInit, OnDestroy {
 
  isExpanded: boolean = false;
 
-  constructor(public authService: AuthService) { }
+  constructor(public authService: AuthService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.userSubscription = this.authService.user$
@@ -51,5 +53,12 @@ export class SideNavBarComponent implements OnInit, OnDestroy {
       adminBackground: !this.authService.user?.isAdmin && (this.isExpanded == true),
       candidateBackground: this.authService.user?.isAdmin && (this.isExpanded == true)
     }
+  }
+
+
+  logOut() {
+    localStorage.removeItem('userData');
+    this.authService.emitUser(null);
+    // this.router.navigate(['/authentication']);
   }
 }
