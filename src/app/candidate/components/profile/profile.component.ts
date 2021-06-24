@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Toast } from 'bootstrap';
 import { Subscription } from 'rxjs';
 import { startWith, switchMap, tap } from 'rxjs/operators';
 import { CandidateResponseData } from 'src/app/core/models/candidate-response-data';
@@ -22,57 +23,62 @@ import { ProfilFormService } from './../../services/profil-form.service';
 })
 export class ProfileComponent implements OnInit, OnDestroy {
   isLoading = false;
-  user : User;
-  
-//needed by video and pjs
+  user: User;
+
+  //needed by video and pjs
   candidate: CandidateResponseData = null;
 
-  userSub : Subscription;
+  userSub: Subscription;
 
   basicInfoForm: FormGroup;
 
 
-  constructor(private profilFormService : ProfilFormService,
-              private fb: FormBuilder,
-              private candidateService: CandidateService,
-              private authService: AuthService) { }
+  @ViewChild("userToast") userToast: ElementRef<HTMLElement>
+  toast: Toast;
+
+
+
+  constructor(private profilFormService: ProfilFormService,
+    private fb: FormBuilder,
+    private candidateService: CandidateService,
+    private authService: AuthService) { }
 
   ngOnInit(): void {
     this.isLoading = true;
 
     this.initBasicInfoForm();
     console.log("Ng on init profil component called");
-    
-    this.userSub = this.authService
-                          .user$
-                            .pipe( //when refreshing the page (the user behaviorSubject becomes null)
-                              startWith(this.authService.user),
-                              tap((user)=> {
-                                console.log('User from tap Operator', user);
-                              }),
-                              switchMap(user => {
-                              console.log("User from switchMap", user);
-                                
-                                this.user = user;
-                                return this.candidateService
-                                           .getOne<CandidateResponseData>(user?.id);
-                              })
-                            ).subscribe(
-                              //we should patch all the form here
-                              //using loadash if necessary
-                              (result: CandidateResponseData) => {
-                              console.log("Result from candidate service", result);
 
-                              this.candidate = result;
-                              
-                              this.patchBasicForm(result);
-                              
-                             // this.basicInfoForm.patchValue(result);
-                              console.log("Basic Info form after patching... ", this.basicInfoForm.value );
-                             
-                              this.isLoading = false;
-                              }
-                            );
+    this.userSub = this.authService
+      .user$
+      .pipe( //when refreshing the page (the user behaviorSubject becomes null)
+        startWith(this.authService.user),
+        tap((user) => {
+          console.log('User from tap Operator', user);
+        }),
+        switchMap(user => {
+          console.log("User from switchMap", user);
+
+          this.user = user;
+          return this.candidateService
+            .getOne<CandidateResponseData>(user?.id);
+        })
+      ).subscribe(
+        //we should patch all the form here
+        //using loadash if necessary
+        (result: CandidateResponseData) => {
+          console.log("Result from candidate service", result);
+
+          this.candidate = result;
+
+          this.patchBasicForm(result);
+
+          // this.basicInfoForm.patchValue(result);
+          console.log("Basic Info form after patching... ", this.basicInfoForm.value);
+
+          this.isLoading = false;
+        }
+      );
   }
 
   patchBasicForm(result: CandidateResponseData) {
@@ -105,16 +111,16 @@ export class ProfileComponent implements OnInit, OnDestroy {
         description: [formation.description, Validators.required]
       }))
     })
-    
+
   }
   patchExperiences(experiences: Experience[]) {
-   let control = this.profilFormService.experiencesArray(this.basicInfoForm);
+    let control = this.profilFormService.experiencesArray(this.basicInfoForm);
     experiences.forEach(exp => {
       control.push(this.fb.group({
         id: exp.id,
-        positionHeld: [exp.positionHeld, Validators.required], 
+        positionHeld: [exp.positionHeld, Validators.required],
         durationPositionHeld: [exp.durationPositionHeld],
-        business:  [exp.business, Validators.required],
+        business: [exp.business, Validators.required],
         description: [exp.description]
       }))
     })
@@ -122,11 +128,21 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   initBasicInfoForm() {
     //we need to chang this
-   return this.basicInfoForm = this.profilFormService.toProfilFormGroup();
+    return this.basicInfoForm = this.profilFormService.toProfilFormGroup();
   }
 
   ngOnDestroy() {
     this.userSub.unsubscribe();
   }
+
+  ngAfterViewInit() {
+    this.toast = new Toast(this.userToast.nativeElement);
+  }
+
+
+  onShowToast() { //output event
+    this.toast.show();
+  }
+
 
 }

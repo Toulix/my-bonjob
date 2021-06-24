@@ -1,14 +1,26 @@
+<div class="toast-container position-absolute start-50 translate-middle p-3" style="top: 5rem; z-index: 11">
+  <div class="toast" #userToast role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto text-success">Modification réussi !</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      Votre profil a été modifié avec succès !!!
+    </div>
+  </div>
+</div>
+
 <div class="profil-container">
   <div class="basic-info">
     <!-- ---------------------- ---------------
     <p>Profil: {{ profilForm.value | json }}</p>
-    <p>Video: {{ videoForm.value | json }}</p> -->
-
+    <p>Video: {{ videoForm.value | json }}</p> --> 
     <user-profile-basic-info
       *ngIf="candidate"
       [basicInfoForm]="basicInfoForm"
       [user]="user"
       [candidate]="candidate"
+      (showToastNotification)="onShowToast($event)"
     >
     </user-profile-basic-info>
 
