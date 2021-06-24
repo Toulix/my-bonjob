@@ -1,0 +1,42 @@
+.btn-search {
+    background-color: var(--secondary-color);
+    color: #fff;
+    min-width: 8rem;
+    border-radius: 8px;
+}
+
+input {
+    border-radius: 0.5rem;
+}
+
+input::-webkit-input-placeholder {
+    opacity: 0.5; /*Change the opacity between 0 and 1*/
+}
+
+span {
+    font-size: 0.9rem;
+}
+/* enable absolute positioning */
+.inner-addon {
+    position: relative;
+}
+
+/* style icon */
+.inner-addon .bi,
+.inner-addon img {
+    position: absolute;
+    padding: 0.6rem;
+    pointer-events: none;
+}
+
+/* align icon */
+.left-addon .bi,
+.left-addon img {
+    left: 1rem;
+    top: -0.3rem;
+}
+
+/* add padding  */
+.left-addon input {
+    padding-left: 2.5rem;
+}
