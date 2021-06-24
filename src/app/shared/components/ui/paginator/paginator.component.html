@@ -1,0 +1,29 @@
+
+<nav *ngIf="pageNumber && (pageNumber !== 1)" aria-label="Navigation">
+    <ul class="pagination pagination-sm justify-content-center">
+      <li class="page-item"
+   
+          [class.disabled]="currentPage && currentPage === 1"
+          (click)="onPrevious()"
+          >
+          
+          <a class="page-link"> &lt; précédent</a></li>
+      <li 
+        *ngFor="let page of pages"
+        class="page-item"
+        [class.active]="page && (page === currentPage)">
+
+        <a class="page-link" (click)="onPageChanged(page)">
+          {{ page }}
+        </a>
+        </li>
+            
+        <li 
+            class="page-item"
+    
+            [class.disabled]="currentPage && currentPage === pageNumber" 
+            (click)="onNext()"
+         >
+         <a class="page-link"> suivant &gt; </a></li>
+    </ul>
+  </nav>

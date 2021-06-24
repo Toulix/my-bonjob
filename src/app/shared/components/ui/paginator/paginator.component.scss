@@ -1,0 +1,10 @@
+//don't do it (override the variable in bootsrap)
+.page-link {
+    color: var(--secondary-color) !important;
+}
+
+.page-item.active .page-link {
+    color: var(--default-color) !important;
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
