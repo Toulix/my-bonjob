@@ -1,0 +1,68 @@
+:host {
+}
+
+.image-container {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.829);
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.offer-details-container {
+    position: relative;
+}
+
+img {
+    display: block;
+    object-fit: cover;
+    margin: auto;
+    transition: transform 0.5s;
+    max-height: 8rem;
+}
+
+img:hover {
+    transform: scale(1.3);
+}
+
+.candidates-number-container {
+    position: absolute;
+    right: -18px;
+    top: -18px;
+    width: 2.4rem;
+    background-color: var(--primary-color);
+    border: 3px solid white;
+    border-radius: 2px;
+    z-index: 10;
+}
+
+.candidate-number {
+    color: white;
+}
+
+p {
+    margin-bottom: 0px;
+}
+
+.place {
+    font-size: 0.9rem;
+    font-weight: normal;
+}
+
+.p-place-container {
+    margin-top: -0.5rem;
+}
+
+.p-title-container {
+    font-weight: bold;
+}
+
+button,
+button:hover {
+    line-height: 1;
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.btn-candidacies {
+    font-size: smaller;
+}

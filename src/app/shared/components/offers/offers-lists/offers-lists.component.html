@@ -1,0 +1,13 @@
+<app-offer-item
+  *ngFor="let offer of offers$ | async | slice: (currentPage-1)*pageSize : (currentPage-1)*pageSize+pageSize"
+  [offer]="offer"
+  class="col-md-3"
+>
+</app-offer-item>
+
+<paginator
+  [totalItems]="totalItems"
+  [pageSize]="pageSize"
+  [currentPage]="currentPage"
+  (pageChanged)="handlePageChanged($event)"
+></paginator>
