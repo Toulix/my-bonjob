@@ -8,7 +8,7 @@
 
     <ul class="list-unstyled components">
       <li *ngIf="!authService.user?.isAdmin">
-        <a href="#">
+        <a [routerLink]="['/candidate/searchOffer']">
           <i class="bi bi-search"></i>
           <span>Rechercher une offre d'emploi </span>
         </a>
@@ -21,7 +21,7 @@
         </a>
       </li>
       <!-- for candidate  -->
-      <li *ngIf="!authService.user?.isAdmin" class="active">
+      <!-- <li *ngIf="!authService.user?.isAdmin" class="active">
         <a
           href="#jobOfferSubmenu"
           data-bs-toggle="collapse"
@@ -44,6 +44,19 @@
             >
           </li>
         </ul>
+      </li> -->
+
+      <li *ngIf="!authService.user?.isAdmin">
+        <a routerLink="/offers">
+          <i class="bi bi-folder2-open"></i>
+          <span>Offre d'emploi</span>
+        </a>
+        <a href="#" class="submenu">
+          <span>Offres archivée</span>
+        </a>
+        <a href="#" class="submenu">
+          <span>Offres postulées</span>
+        </a>
       </li>
       <!-- liste des candidats (admin) -->
       <li *ngIf="authService.user?.isAdmin" class="active">
@@ -79,28 +92,41 @@
       </li>
 
       <!-- Mes offres (admin) -->
-      <li *ngIf="authService.user?.isAdmin" class="active">
+      <!-- <li *ngIf="authService.user?.isAdmin">
         <a
-          href="#myOffers"
+          RouterLinkWithHref="offers"
           data-bs-toggle="collapse"
-          aria-expanded="false"
+          aria-expanded="true"
           class="dropdown-toggle"
         >
           <i class="bi bi-folder2-open"></i>
           <span>Mes offres</span>
         </a>
-        <ul class="collapse list-unstyled" id="myOffers">
+        <ul class="collapse list-unstyled" id="offers">
           <li>
-            <a href="#" class="submenu" [ngClass]="setNavBarBackground()"
+            <a href="" class="submenu" [ngClass]="setNavBarBackground()"
               >Offres publiées</a
             >
           </li>
           <li>
-            <a href="#" class="submenu" [ngClass]="setNavBarBackground()"
+            <a href="" class="submenu" [ngClass]="setNavBarBackground()"
               >Offres archivées</a
             >
           </li>
         </ul>
+      </li> -->
+
+      <li *ngIf="authService.user?.isAdmin">
+        <a routerLink="/offers">
+          <i class="bi bi-folder2-open"></i>
+          <span>Mes offres</span>
+        </a>
+        <a href="#" class="submenu">
+          <span>Offres publiées</span>
+        </a>
+        <a href="#" class="submenu">
+          <span>Offres archivées</span>
+        </a>
       </li>
 
       <!-- admin -->

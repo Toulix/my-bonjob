@@ -16,6 +16,8 @@ export class SideNavBarComponent implements OnInit, OnDestroy {
 
  isExpanded: boolean = false;
 
+ isMyOfferExpanded: boolean = true;
+
   constructor(public authService: AuthService,
               private router: Router) { }
 
@@ -31,6 +33,11 @@ export class SideNavBarComponent implements OnInit, OnDestroy {
                                     this.user = user;
                                   }
       )
+  }
+
+
+  toggleIsExpanded() {
+    this.isMyOfferExpanded = !this.isMyOfferExpanded;
   }
 
   ngOnDestroy() {
