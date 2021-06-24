@@ -1,8 +1,30 @@
 <div class="container">
   <div>
     <div class="row">
-      <p *ngIf="error" class="col-md-8 alert alert-danger">
+      <p
+        *ngIf="error"
+        class="col-md-8 alert alert-danger alert-dismissible fade show"
+      >
         {{ error }}
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </p>
+      <p *ngIf="success" class="col-md-8 alert alert-success">
+        L'offre a été crée avec succés
+        <button
+          type="button"
+          class="close"
+          data-dismiss="alert"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
       </p>
     </div>
 

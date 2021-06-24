@@ -18,6 +18,7 @@ export class PublishOfferComponent implements OnInit {
 
   publishOfferform: FormGroup;
   error = null;
+  success: boolean = false;
 
   isLoading = false;
 
@@ -81,6 +82,7 @@ export class PublishOfferComponent implements OnInit {
                       .subscribe(
                         (result) => {
                           this.isLoading = false;
+                          this.success = true;
                           this.publishOfferform.reset();
                           console.log(result);
 
