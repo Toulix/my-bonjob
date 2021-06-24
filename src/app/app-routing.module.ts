@@ -26,7 +26,11 @@ const routes: Routes = [
     path: 'candidatelist', 
     loadChildren: () => import('./candidate-list/candidate-list.module')
     .then(m => m.CandidateListModule)
-  } 
+  },
+  { 
+    path: 'offers',
+    loadChildren: () => import('./offers/offers.module')
+    .then(m => m.OffersModule) } 
 ];
 
 @NgModule({
