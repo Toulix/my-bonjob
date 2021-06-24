@@ -13,6 +13,12 @@ import { AttachementFileService } from '../candidate/services/attachement-file.s
 import { UserVideoComponent } from './components/profile/user-video/user-video.component';
 import { ContentLoaderComponent, ContentLoaderModule } from '@ngneat/content-loader';
 import { SideNavBarComponent } from './components/side-nav-bar/side-nav-bar.component';
+import { PaginatorComponent } from './components/ui/paginator/paginator.component';
+import { OfferSearchComponent } from './components/forms/offer-search/offer-search.component';
+import { OffersListsComponent } from './components/offers/offers-lists/offers-lists.component';
+import { OfferItemComponent } from './components/offers/offers-lists/offer-item/offer-item.component';
+import { OfferDetailComponent } from './components/offers/offers-lists/offer-item/offer-detail/offer-detail.component';
+import { OfferService } from './services/offers.service';
 
 @NgModule({
   declarations: [
@@ -23,7 +29,12 @@ import { SideNavBarComponent } from './components/side-nav-bar/side-nav-bar.comp
     UserProfileBasicInfoComponent,
     SideNavBarComponent,
     PjsComponent,
-    UserVideoComponent
+    UserVideoComponent,
+    PaginatorComponent,
+    OfferSearchComponent,
+    OffersListsComponent,
+    OfferItemComponent,
+    OfferDetailComponent,
   ],
   imports: [
     RouterModule,
@@ -34,11 +45,17 @@ import { SideNavBarComponent } from './components/side-nav-bar/side-nav-bar.comp
     LayoutComponent,
     SpinnerComponent,
     UserProfileImageComponent,
-    UserProfileBasicInfoComponent
+    UserProfileBasicInfoComponent,
+    PaginatorComponent,
+    OfferSearchComponent,
+    OffersListsComponent,
+    OfferItemComponent,
+    OfferDetailComponent
   ],
   providers: [
     UploadService,
     AttachementFileService,
+    OfferService
   ]
 
 })

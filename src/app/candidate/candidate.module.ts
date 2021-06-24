@@ -23,6 +23,7 @@ import { DurationComponent } from './components/profile/experience/duration/dura
 import { LevelComponent } from './components/profile/language/level/level.component';
 import { PhotosGalleryComponent } from './components/profile/other-info/photos-gallery/photos-gallery.component';
 import { ContentLoaderModule } from '@ngneat/content-loader';
+import { SearchJobOfferComponent } from './components/search-job-offer/search-job-offer.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ContentLoaderModule } from '@ngneat/content-loader';
     DurationComponent,
     LevelComponent,
     PhotosGalleryComponent,
+    SearchJobOfferComponent,
   ],
   imports: [
     ContentLoaderModule,
@@ -47,7 +49,6 @@ import { ContentLoaderModule } from '@ngneat/content-loader';
     CommonModule,
     ReactiveFormsModule,
   ],
-  //
   providers: [
     SignUpService,
     CandidateService,

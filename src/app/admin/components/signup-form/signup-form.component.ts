@@ -14,19 +14,19 @@ import { exhaustMap } from 'rxjs/operators';
 export class SignupFormComponent implements OnInit {
   error = null;
   isLoading: boolean = false;
-  
+
   inscriptionForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private router: Router,
-              private auth: AuthService,
-              private signUpService: SignUpService
-             ) { }
+    private router: Router,
+    private auth: AuthService,
+    private signUpService: SignUpService
+  ) { }
 
   ngOnInit(): void {
     this.initInscriptionForm();
   }
- 
+
   initInscriptionForm() {
     this.inscriptionForm = this.fb.group({
       user: this.fb.group({
@@ -35,13 +35,14 @@ export class SignupFormComponent implements OnInit {
         company: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(4)]],
-        confirmPassword: ['',[Validators.required,
-                              Validators.minLength(4)]],
-        roles: 'ROLE_ADMIN'
-       },
-      { 
-        validator: ConfirmedValidator('password', 'confirmPassword')
-      })
+        confirmPassword: ['', [Validators.required,
+        Validators.minLength(4)]],
+        roles: 'ROLE_ADMIN',
+        isAdmin: 1
+      },
+        {
+          validator: ConfirmedValidator('password', 'confirmPassword')
+        })
     })
   }
 
@@ -74,37 +75,37 @@ export class SignupFormComponent implements OnInit {
   }
 
   onSignUp() {
-      this.isLoading = true;
-      //strip out the confirm password 
-      const { confirmPassword, ...signUpForm} = this.inscriptionForm.value.user;
-      //we will need the email and password for auto-login
-      const { email, password } = signUpForm;
-     
-      const signUpData = Object.assign({}, {user: {...signUpForm}});
-      //
-      const credentials = { email, password};
+    this.isLoading = true;
+    //strip out the confirm password 
+    const { confirmPassword, ...signUpForm } = this.inscriptionForm.value.user;
+    //we will need the email and password for auto-login
+    const { email, password } = signUpForm;
 
-      console.log(signUpData);
-      
-      this.signUpService
+    const signUpData = Object.assign({}, { user: { ...signUpForm } });
+    //
+    const credentials = { email, password };
+
+    console.log(signUpData);
+
+    this.signUpService
       .create<any>(signUpData)
       .pipe(
-        exhaustMap(() =>{
+        exhaustMap(() => {
           return this.auth.singIn(credentials)
         })
       )
       .subscribe(
-        (response)=> {
+        (response) => {
           this.isLoading = false;
           return this.router.navigate(['/admin'])
-          
+
         },
-        (errorMessage)=> {
+        (errorMessage) => {
           this.isLoading = false;
           this.error = errorMessage;
           return this.router.navigate(['/admin/signup'])
         }
       )
-    
+
   }
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { CLIENT_SIDE_ERROR, DEFAULT_ERROR, INVALID_CREDENTIALS, SERVER_ERROR } from '../utils/constante';
+import { CLIENT_SIDE_ERROR, DEFAULT_ERROR, EMAIL_ALREADY_EXIST, INVALID_CREDENTIALS, SERVER_ERROR } from '../utils/constante';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +11,12 @@ import { CLIENT_SIDE_ERROR, DEFAULT_ERROR, INVALID_CREDENTIALS, SERVER_ERROR } f
 export class DataService {
   constructor(private endPoint, private http: HttpClient) { }
 
-  getAll(){}
+  getAll<T>(){
+    return this.http.get<T>(this.endPoint)
+                    .pipe(
+                      catchError(this.handleError)
+                    )
+  }
 
   getMockCandidate<T>(id) {
     const url = 'assets/mock.candidate.json';
@@ -66,6 +71,9 @@ export class DataService {
           break;
         case 500:
           errorMessage = SERVER_ERROR;
+          break;
+        case 401:
+          errorMessage = EMAIL_ALREADY_EXIST;
           break;
         default: //status 0 => Unexpeted error
           errorMessage = DEFAULT_ERROR;

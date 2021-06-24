@@ -21,23 +21,23 @@ export class SignUpComponent implements OnInit {
   //(firstname, lastname, email, password, confirmpassword, image)
   basicInscriptionMode: boolean = true;
 
-  @ViewChild("fileUpload", {static: false}) fileUpload: ElementRef;
-  @ViewChild("fileName", {static: false}) fileName: ElementRef;
-  
+  @ViewChild("fileUpload", { static: false }) fileUpload: ElementRef;
+  @ViewChild("fileName", { static: false }) fileName: ElementRef;
+
   profileImageToUpload: File = null;
   candidateProfile: string = null; // <= base 64
 
   inscriptionForm: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private router: Router,
-              private auth: AuthService,
-              private signUpService: SignUpService) { }
+    private router: Router,
+    private auth: AuthService,
+    private signUpService: SignUpService) { }
 
   ngOnInit(): void {
     this.initInscriptionForm();
   }
-  
+
   onSwitchInscriptionMode() {
     this.basicInscriptionMode = !this.basicInscriptionMode;
   }
@@ -48,9 +48,10 @@ export class SignUpComponent implements OnInit {
         firstname: ['', Validators.required],
         lastname: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
+        address: [''],
         password: ['', [Validators.required, Validators.minLength(4)]],
-        confirmPassword: ['',[Validators.required,
-                              Validators.minLength(4)]],
+        confirmPassword: ['', [Validators.required,
+        Validators.minLength(4)]],
         profile: this.fb.group({
           name: '',
           data: ''
@@ -65,50 +66,51 @@ export class SignUpComponent implements OnInit {
         ]),
 
         others: this.fb.group({
-          job_search: '', 
+          job_search: '',
           statut: '',
           mobility: null,
           sector: this.fb.array([])
-        })
+        }),
+        isAdmin: 0
       },
-      { 
-        validator: ConfirmedValidator('password', 'confirmPassword')
-      })
+        {
+          validator: ConfirmedValidator('password', 'confirmPassword')
+        })
     })
   }
 
   onSignUp() {
     console.log('signup executed !');
-    
+
     this.isLoading = true;
     //strip out the confirm password 
-    const { confirmPassword, ...signUpForm} = this.inscriptionForm.value.user;
+    const { confirmPassword, ...signUpForm } = this.inscriptionForm.value.user;
     const { email, password } = signUpForm;
-    const signUpData = Object.assign({}, {user: {...signUpForm}});
- 
-    const credentials = { email, password};
-  
+    const signUpData = Object.assign({}, { user: { ...signUpForm } });
+
+    const credentials = { email, password };
+
     this.signUpService
-        .create<any>(signUpData)
-        .pipe(
-          take(1),
-          exhaustMap(() =>{
-            return this.auth.singIn(credentials)
-          })
-        )
-        .subscribe(
-          (response)=> {
-            this.isLoading = false;
-            console.log(response);
-            return this.router.navigate(['/candidate'])
-            
-          },
-          (errorMessage)=> {
-            this.isLoading = false;
-            this.error = errorMessage;
-            return this.router.navigate(['/candidate/signup'])
-          }
-        )
+      .create<any>(signUpData)
+      .pipe(
+        take(1),
+        exhaustMap(() => {
+          return this.auth.singIn(credentials)
+        })
+      )
+      .subscribe(
+        (response) => {
+          this.isLoading = false;
+          console.log(response);
+          return this.router.navigate(['/candidate'])
+
+        },
+        (errorMessage) => {
+          this.isLoading = false;
+          this.error = errorMessage;
+          return this.router.navigate(['/candidate/signup'])
+        }
+      )
 
     // this.signUpService
     //       .create<any>(signUpData)
@@ -150,7 +152,7 @@ export class SignUpComponent implements OnInit {
 
   get experiencesArray() {
     return this.inscriptionForm.get('user.experiences') as FormArray;
-  } 
+  }
 
   get formationArray() {
     return this.inscriptionForm.get('user.formations') as FormArray;
@@ -172,12 +174,12 @@ export class SignUpComponent implements OnInit {
 
   addExperienceGroup() {
     return this.fb.group({
-            positionHeld: ['', Validators.required], 
-            durationPositionHeld: '',
-            business:  ['', Validators.required],
-            description: ''
-          })
-       }
+      positionHeld: ['', Validators.required],
+      durationPositionHeld: '',
+      business: ['', Validators.required],
+      description: ''
+    })
+  }
 
   addFormationGroup() {
     return this.fb.group({
@@ -198,34 +200,34 @@ export class SignUpComponent implements OnInit {
   deleteExperienceArray(index: number) {
     return this.experiencesArray.removeAt(index);
   }
-  
+
   deleteFormationArray(index: number) {
     return this.formationArray.removeAt(index);
   }
 
   setProfileName(profileName: string) {
-   return this.inscriptionForm
-              .get('user.profile.name')
-              .setValue(profileName);
+    return this.inscriptionForm
+      .get('user.profile.name')
+      .setValue(profileName);
   }
 
   setProfileData(base64: string) {
     return this.inscriptionForm
-          .get('user.profile.data')
-          .setValue(base64);
+      .get('user.profile.data')
+      .setValue(base64);
   }
 
   onClickUploadProfile() {
-   this.fileUpload.nativeElement.click();
+    this.fileUpload.nativeElement.click();
   }
-  
+
   handleFileInput(file: FileList) {
     this.profileImageToUpload = file.item(0);
 
     const name = this.profileImageToUpload.name;
-    const lastDot =  name.lastIndexOf('.'); 
+    const lastDot = name.lastIndexOf('.');
     const fileName = name.substring(0, lastDot);
-    const reader = new FileReader(); 
+    const reader = new FileReader();
 
     reader.onload = (event: any) => {
       //set the src attribute in order for the user to see the 
@@ -240,8 +242,8 @@ export class SignUpComponent implements OnInit {
 
     }
     reader.readAsDataURL(this.profileImageToUpload);
-    
+
   }
-  
+
 
 }
