@@ -7,10 +7,11 @@ import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./formation.component.scss']
 })
 export class FormationComponent implements OnInit {
- 
+
   @Input()
   basicInfoForm: FormGroup;
 
+  formations = ['', 'BTS', 'Licence', 'Master'];
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -24,7 +25,7 @@ export class FormationComponent implements OnInit {
   addFormation() {
     this.formationArray.push(this.addFormationGroup());
   }
-  
+
   deleteFormationArray(index: number) {
     return this.formationArray.removeAt(index);
   }

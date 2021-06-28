@@ -2,9 +2,9 @@
 @import "~bootstrap-icons/font/bootstrap-icons.css";
 
 @font-face {
-    font-family: 'kelvetica_nobisregular';
-    src: url('/src/assets/fonts/Kelvetica_Nobis/kelvetica-nobis.regular-webfont.woff2') format('woff2'),
-         url('/src/assets/fonts/Kelvetica_Nobis/kelvetica-nobis.regular-webfont.woff') format('woff');
+    font-family: "kelvetica_nobisregular";
+    src: url("/src/assets/fonts/Kelvetica_Nobis/kelvetica-nobis.regular-webfont.woff2") format("woff2"),
+        url("/src/assets/fonts/Kelvetica_Nobis/kelvetica-nobis.regular-webfont.woff") format("woff");
     font-weight: normal;
     font-style: normal;
 }
@@ -45,11 +45,6 @@
 //     font-display: swap;
 // }
 
-
-
-
-
-
 :root {
     --primary-color: #003c7e;
     --secondary-color: #101a50;
@@ -57,12 +52,12 @@
     --error-color: #bd2525;
 }
 
-html, body {
-    font-family: 'kelvetica_nobisregular', Arial, sans-serif;
+html,
+body {
+    font-family: "kelvetica_nobisregular", Arial, sans-serif;
     height: 100%;
     margin: 0;
     padding: 0;
-    
 }
 
 body {
@@ -75,38 +70,37 @@ body {
     font-family: sans-serif;
     letter-spacing: 0.2px;
     opacity: 0.93;
-    -webkit-box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.1);
-    -moz-box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.1);
-    box-shadow: 0px 1px 2px 0px rgba(0,0,0,0.1);
+    -webkit-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.1);
 }
 
 .btn {
-display: inline-block;
-padding: 6px 12px;
-margin-bottom: 0;
-font-size: 14px;
-font-weight: 400;
-line-height: 1.42857143;
-text-align: center;
-white-space: nowrap;
-vertical-align: middle;
--ms-touch-action: manipulation;
-touch-action: manipulation;
-cursor: pointer;
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
-user-select: none;
-background-image: none;
-// border: 1px solid transparent;
-// border-top-color: transparent;
-// border-right-color: transparent;
-// border-bottom-color: transparent;
-// border-left-color: transparent;
-border: 1px solid #6663;
-border-radius: 4px;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    // border: 1px solid transparent;
+    // border-top-color: transparent;
+    // border-right-color: transparent;
+    // border-bottom-color: transparent;
+    // border-left-color: transparent;
+    border: 1px solid #6663;
+    border-radius: 4px;
 }
-
 
 input.ng-touched.ng-invalid {
     border: 2px solid red;
@@ -115,19 +109,19 @@ input.ng-touched.ng-invalid {
 .selected-btn {
     background-color: var(--primary-color);
     color: white !important;
-  }
+}
 
 // Radio button style
 
 .btn-low-opacity {
-    color: rgba(0,0,0,0.6);
+    color: rgba(0, 0, 0, 0.6);
 }
 
 .candidateBackground {
     background-color: var(--primary-color);
 }
 
-.adminBackground{
+.adminBackground {
     background-color: var(--secondary-color);
 }
 
@@ -135,20 +129,26 @@ input.ng-touched.ng-invalid {
     background-color: var(--default-color);
 }
 
-.hidden-file-input{
+.hidden-file-input {
     display: none;
-  }
+}
 
 .btn-custom {
     color: #fff;
     border: 0;
     padding: 0.5rem 0.7rem;
     border-radius: 5px;
-    outline:0;
+    outline: 0;
 }
 
 .heading_2 {
     color: var(--secondary-color);
     font-size: 1.2rem;
     font-weight: 500;
-  }
+}
+
+.heading_3 {
+    color: var(--primary-color);
+    font-size: 1rem;
+    font-weight: bold;
+}

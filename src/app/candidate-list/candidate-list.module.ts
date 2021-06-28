@@ -1,3 +1,4 @@
+import { CandidateListService } from './services/candidate-list.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -25,6 +26,9 @@ import { CandidateDetailsComponent } from './components/candidate-overview/candi
     CommonModule,
     ReactiveFormsModule,
     CandidateListRoutingModule
+  ],
+  providers: [
+    CandidateListService
   ]
 })
 export class CandidateListModule { }

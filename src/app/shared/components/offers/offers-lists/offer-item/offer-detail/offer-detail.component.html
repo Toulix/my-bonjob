@@ -1,1 +1,64 @@
-<p>offer-detail works!</p>
+<div class="container" *ngIf="(offerDetail$ | async) as offerDetail">
+    <div class="row">
+        <div class="col-md-6">
+            <div>
+                <p class="heading_2"> OFFRE {{ offerDetail.offer.title | uppercase }}</p>
+                <div class="offer-image-container mb-3 hidden-image ">
+                    <img [src]="offerDetail.offer.image" alt="offer detail" />
+                    <div *ngIf="authService.user?.isAdmin" class="btn-delete-offer-container">
+                        <button class="btn btn-delete-offer"> Supprimer</button>
+                    </div>
+                   
+                    <div *ngIf="!authService.user?.isAdmin"
+                         class="btn-delete-offer-container"
+                         (click)="apply(offerDetail.offer.id)"
+                         >
+                        <button class="btn btn-delete-offer"> Postuler</button>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <p class="heading_3">POSTE RECHERCHE: </p>
+                    <p class="small-description">{{ offerDetail.offer.title }}</p>
+                </div>
+
+                <div class="mb-3">
+                    <p class="heading_3">CONTRAT: </p>
+                    <p class="small-description">{{ offerDetail.offer.contrat }}</p>
+                </div>
+
+                <div class="mb-3">
+                    <p><span class="heading_3">NOMBRES D'HEURES: </span><span class="small-description">{{ offerDetail.offer.nbHour }} heures</span></p>
+                </div>
+
+                <div class="mb-3">
+                    <p> <span class="heading_3">SALAIRE: </span><span class="small-description">{{ offerDetail.offer.nbHour | currency:"EUR" }}</span></p>
+                </div>
+
+                <div class="mb-3">
+                    <p class="small-description"> {{ offerDetail.offer.description }} </p>
+                </div>
+
+                <div class="mb-3">
+                    <p> <span class="heading_3">DATE DE DEBUT: </span><span class="small-description">{{ offerDetail.offer.startDate | date:"shortDate" }}  </span></p>    
+                </div>
+
+                <div>
+                    <p> <span class="heading_3"> LIEUX: </span> <span class="small-description">{{ offerDetail.offer.location }} </span></p>    
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+        <!-- offre déjà publié -->
+        <div *ngIf="authService.user?.isAdmin">
+            <p>OFFRE DEJA PUBLIEES</p>
+        </div>
+        <div *ngIf="!authService.user?.isAdmin">
+            <p>CES OFFRES PEUVENT VOUS INTERESSES</p>
+        </div>
+
+        </div>
+    </div>
+
+</div>

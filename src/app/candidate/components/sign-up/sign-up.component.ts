@@ -29,6 +29,8 @@ export class SignUpComponent implements OnInit {
 
   inscriptionForm: FormGroup;
 
+  formations = ['', 'BTS', 'Licence', 'Master'];
+
   constructor(private fb: FormBuilder,
     private router: Router,
     private auth: AuthService,
@@ -56,6 +58,7 @@ export class SignUpComponent implements OnInit {
           name: '',
           data: ''
         }),
+        location: [''],
 
         experiences: this.fb.array([
           this.addExperienceGroup()

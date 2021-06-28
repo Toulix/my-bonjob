@@ -14,6 +14,7 @@
             <label for="formationLevel">Niveau de formation: </label>
           </div>
           <div class="col-md-6 offset-md-2">
+            <!-- 
             <div class="input-group input-group-sm">
               <input
                 type="text"
@@ -31,7 +32,22 @@
                 Niveau de formation requis !
               </p>
             </div>
+          </div> -->
+          <select placeholder="Licence..." formControlName="level" class="form-select form-select-sm">
+            <option *ngFor="let formation of formations" [value]="formation">
+              {{ formation }}
+            </option>
+          </select>
+          <div
+            *ngIf="
+              level(i).invalid && (level(i).touched || level(i).dirty)
+            "
+          >
+            <p class="p-error" *ngIf="level(i).errors.required">
+              Niveau de formation requis !
+            </p>
           </div>
+        </div>
         </div>
         <!-- formation specification -->
         <div class="row mb-3">

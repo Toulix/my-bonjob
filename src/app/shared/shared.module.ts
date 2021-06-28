@@ -19,6 +19,7 @@ import { OffersListsComponent } from './components/offers/offers-lists/offers-li
 import { OfferItemComponent } from './components/offers/offers-lists/offer-item/offer-item.component';
 import { OfferDetailComponent } from './components/offers/offers-lists/offer-item/offer-detail/offer-detail.component';
 import { OfferService } from './services/offers.service';
+import { ApplyOfferService } from './services/apply-offer.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { OfferService } from './services/offers.service';
   providers: [
     UploadService,
     AttachementFileService,
-    OfferService
+    OfferService,
+    ApplyOfferService
   ]
 
 })

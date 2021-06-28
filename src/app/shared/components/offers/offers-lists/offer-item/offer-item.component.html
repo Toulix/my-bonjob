@@ -1,12 +1,12 @@
 <div class="ms-3 mb-5">
 
-    <div class="image-container mb-2">
+    <div class="image-container">
       <img [src]="offer.image" alt="image offer" />
     </div>
   
-    <div class="mt-5" class="offer-details-container">
+    <div class="offer-details-container" (click)="seeOfferDetail(offer)">
 
-      <div class="candidates-number-container text-center">
+      <div *ngIf="authService.user?.isAdmin" class="candidates-number-container text-center">
         <span class="candidate-number"> {{ offer.applications }}</span>
       </div>
 
@@ -14,13 +14,15 @@
       <p class="text-center p-place-container">
         <span class="place"> {{ offer.location }} </span>
       </p>
+
+      <div class="mt-2"  *ngIf="authService.user?.isAdmin">
+        <button class="btn w-100">
+          <span class="btn-candidacies">Voir les candidatures</span>
+        </button>
+      </div>
     </div>
   
-    <div class="mt-2">
-      <button class="btn w-100">
-        <span class="btn-candidacies">Voir les candidatures</span>
-      </button>
-    </div>
+    
 
   
 </div>

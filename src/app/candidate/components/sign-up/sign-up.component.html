@@ -88,6 +88,20 @@
                 </div>
               </div>
             </div>
+            <div class="row mb-2">
+              <div class="col-md-4 offset-md-2">
+                <label for="location">Localisation</label>
+              </div>
+              <div class="col-md-6">
+                <input
+                  id="location"
+                  type="location"
+                  class="form-control form-control-sm"
+                  placeholder="Entrez votre location..."
+                  formControlName="location"
+                />
+              </div>
+            </div>
             <!-- mot de passe  -->
             <div class="row mb-2">
               <div class="col-md-4 offset-md-2">
@@ -343,7 +357,7 @@
                     <label for="formationLevel">Niveau de formation: </label>
                   </div>
                   <div class="col-md-7">
-                    <div class="input-group input-group-sm">
+                    <!-- <div class="input-group input-group-sm">
                       <input
                         type="text"
                         class="form-control form-control-sm"
@@ -353,6 +367,21 @@
                       />
                       <span class="input-group-text">&nbsp;&nbsp;</span>
                     </div>
+                    <div
+                      *ngIf="
+                        level(i).invalid && (level(i).touched || level(i).dirty)
+                      "
+                    >
+                      <p class="p-error" *ngIf="level(i).errors.required">
+                        Niveau de formation requis !
+                      </p>
+                    </div> -->
+
+                    <select formControlName="level" class="form-select form-select-sm">
+                      <option *ngFor="let formation of formations" [value]="formation">
+                        {{ formation }}
+                      </option>
+                    </select>
                     <div
                       *ngIf="
                         level(i).invalid && (level(i).touched || level(i).dirty)

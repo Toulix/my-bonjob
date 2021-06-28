@@ -1,14 +1,17 @@
 :host {
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
 }
 
 .apprentis-status {
     width: 84px;
     height: 30px;
-   }
-  
-.student-status, .active-satus, .emploi-status, .not-active-status {
-    width: 78px;
+}
+
+.student-status,
+.active-satus,
+.emploi-status,
+.not-active-status {
+    width: 90px;
     height: 30px;
-   }
+}

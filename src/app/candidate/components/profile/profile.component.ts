@@ -87,9 +87,21 @@ export class ProfileComponent implements OnInit, OnDestroy {
         ...result.user
       }
     });
-    this.patchExperiences(result.user.experiences);
-    this.patchFormations(result.user.formations);
-    this.patchLanguage(result.user.languages);
+    // result.user.experiences ? result.user.experiences : default(initExperience array)
+    result.user.experiences ?
+      this.patchExperiences(result.user.experiences) :
+      this.profilFormService.experiencesArray(this.basicInfoForm)
+        .push(this.profilFormService.addExperienceGroup());
+
+    result.user.formations ?
+      this.patchFormations(result.user.formations) :
+      this.profilFormService.formationsArray(this.basicInfoForm)
+        .push(this.profilFormService.addFormationGroup());
+
+    result.user.languages ?
+      this.patchLanguage(result.user.languages) :
+      this.profilFormService.languagesArray(this.basicInfoForm)
+        .push(this.profilFormService.addLanguageGroup());
   }
 
   patchLanguage(languages: Language[]) {

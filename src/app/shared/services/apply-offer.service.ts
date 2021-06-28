@@ -6,8 +6,8 @@ import { environment } from 'src/environments/environment';
 @Injectable({
     providedIn: 'root'
 })
-export class CandidateListService extends DataService {
+export class ApplyOfferService extends DataService {
     constructor(http: HttpClient) {
-        super(`${environment.apiUrl}/users`, http);
+        super(`${environment.apiUrl}/offer-apply`, http);
     }
 }

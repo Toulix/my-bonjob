@@ -8,8 +8,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HeaderComponent } from './header/header.component';
+import { LOCALE_ID } from "@angular/core";
+import localeFr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
 
-
+registerLocaleData(localeFr, 'fr');
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,6 +28,7 @@ import { HeaderComponent } from './header/header.component';
     HttpClientModule
   ],
   providers: [
+    { provide: LOCALE_ID, useValue: "fr-FR" }
   ],
   bootstrap: [AppComponent]
 })
