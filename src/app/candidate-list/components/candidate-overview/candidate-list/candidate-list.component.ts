@@ -1,7 +1,5 @@
-import { DownloadService } from './../../../../core/services/download.service';
 import { Component, Input, OnInit } from '@angular/core';
-import { CandidateResponseData } from 'src/app/core/models/candidate-response-data';
-import { CandidateListResponse } from 'src/app/candidate-list/models/candidate-list-response';
+import { CandidateListResponse } from 'src/app/core/models/candidate-list-response';
 
 @Component({
   selector: 'candidates-list',

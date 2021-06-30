@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Candidate } from 'src/app/candidate-list/models/candidate';
+import { Candidate } from 'src/app/core/models/candidate';
+
 
 @Component({
   selector: 'single-candidate',

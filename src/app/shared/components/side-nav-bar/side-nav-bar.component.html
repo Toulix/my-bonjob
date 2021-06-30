@@ -59,7 +59,7 @@
         </a>
       </li>
       <!-- liste des candidats (admin) -->
-      <li *ngIf="authService.user?.isAdmin" class="active">
+      <!-- <li *ngIf="authService.user?.isAdmin" class="active">
         <a
           href="#candidates"
           data-bs-toggle="collapse"
@@ -81,6 +81,19 @@
             >
           </li>
         </ul>
+      </li> -->
+
+      <li *ngIf="authService.user?.isAdmin">
+        <a routerLink="/candidacies">
+          <i class="bi bi-folder2-open"></i>
+          <span>Candidats</span>
+        </a>
+        <a routerLink="/candidacies/applications" class="submenu">
+          <span>Candidatures</span>
+        </a>
+        <a routerLink="/candidacies/selectedCandidates" class="submenu">
+          <span>Candidats sélectionnés</span>
+        </a>
       </li>
 
       <!-- Publier offre candidats (admin) -->

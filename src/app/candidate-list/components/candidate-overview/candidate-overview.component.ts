@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { CandidateResponseData } from 'src/app/core/models/candidate-response-data';
 import { CandidateListService } from './../../services/candidate-list.service';
 import { Component, OnInit } from '@angular/core';
-import { CandidateListResponse } from '../../models/candidate-list-response';
+import { CandidateListResponse } from '../../../core/models/candidate-list-response';
 
 @Component({
   selector: 'app-candidate-overview',

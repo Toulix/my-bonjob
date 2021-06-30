@@ -1,0 +1,23 @@
+<div class="container">
+    <p class="heading_2">CANDIDATS</p>
+    <div class="row mt-4">
+      <div class="col-md-2">
+        <button
+          [routerLink]="['/candidacies/applications']"
+          type="button"
+          class="btn btn-outline"
+        >
+          Candidatures
+        </button>
+      </div>
+      <div class="col-md-2 ms-3">
+        <button
+            [routerLink]="['/candidacies/selectedCandidates']"
+            class="btn btn-outline">Candidats sélectionnés</button>
+      </div>
+      <div class="col-md-2 ms-3">
+        <button class="btn btn-outline">Candidats embauchés</button>
+      </div>
+    </div>
+  </div>
+  <app-candidate-lists></app-candidate-lists>
