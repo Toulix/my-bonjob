@@ -1,10 +1,7 @@
-.hidden-image :not(btn-delete-offer-container) {
-    overflow: hidden;
-}
-
 .offer-image-container {
     position: relative;
     width: fit-content;
+    overflow: hidden;
 }
 
 p {
@@ -16,7 +13,7 @@ img {
     object-fit: cover;
     transition: transform 0.5s;
     max-height: 12rem;
-    max-width: 21rem;
+    max-width: 100%;
     cursor: pointer;
 }
 
@@ -31,7 +28,7 @@ img:hover {
 .btn-delete-offer {
     background-color: var(--primary-color);
     color: #fff;
-    min-width: 7rem;
+    min-width: 9rem;
     border-radius: 8px;
 }
 
@@ -40,6 +37,5 @@ img:hover {
 }
 .btn-delete-offer-container {
     position: absolute;
-    right: 0px;
-    bottom: -3rem;
+    right: 10px;
 }

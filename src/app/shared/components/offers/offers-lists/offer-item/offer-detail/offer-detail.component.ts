@@ -1,11 +1,12 @@
 import { ApplyOfferService } from './../../../../../services/apply-offer.service';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { OfferService } from 'src/app/shared/services/offers.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Offer } from 'src/app/core/models/offer';
+import { Toast } from 'bootstrap';
 
 interface OfferDetail {
   offer: Offer
@@ -16,10 +17,17 @@ interface OfferDetail {
   templateUrl: './offer-detail.component.html',
   styleUrls: ['./offer-detail.component.scss']
 })
-export class OfferDetailComponent implements OnInit, OnDestroy {
+export class OfferDetailComponent implements OnInit {
 
   offerDetail$: Observable<OfferDetail>;
-  applyOfferSubscription: Subscription;
+
+  isApplying: boolean = false;
+  haveApplied: boolean = false;
+
+  @ViewChild("userToast") userToast: ElementRef<HTMLElement>
+  toast: Toast;
+
+
 
   constructor(private activatedRoute: ActivatedRoute,
     public authService: AuthService,
@@ -43,22 +51,33 @@ export class OfferDetailComponent implements OnInit, OnDestroy {
   }
 
   apply(offerId: number) {
-    this.applyOfferSubscription = this.applyOfferService
+    this.isApplying = true;
+    this.applyOfferService
       .postOne(offerId)
       .subscribe(
         (result) => {
+          this.isApplying = false;
+          this.haveApplied = true;
+          this.toast.show();
           console.log(result);
         },
         (error) => {
           console.log("error ", error);
+          this.isApplying = false;
         }
       )
   }
 
-  ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
-    this.applyOfferSubscription.unsubscribe();
+
+  ngAfterViewInit() {
+    this.toast = new Toast(this.userToast.nativeElement);
   }
+
+  onShowToast() { //output event
+    this.toast.show();
+  }
+
+
+
 
 }

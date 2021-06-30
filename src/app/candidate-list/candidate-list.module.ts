@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { CandidateListService } from './services/candidate-list.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
@@ -25,7 +26,8 @@ import { CandidateDetailsComponent } from './components/candidate-overview/candi
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    CandidateListRoutingModule
+    CandidateListRoutingModule,
+    SharedModule
   ],
   providers: [
     CandidateListService

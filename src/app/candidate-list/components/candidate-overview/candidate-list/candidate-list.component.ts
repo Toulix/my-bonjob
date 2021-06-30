@@ -1,5 +1,7 @@
 import { DownloadService } from './../../../../core/services/download.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { CandidateResponseData } from 'src/app/core/models/candidate-response-data';
+import { CandidateListResponse } from 'src/app/candidate-list/models/candidate-list-response';
 
 @Component({
   selector: 'candidates-list',
@@ -8,10 +10,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CandidateListComponent implements OnInit {
 
-  constructor(private downloadService: DownloadService) { }
+  @Input()
+  candidateList: CandidateListResponse;
+
+  totalItems: number;
+
+  currentPage: number = 1;
+  pageSize: number = 15
+
+  constructor() { }
 
   ngOnInit(): void {
-    
+    console.log("candidate list", this.candidateList);
+    this.totalItems = this.candidateList.total;
   }
- 
+
+
+  handlePageChanged(pageNumber) {
+    this.currentPage = pageNumber;
+  }
+
 }

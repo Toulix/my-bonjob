@@ -5,6 +5,9 @@
       <p class="candidate-title">CANDIDATS</p>
     </div>
     <candidate-search></candidate-search>
-    <candidates-list></candidates-list>
+    <candidates-list *ngIf="( candidateList$ | async) as candidateList"
+                      [candidateList]="candidateList"
+                      class="row"
+                      ></candidates-list>
   </div>
 </div>

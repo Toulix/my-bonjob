@@ -1,3 +1,15 @@
+<div class="toast-container position-absolute start-50 translate-middle p-3" style="top: 5rem; z-index: 11">
+  <div class="toast" #userToast role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <strong class="me-auto text-success">Création réussi !</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+      L'offre a été crée avec succès !!!
+    </div>
+  </div>
+</div>
+
 <div class="container">
   <div>
     <div class="row">
@@ -15,7 +27,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </p>
-      <p *ngIf="success" class="col-md-8 alert alert-success">
+      <!-- <p *ngIf="success" class="col-md-8 alert alert-success">
         L'offre a été crée avec succés
         <button
           type="button"
@@ -25,7 +37,8 @@
         >
           <span aria-hidden="true">&times;</span>
         </button>
-      </p>
+      </p> -->
+
     </div>
 
     <p class="heading_2">PUBLIER UNE OFFRE</p>

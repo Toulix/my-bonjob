@@ -1,23 +1,40 @@
+<div class="toast-container position-absolute start-50 translate-middle p-3" style="top: 5rem; z-index: 11">
+    <div class="toast" #userToast role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+        <strong class="me-auto text-success"> Candidature envoyée !</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body">
+        Vous avez postulé à cette offre !!!
+      </div>
+    </div>
+  </div>
+  
+
 <div class="container" *ngIf="(offerDetail$ | async) as offerDetail">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-5">
             <div>
                 <p class="heading_2"> OFFRE {{ offerDetail.offer.title | uppercase }}</p>
-                <div class="offer-image-container mb-3 hidden-image ">
+                <div class="offer-image-container  mb-3  ">
                     <img [src]="offerDetail.offer.image" alt="offer detail" />
-                    <div *ngIf="authService.user?.isAdmin" class="btn-delete-offer-container">
-                        <button class="btn btn-delete-offer"> Supprimer</button>
-                    </div>
-                   
-                    <div *ngIf="!authService.user?.isAdmin"
-                         class="btn-delete-offer-container"
-                         (click)="apply(offerDetail.offer.id)"
-                         >
-                        <button class="btn btn-delete-offer"> Postuler</button>
-                    </div>
+                  
                 </div>
 
-                <div class="mb-3">
+                <div class="mb-3 position-relative">
+                        <div *ngIf="!authService.user?.isAdmin"
+                        class="btn-delete-offer-container"
+                        (click)="apply(offerDetail.offer.id)"
+                        >
+                        <button class="btn btn-delete-offer"> Postuler
+                            <loader *ngIf="isApplying"></loader>
+                        </button>
+                    </div>
+
+                    <div *ngIf="authService.user?.isAdmin"
+                        class="btn-delete-offer-container">
+                        <button class="btn btn-delete-offer"> Supprimer</button>
+                    </div>
                     <p class="heading_3">POSTE RECHERCHE: </p>
                     <p class="small-description">{{ offerDetail.offer.title }}</p>
                 </div>

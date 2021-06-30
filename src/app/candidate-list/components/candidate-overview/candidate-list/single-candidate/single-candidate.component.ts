@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Candidate } from 'src/app/candidate-list/models/candidate';
 
 @Component({
   selector: 'single-candidate',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SingleCandidateComponent implements OnInit {
 
+  @Input()
+  candidate: Candidate;
+
+  defaultUserProfil: string = "/assets/images/default_candidate_profil.png";
+
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.candidate);
+
   }
 
 }

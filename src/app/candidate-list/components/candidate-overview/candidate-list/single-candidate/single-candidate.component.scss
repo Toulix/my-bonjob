@@ -1,0 +1,23 @@
+:host {
+    max-width: fit-content;
+    margin-top: 2rem;
+}
+
+img {
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+}
+
+span {
+    font-size: 0.8rem;
+}
+
+.small-line-height {
+    line-height: 1;
+}
+
+// to prevent line break
+.no-wrap {
+    white-space: nowrap;
+}

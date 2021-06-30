@@ -1,1 +1,19 @@
-<p>single-candidate works!</p>
+<div class="d-flex flex-column small-line-height" style="width: 7rem;">
+    <div class="mx-auto image-container">
+            <img
+                *ngIf="candidate.profil"
+                [src]="candidate.profil"
+                alt="candidate image"
+                class="userProfil"
+            />
+            <img *ngIf="!candidate.profil" [src]="defaultUserProfil" alt="default user profile" />
+
+    </div>
+    <div class="mx-auto no-wrap mt-1" style="font-weight: 700;">
+        <span>{{ candidate.lastname }}</span>
+      </div>
+      <div class="mx-auto no-wrap">
+        <span>{{ candidate?.experiences && candidate?.experiences[0].positionHeld}}</span>
+      </div>
+
+</div>

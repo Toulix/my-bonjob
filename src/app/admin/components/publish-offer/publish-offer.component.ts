@@ -8,6 +8,7 @@ import { FileNameService } from 'src/app/core/services/file-name.service';
 
 import { AttachementFileService } from './../../../candidate/services/attachement-file.service';
 import { Base64Service } from './../../../core/services/base64.service';
+import { Toast } from 'bootstrap';
 
 @Component({
   selector: 'publish-offer',
@@ -22,16 +23,21 @@ export class PublishOfferComponent implements OnInit {
 
   isLoading = false;
 
-  @ViewChild("offerImageInput", {static: false}) offerImageInputRef: ElementRef;
-  @ViewChild("offerImageName", {static: false}) offerImageNameRef: ElementRef;
+  @ViewChild("offerImageInput", { static: false }) offerImageInputRef: ElementRef;
+  @ViewChild("offerImageName", { static: false }) offerImageNameRef: ElementRef;
 
 
-  contractTypes = ['', 'CDI','CDD'];
+
+  @ViewChild("userToast") userToast: ElementRef<HTMLElement>
+  toast: Toast;
+
+
+  contractTypes = ['', 'CDI', 'CDD'];
   formations = ['', 'BTS', 'Licence', 'Master'];
-  hours = [null,1,2,3,4,5,6,7,8];
+  hours = [null, 1, 2, 3, 4, 5, 6, 7, 8];
 
   minimumExperiences = [
-    { value: YearOfExperience.NO,  label: ExperienceLabel.NO },
+    { value: YearOfExperience.NO, label: ExperienceLabel.NO },
     { value: YearOfExperience.PLUS_ONE, label: ExperienceLabel.PLUS_ONE },
     { value: YearOfExperience.ONE_TO_TWO, label: ExperienceLabel.ONE_TO_TWO },
     { value: YearOfExperience.THREE_TO_FOUR, label: ExperienceLabel.THREE_TO_FOUR },
@@ -42,13 +48,13 @@ export class PublishOfferComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder,
-              private offerService: OfferService,
-              private fileNameService: FileNameService,
-              private attachementFileService: AttachementFileService,
-              private base64Service: Base64Service) { }
+    private offerService: OfferService,
+    private fileNameService: FileNameService,
+    private attachementFileService: AttachementFileService,
+    private base64Service: Base64Service) { }
 
   ngOnInit(): void {
-  this.initPublishOfferForm();
+    this.initPublishOfferForm();
   }
 
 
@@ -73,63 +79,74 @@ export class PublishOfferComponent implements OnInit {
   }
 
   createOffer() {
-    const offer = { ...this.publishOfferform.value, 
-                    hour: +this.publishOfferform.value.hour 
-                  }
+    const offer = {
+      ...this.publishOfferform.value,
+      hour: +this.publishOfferform.value.hour
+    }
     this.isLoading = true;
-    
-    this.offerService.create(offer)
-                      .subscribe(
-                        (result) => {
-                          this.isLoading = false;
-                          this.success = true;
-                          this.publishOfferform.reset();
-                          console.log(result);
 
-                        },
-                          (error) => {
-                            this.isLoading = false;
-                            this.error = error;
-                          }                         
-                      )
-    
+    this.offerService.create(offer)
+      .subscribe(
+        (result) => {
+          this.isLoading = false;
+          this.success = true;
+          this.publishOfferform.reset();
+          this.onShowToast();
+          console.log(result);
+
+        },
+        (error) => {
+          this.isLoading = false;
+          this.error = error;
+        }
+      )
+
   }
 
   onClickUploadOfferImage() {
     this.offerImageInputRef.nativeElement.click();
   }
 
+  ngAfterViewInit() {
+    this.toast = new Toast(this.userToast.nativeElement);
+  }
+
+
+  onShowToast() { //output event
+    this.toast.show();
+  }
+
 
   handleOfferPhotoInput(file: File) {
 
     const fileNameWithoutExtension = this.fileNameService
-                                          .getFileNameWithoutExtension(file);
+      .getFileNameWithoutExtension(file);
     const fileNameWithExtension = this.fileNameService
-                                          .getFileNameWithExtension(file);
+      .getFileNameWithExtension(file);
 
     this.base64Service.getBase64(file)
-                      .pipe(
-                        take(1),
-                        tap((base64) => {
-                        this.offerImageNameRef.nativeElement.value = fileNameWithExtension;
-                       
-                        this.attachementFileService
-                            .setFileData(base64,
-                                         this.publishOfferform,
-                                         'image.data')
+      .pipe(
+        take(1),
+        tap((base64) => {
+          this.offerImageNameRef.nativeElement.value = fileNameWithExtension;
 
-                        this.attachementFileService
-                            .setFileName(
-                              fileNameWithoutExtension,
-                              this.publishOfferform,
-                              'image.name');
-                            }),
-                        
-                        ).subscribe(
-                          (event) => {
+          this.attachementFileService
+            .setFileData(base64,
+              this.publishOfferform,
+              'image.data')
 
-                          },
-                          (error) => console.log("error", error));
-                          }
+          this.attachementFileService
+            .setFileName(
+              fileNameWithoutExtension,
+              this.publishOfferform,
+              'image.name');
+        }),
+
+      ).subscribe(
+        (event) => {
+
+        },
+        (error) => console.log("error", error));
+  }
 
 }

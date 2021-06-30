@@ -1,1 +1,16 @@
-<div class="candidate-list-container mt-3"></div>
+<div class="row candidate-list-container mt-3">
+
+    <single-candidate
+        *ngFor="let candidate of candidateList.items | slice: (currentPage-1)*pageSize : (currentPage-1)*pageSize+pageSize"
+        [candidate]="candidate"
+        class="col-md-3"
+        >
+    </single-candidate>
+</div>
+
+<paginator
+    [totalItems]="totalItems"
+    [pageSize]="pageSize"
+    [currentPage]="currentPage"
+    (pageChanged)="handlePageChanged($event)"
+></paginator>

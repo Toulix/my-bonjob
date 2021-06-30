@@ -20,6 +20,7 @@ import { OfferItemComponent } from './components/offers/offers-lists/offer-item/
 import { OfferDetailComponent } from './components/offers/offers-lists/offer-item/offer-detail/offer-detail.component';
 import { OfferService } from './services/offers.service';
 import { ApplyOfferService } from './services/apply-offer.service';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { ApplyOfferService } from './services/apply-offer.service';
     OffersListsComponent,
     OfferItemComponent,
     OfferDetailComponent,
+    LoaderComponent,
   ],
   imports: [
     RouterModule,
@@ -51,7 +53,8 @@ import { ApplyOfferService } from './services/apply-offer.service';
     OfferSearchComponent,
     OffersListsComponent,
     OfferItemComponent,
-    OfferDetailComponent
+    OfferDetailComponent,
+    LoaderComponent
   ],
   providers: [
     UploadService,

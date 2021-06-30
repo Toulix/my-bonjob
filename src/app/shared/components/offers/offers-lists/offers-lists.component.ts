@@ -24,7 +24,7 @@ export class OffersListsComponent implements OnInit {
 
   currentPage: number = 1;
   pageSize: number = 15
-
+  //
   constructor(private offerService: OfferService) { }
 
   ngOnInit(): void {
